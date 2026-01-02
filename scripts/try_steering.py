@@ -35,7 +35,10 @@ Outputs:
     - results/steering_*.json: Full results with all sample data (grid search)
     - results/random_search_*.json: Results from random search mode
     - debug_steering.json: Quick summary showing if steering worked, failures, etc.
-    - viz/random_search_flip_rates.png: Heatmap of flip rates (random search)
+    - viz/random_search_short_to_long.png: Min magnitude to flip short→long (random search)
+    - viz/random_search_long_to_short.png: Min magnitude to flip long→short (random search)
+    - viz/steering_short_to_long.png: Min magnitude heatmap (grid search)
+    - viz/steering_long_to_short.png: Min magnitude heatmap (grid search)
 
 Usage:
     python scripts/try_steering.py
@@ -875,308 +878,422 @@ def run_steering_experiment(
 
 
 # =============================================================================
-# Random Search
+# Random Search - Cell State Tracking
 # =============================================================================
 
 
 @dataclass
-class RandomSearchSampler:
+class DirectionState:
     """
-    Samples random parameter combinations for steering experiments.
+    Tracks steering state for one direction (short→long or long→short).
 
-    Biases sampling towards configurations more likely to produce signal:
-    - Middle layers (where probes typically have better accuracy)
-    - After-horizon positions (where choice info should be encoded)
-    - Larger steering magnitudes (more likely to cause flips)
-    - Novelty: less-tested (layer, position) combinations get a boost
-
-    Uses UCB1-inspired exploration/exploitation balance:
-    - Exploitation: favor (layer, position) combos with high flip rates
-    - Exploration: favor less-tested combos (novelty bonus)
-
-    Tracks tested combinations to avoid duplicates and updates biases based on results.
+    Binary search via distribution bounds:
+    - Initial bounds: [min_mag, max_mag]
+    - On flip at X: upper_bound = min(upper_bound, X)
+    - On no-flip at Y: lower_bound = max(lower_bound, Y)
+    - Always sample uniformly from [lower_bound, upper_bound]
     """
 
-    layers: list[int]
-    positions: list[int]
-    sample_ids: list[int]
-    steering_strengths: list[float]
-    probe_index: dict  # For accuracy/metadata lookup
-    seed: int = 42
-    novelty_weight: float = 2.0  # How much to favor unexplored (layer, pos) combos
+    direction: str  # "short_to_long" or "long_to_short"
+    min_mag: float  # Initial minimum magnitude
+    max_mag: float  # Initial maximum magnitude
+    sign: int  # +1 for positive steering, -1 for negative
+    tested_magnitudes: list[float] = field(default_factory=list)
+    tested_results: list[bool] = field(default_factory=list)
+    min_flip_magnitude: Optional[float] = None  # Best (smallest) flip found
+    # Binary search bounds
+    lower_bound: Optional[float] = None  # Largest no-flip (lower bound of uncertainty)
+    upper_bound: Optional[float] = None  # Smallest flip (upper bound of uncertainty)
 
-    # Bias parameters (base weights from probe metadata)
-    layer_weights: dict[int, float] = field(default_factory=dict)
-    position_weights: dict[int, float] = field(default_factory=dict)
-    strength_weights: dict[float, float] = field(default_factory=dict)
+    def _get_current_bounds(self) -> tuple[float, float]:
+        """Get current search bounds."""
+        low = self.lower_bound if self.lower_bound is not None else self.min_mag
+        high = self.upper_bound if self.upper_bound is not None else self.max_mag
+        return (low, high)
 
-    # Track results for adaptive biasing
-    flip_counts: dict[tuple[int, int], int] = field(default_factory=dict)  # (layer, pos) -> flips
-    test_counts: dict[tuple[int, int], int] = field(default_factory=dict)  # (layer, pos) -> tests
-    tested_combinations: set[tuple[int, int, int, float]] = field(default_factory=set)
+    def sample_magnitude(self, rng) -> float:
+        """
+        Sample from current bounds [lower_bound, upper_bound].
 
-    # Store base weights separately (before adaptive updates)
-    _base_layer_weights: dict[int, float] = field(default_factory=dict)
-    _base_position_weights: dict[int, float] = field(default_factory=dict)
+        Before flip found: beta distribution biased toward upper bound.
+        After flip found: uniform over narrowed range.
+        """
+        low, high = self._get_current_bounds()
+
+        if self.upper_bound is None:
+            # No flip yet - bias toward large magnitudes
+            alpha, beta = 2.0, 1.0  # Skewed toward high end
+            u = rng.betavariate(alpha, beta)
+        else:
+            # Flip found - uniform in [lower, upper] for binary search
+            u = rng.random()
+
+        mag = low + u * (high - low)
+        return self.sign * mag
+
+    def record_result(self, magnitude: float, flipped: bool) -> None:
+        """Record result and update binary search bounds."""
+        self.tested_magnitudes.append(magnitude)
+        self.tested_results.append(flipped)
+
+        abs_mag = abs(magnitude)
+        if flipped:
+            # Flip: tighten upper bound
+            if self.upper_bound is None or abs_mag < self.upper_bound:
+                self.upper_bound = abs_mag
+            if self.min_flip_magnitude is None or abs_mag < abs(self.min_flip_magnitude):
+                self.min_flip_magnitude = magnitude
+        else:
+            # No flip: tighten lower bound
+            if self.lower_bound is None or abs_mag > self.lower_bound:
+                self.lower_bound = abs_mag
+
+    def get_search_range(self) -> tuple[float, float]:
+        """Get current search range."""
+        return self._get_current_bounds()
+
+    def is_complete(self, min_tests: int = 5, precision: float = 1.0) -> bool:
+        """Check if we've narrowed down enough."""
+        if len(self.tested_magnitudes) < min_tests:
+            return False
+        if self.upper_bound is None:
+            # No flip found yet
+            return len(self.tested_magnitudes) >= min_tests * 2
+        low, high = self._get_current_bounds()
+        return (high - low) < precision
+
+
+@dataclass
+class CellState:
+    """
+    Tracks state for a single (layer, position, sample_id) cell.
+
+    Manages both directions separately and tracks baseline choice.
+    """
+
+    layer: int
+    position: int
+    sample_id: int
+    positive_range: tuple[float, float]  # (min, max) for short→long
+    negative_range: tuple[float, float]  # (min, max) for long→short
+
+    baseline_choice: Optional[str] = None  # Determined on first test
+    short_to_long: DirectionState = field(init=False)
+    long_to_short: DirectionState = field(init=False)
 
     def __post_init__(self):
+        self.short_to_long = DirectionState(
+            direction="short_to_long",
+            min_mag=self.positive_range[0],
+            max_mag=self.positive_range[1],
+            sign=1,
+        )
+        self.long_to_short = DirectionState(
+            direction="long_to_short",
+            min_mag=self.negative_range[0],
+            max_mag=self.negative_range[1],
+            sign=-1,
+        )
+
+    def get_active_direction(self) -> Optional[DirectionState]:
+        """
+        Get the direction we should be testing based on baseline.
+
+        Returns None if baseline not yet determined.
+        """
+        if self.baseline_choice is None:
+            return None
+        if self.baseline_choice == "short_term":
+            return self.short_to_long  # Try to flip to long
+        elif self.baseline_choice == "long_term":
+            return self.long_to_short  # Try to flip to short
+        return None  # Unknown baseline
+
+    def needs_baseline(self) -> bool:
+        """Check if we still need to determine baseline."""
+        return self.baseline_choice is None
+
+    def set_baseline(self, choice: str) -> None:
+        """Set baseline choice."""
+        self.baseline_choice = choice
+
+    def get_results(self) -> dict:
+        """Get results for this cell in a format compatible with steering heatmaps."""
+        return {
+            "layer": self.layer,
+            "position": self.position,
+            "sample_id": self.sample_id,
+            "baseline_choice": self.baseline_choice,
+            "min_flip_to_long": self.short_to_long.min_flip_magnitude,
+            "min_flip_to_short": self.long_to_short.min_flip_magnitude,
+            "tests_to_long": len(self.short_to_long.tested_magnitudes),
+            "tests_to_short": len(self.long_to_short.tested_magnitudes),
+        }
+
+
+class CellTracker:
+    """
+    Manages all cells for random search.
+
+    Provides cell selection with novelty/exploitation balance and
+    magnitude selection within cells.
+    """
+
+    def __init__(
+        self,
+        layers: list[int],
+        positions: list[int],
+        sample_ids: list[int],
+        steering_strengths: list[float],
+        probe_index: dict,
+        seed: int = 42,
+        novelty_weight: float = 2.0,
+        min_magnitude: float = 0.5,  # Minimum magnitude to test
+    ):
         import random
-        self._rng = random.Random(self.seed)
-        self._initialize_weights()
 
-    def _initialize_weights(self):
-        """Initialize sampling weights based on probe metadata."""
-        # Build lookup for probe accuracy by (layer, position)
-        probe_accuracy: dict[tuple[int, int], float] = {}
-        probe_after_horizon: dict[tuple[int, int], bool] = {}
+        self.layers = layers
+        self.positions = positions
+        self.sample_ids = sample_ids
+        self.probe_index = probe_index
+        self.novelty_weight = novelty_weight
+        self._rng = random.Random(seed)
 
+        # Compute continuous ranges from steering_strengths
+        positive_vals = [s for s in steering_strengths if s > 0]
+        negative_vals = [abs(s) for s in steering_strengths if s < 0]
+
+        # Use min/max to define the sampling range
+        self.positive_range = (
+            min_magnitude,
+            max(positive_vals) if positive_vals else 50.0,
+        )
+        self.negative_range = (
+            min_magnitude,
+            max(negative_vals) if negative_vals else 50.0,
+        )
+
+        # Cell states: (layer, position, sample_id) -> CellState
+        self.cells: dict[tuple[int, int, int], CellState] = {}
+
+        # Compute base weights for layer/position selection
+        self._base_layer_weights = self._compute_layer_weights()
+        self._base_position_weights = self._compute_position_weights()
+
+    def _compute_layer_weights(self) -> dict[int, float]:
+        """Compute base weights for layers based on probe accuracy."""
+        probe_accuracy = {}
         for probe_info in self.probe_index.get("probes", []):
             if probe_info.get("type") != "choice":
                 continue
-            layer = probe_info["layer"]
-            pos = probe_info["position"]
-            key = (layer, pos)
+            key = (probe_info["layer"], probe_info["position"])
             probe_accuracy[key] = probe_info.get("accuracy", 0.5)
-            probe_after_horizon[key] = probe_info.get("after_horizon", False)
 
-        # Layer weights: bias towards middle layers (empirically better for steering)
-        # Also weight by max accuracy at that layer
+        weights = {}
         n_layers = len(self.layers)
         for i, layer in enumerate(self.layers):
             # Bell curve centered on middle layers
             center = n_layers / 2
             distance = abs(i - center) / max(center, 1)
-            position_weight = 1.0 - 0.5 * distance  # 0.5 to 1.0
+            layer_weight = 1.0 - 0.5 * distance
 
-            # Boost by max accuracy at this layer
-            layer_accuracies = [
-                probe_accuracy.get((layer, p), 0.5) for p in self.positions
-            ]
-            max_accuracy = max(layer_accuracies) if layer_accuracies else 0.5
-            accuracy_weight = max_accuracy  # 0.5 to 1.0 typically
+            # Boost by max accuracy
+            accuracies = [probe_accuracy.get((layer, p), 0.5) for p in self.positions]
+            max_acc = max(accuracies) if accuracies else 0.5
+            weights[layer] = layer_weight * max_acc
 
-            base_weight = position_weight * accuracy_weight
-            self._base_layer_weights[layer] = base_weight
-            self.layer_weights[layer] = base_weight
+        return weights
 
-        # Position weights: bias towards after-horizon positions
+    def _compute_position_weights(self) -> dict[int, float]:
+        """Compute base weights for positions based on after_horizon and accuracy."""
+        probe_after_horizon = {}
+        probe_accuracy = {}
+        for probe_info in self.probe_index.get("probes", []):
+            if probe_info.get("type") != "choice":
+                continue
+            key = (probe_info["layer"], probe_info["position"])
+            probe_accuracy[key] = probe_info.get("accuracy", 0.5)
+            probe_after_horizon[key] = probe_info.get("after_horizon", False)
+
+        weights = {}
         for pos in self.positions:
-            # Check if any probe at this position is after_horizon
-            is_after_horizon = any(
-                probe_after_horizon.get((layer, pos), False) for layer in self.layers
+            is_after = any(probe_after_horizon.get((l, pos), False) for l in self.layers)
+            accuracies = [probe_accuracy.get((l, pos), 0.5) for l in self.layers]
+            max_acc = max(accuracies) if accuracies else 0.5
+            weights[pos] = (2.0 if is_after else 1.0) * max_acc
+
+        return weights
+
+    def _get_or_create_cell(self, layer: int, position: int, sample_id: int) -> CellState:
+        """Get existing cell or create new one."""
+        key = (layer, position, sample_id)
+        if key not in self.cells:
+            self.cells[key] = CellState(
+                layer=layer,
+                position=position,
+                sample_id=sample_id,
+                positive_range=self.positive_range,
+                negative_range=self.negative_range,
             )
-            # Also check accuracy at this position
-            pos_accuracies = [
-                probe_accuracy.get((layer, pos), 0.5) for layer in self.layers
-            ]
-            max_accuracy = max(pos_accuracies) if pos_accuracies else 0.5
+        return self.cells[key]
 
-            base_weight = 2.0 if is_after_horizon else 1.0
-            base_weight *= max_accuracy
-            self._base_position_weights[pos] = base_weight
-            self.position_weights[pos] = base_weight
+    def _get_cell_novelty(self, layer: int, position: int) -> float:
+        """UCB1-style novelty bonus for (layer, position)."""
+        import math
 
-        # Strength weights: bias towards larger magnitudes (more likely to flip)
-        for strength in self.steering_strengths:
-            if strength == 0:
-                self.strength_weights[strength] = 0.1  # Low weight for baseline
-            else:
-                # Higher weight for larger magnitudes
-                self.strength_weights[strength] = 0.5 + abs(strength) / 100.0
+        total_cells = len(self.cells)
+        if total_cells == 0:
+            return 1.0
 
-    def _weighted_choice(self, items: list, weights: dict) -> any:
-        """Choose from items with given weights."""
-        item_weights = [weights.get(item, 1.0) for item in items]
-        total = sum(item_weights)
+        # Count cells at this (layer, position)
+        cell_count = sum(
+            1 for (l, p, _) in self.cells.keys() if l == layer and p == position
+        )
+        return math.sqrt(math.log(total_cells + 1) / (cell_count + 1))
+
+    def _get_cell_priority(self, layer: int, position: int, sample_id: int) -> float:
+        """
+        Compute priority for a cell based on:
+        - Base weights (layer/position quality)
+        - Novelty (unexplored cells)
+        - Progress (cells with flips found need refinement)
+        """
+        base = self._base_layer_weights.get(layer, 1.0)
+        base *= self._base_position_weights.get(position, 1.0)
+
+        novelty = self._get_cell_novelty(layer, position)
+
+        # Check if cell exists and has found flips
+        key = (layer, position, sample_id)
+        if key in self.cells:
+            cell = self.cells[key]
+            direction = cell.get_active_direction()
+            if direction and direction.min_flip_magnitude is not None:
+                # Has flip - boost priority if still refining
+                if not direction.is_complete():
+                    return base * 2.0  # Prioritize refinement
+                return base * 0.1  # De-prioritize completed cells
+
+        return base * (1.0 + self.novelty_weight * novelty)
+
+    def sample_cell(self) -> Optional[tuple[int, int, int]]:
+        """Sample a (layer, position, sample_id) cell weighted by priority."""
+        # Build candidate list with weights
+        candidates = []
+        weights = []
+        for layer in self.layers:
+            for position in self.positions:
+                for sample_id in self.sample_ids:
+                    key = (layer, position, sample_id)
+                    # Skip completed cells
+                    if key in self.cells:
+                        cell = self.cells[key]
+                        direction = cell.get_active_direction()
+                        if direction and direction.is_complete():
+                            continue
+
+                    priority = self._get_cell_priority(layer, position, sample_id)
+                    candidates.append(key)
+                    weights.append(priority)
+
+        if not candidates:
+            return None
+
+        # Weighted random choice
+        total = sum(weights)
         if total == 0:
-            return self._rng.choice(items)
+            return self._rng.choice(candidates)
 
         r = self._rng.random() * total
         cumulative = 0.0
-        for item, weight in zip(items, item_weights):
+        for candidate, weight in zip(candidates, weights):
             cumulative += weight
             if r <= cumulative:
-                return item
-        return items[-1]
+                return candidate
+        return candidates[-1]
 
-    def _get_novelty_bonus(self, layer: int, position: int) -> float:
-        """
-        Calculate novelty bonus for a (layer, position) combination.
+    def sample_magnitude(self, cell: CellState) -> Optional[float]:
+        """Sample a magnitude for a cell based on its current state."""
+        direction = cell.get_active_direction()
+        if direction is None:
+            return None
 
-        Uses UCB1-inspired formula: novelty = sqrt(log(total_tests + 1) / (tests + 1))
-        This gives high bonus to untested combos and decreases as we test more.
-        """
-        import math
+        # Check if direction is complete
+        if direction.is_complete():
+            return None
 
-        total_tests = len(self.tested_combinations)
-        key = (layer, position)
-        tests = self.test_counts.get(key, 0)
+        return direction.sample_magnitude(self._rng)
 
-        if total_tests == 0:
-            return 1.0  # No tests yet, equal novelty for all
+    def record_baseline(self, layer: int, position: int, sample_id: int, choice: str) -> None:
+        """Record baseline choice for a cell."""
+        cell = self._get_or_create_cell(layer, position, sample_id)
+        cell.set_baseline(choice)
 
-        # UCB1-style exploration bonus
-        # Higher when this (layer, pos) is under-explored relative to total
-        novelty = math.sqrt(math.log(total_tests + 1) / (tests + 1))
-        return novelty
-
-    def _get_effective_weights(self) -> tuple[dict[int, float], dict[int, float]]:
-        """
-        Get effective layer and position weights including novelty bonus.
-
-        Combines:
-        - Base weights (from probe accuracy, layer position, etc.)
-        - Exploitation bonus (flip rate)
-        - Exploration bonus (novelty)
-        """
-        effective_layer_weights = {}
-        effective_position_weights = {}
-
-        # Calculate layer weights with novelty
-        for layer in self.layers:
-            base = self._base_layer_weights.get(layer, 1.0)
-
-            # Average novelty across positions for this layer
-            novelty_sum = sum(
-                self._get_novelty_bonus(layer, pos) for pos in self.positions
-            )
-            avg_novelty = novelty_sum / len(self.positions)
-
-            # Exploitation: average flip rate at this layer
-            flip_rates = []
-            for pos in self.positions:
-                key = (layer, pos)
-                tests = self.test_counts.get(key, 0)
-                if tests > 0:
-                    flip_rates.append(self.flip_counts.get(key, 0) / tests)
-            avg_flip_rate = sum(flip_rates) / len(flip_rates) if flip_rates else 0.0
-
-            # Combine: base * (1 + exploitation + novelty_weight * exploration)
-            effective_layer_weights[layer] = base * (
-                1.0 + avg_flip_rate + self.novelty_weight * avg_novelty
-            )
-
-        # Calculate position weights with novelty
-        for pos in self.positions:
-            base = self._base_position_weights.get(pos, 1.0)
-
-            # Average novelty across layers for this position
-            novelty_sum = sum(
-                self._get_novelty_bonus(layer, pos) for layer in self.layers
-            )
-            avg_novelty = novelty_sum / len(self.layers)
-
-            # Exploitation: average flip rate at this position
-            flip_rates = []
-            for layer in self.layers:
-                key = (layer, pos)
-                tests = self.test_counts.get(key, 0)
-                if tests > 0:
-                    flip_rates.append(self.flip_counts.get(key, 0) / tests)
-            avg_flip_rate = sum(flip_rates) / len(flip_rates) if flip_rates else 0.0
-
-            # Combine: base * (1 + exploitation + novelty_weight * exploration)
-            effective_position_weights[pos] = base * (
-                1.0 + avg_flip_rate + self.novelty_weight * avg_novelty
-            )
-
-        return effective_layer_weights, effective_position_weights
-
-    def sample(self) -> Optional[tuple[int, int, int, float]]:
-        """
-        Sample a random (layer, position, sample_id, strength) combination.
-
-        Uses effective weights that combine:
-        - Base weights (accuracy, layer position, after-horizon)
-        - Exploitation (flip rate from previous tests)
-        - Exploration (novelty bonus for less-tested combos)
-
-        Returns None if all combinations have been tested.
-        """
-        # Get current effective weights including novelty
-        layer_weights, position_weights = self._get_effective_weights()
-
-        max_attempts = 1000
-        for _ in range(max_attempts):
-            layer = self._weighted_choice(self.layers, layer_weights)
-            position = self._weighted_choice(self.positions, position_weights)
-            sample_id = self._rng.choice(self.sample_ids)
-            strength = self._weighted_choice(self.steering_strengths, self.strength_weights)
-
-            combo = (layer, position, sample_id, strength)
-            if combo not in self.tested_combinations:
-                return combo
-
-        # All combinations tested or couldn't find new one
-        return None
-
-    def record_result(
+    def record_steering_result(
         self,
         layer: int,
         position: int,
         sample_id: int,
-        strength: float,
-        flipped: bool,
-    ):
+        magnitude: float,
+        steered_choice: str,
+    ) -> bool:
         """
-        Record a result for adaptive weight computation.
-
-        Weights are computed dynamically in _get_effective_weights() using:
-        - Base weights (probe accuracy, layer position, etc.)
-        - Exploitation bonus (flip rate from these counts)
-        - Exploration bonus (novelty based on test counts)
+        Record steering result. Returns True if a flip occurred.
         """
-        combo = (layer, position, sample_id, strength)
-        self.tested_combinations.add(combo)
+        cell = self._get_or_create_cell(layer, position, sample_id)
+        if cell.baseline_choice is None:
+            return False
 
-        key = (layer, position)
-        self.test_counts[key] = self.test_counts.get(key, 0) + 1
-        if flipped:
-            self.flip_counts[key] = self.flip_counts.get(key, 0) + 1
+        flipped = (
+            cell.baseline_choice in ("short_term", "long_term")
+            and steered_choice in ("short_term", "long_term")
+            and cell.baseline_choice != steered_choice
+        )
+
+        # Record to appropriate direction
+        if magnitude > 0:
+            cell.short_to_long.record_result(magnitude, flipped)
+        else:
+            cell.long_to_short.record_result(magnitude, flipped)
+
+        return flipped
+
+    def get_all_results(self) -> list[dict]:
+        """Get results from all cells for heatmap generation."""
+        return [cell.get_results() for cell in self.cells.values()]
 
     def get_stats(self) -> dict:
-        """Get statistics about sampling and results."""
-        total_tests = len(self.tested_combinations)
-        total_flips = sum(self.flip_counts.values())
+        """Get summary statistics."""
+        total_cells = len(self.cells)
+        cells_with_baseline = sum(1 for c in self.cells.values() if c.baseline_choice)
+        cells_with_flip_to_long = sum(
+            1 for c in self.cells.values()
+            if c.short_to_long.min_flip_magnitude is not None
+        )
+        cells_with_flip_to_short = sum(
+            1 for c in self.cells.values()
+            if c.long_to_short.min_flip_magnitude is not None
+        )
 
-        # Best layer/position combos by flip rate
-        best_combos = []
-        for key, tests in self.test_counts.items():
-            if tests >= 2:
-                flips = self.flip_counts.get(key, 0)
-                flip_rate = flips / tests
-                best_combos.append((key, flip_rate, tests, flips))
+        # Grid coverage
+        layer_pos_pairs = set((c.layer, c.position) for c in self.cells.values())
+        total_grid = len(self.layers) * len(self.positions)
 
-        best_combos.sort(key=lambda x: (-x[1], -x[2]))  # Sort by flip rate, then tests
-
-        # Grid coverage: how many (layer, position) cells have been tested?
-        total_cells = len(self.layers) * len(self.positions)
-        tested_cells = len(self.test_counts)
-        coverage = tested_cells / total_cells if total_cells > 0 else 0
-
-        # Test distribution: how evenly spread are tests across cells?
-        if self.test_counts:
-            test_values = list(self.test_counts.values())
-            avg_tests_per_cell = sum(test_values) / len(test_values)
-            max_tests = max(test_values)
-            min_tests = min(test_values)
-        else:
-            avg_tests_per_cell = 0
-            max_tests = 0
-            min_tests = 0
+        # Test counts
+        total_tests = sum(
+            len(c.short_to_long.tested_magnitudes) + len(c.long_to_short.tested_magnitudes)
+            for c in self.cells.values()
+        )
 
         return {
-            "total_tests": total_tests,
-            "total_flips": total_flips,
-            "flip_rate": total_flips / total_tests if total_tests > 0 else 0,
-            "best_layer_positions": best_combos[:10],
-            "unique_layers_tested": len(set(k[0] for k in self.test_counts.keys())),
-            "unique_positions_tested": len(set(k[1] for k in self.test_counts.keys())),
-            "grid_coverage": coverage,
-            "tested_cells": tested_cells,
             "total_cells": total_cells,
-            "avg_tests_per_cell": avg_tests_per_cell,
-            "test_distribution": {"min": min_tests, "max": max_tests},
+            "cells_with_baseline": cells_with_baseline,
+            "cells_with_flip_to_long": cells_with_flip_to_long,
+            "cells_with_flip_to_short": cells_with_flip_to_short,
+            "grid_coverage": len(layer_pos_pairs) / total_grid if total_grid > 0 else 0,
+            "unique_layer_pos": len(layer_pos_pairs),
+            "total_grid_cells": total_grid,
+            "total_tests": total_tests,
         }
 
 
@@ -1191,7 +1308,7 @@ class RandomSearchResult:
     baseline_choice: str
     steered_choice: str
     flipped: bool
-    probe_id: str
+    flip_direction: Optional[str]  # "short_to_long" or "long_to_short"
 
 
 @dataclass
@@ -1205,7 +1322,8 @@ class RandomSearchOutput:
     n_iterations: int
     timestamp: str
     results: list[RandomSearchResult]
-    sampler_stats: dict
+    cell_results: list[dict]  # Per-cell min flip magnitudes
+    stats: dict
 
 
 def run_steering_for_single_sample(
@@ -1272,8 +1390,11 @@ def run_random_search_experiment(
     """
     Run random search steering experiment.
 
-    Randomly samples (layer, position, sample, strength) combinations,
-    biasing towards configurations more likely to produce signal.
+    Uses CellTracker for intelligent sampling:
+    - Samples cells (layer, position, sample) with novelty/exploitation balance
+    - Within each cell, starts with large magnitudes to find flips
+    - After flip found, narrows magnitude range to find minimum
+    - Tracks both directions (short→long, long→short) separately
 
     Args:
         config: Steering experiment configuration
@@ -1281,7 +1402,7 @@ def run_random_search_experiment(
         output_dir: Directory for output (auto-created if None)
 
     Returns:
-        RandomSearchOutput with all results
+        RandomSearchOutput with results and per-cell min flip magnitudes
     """
     # Load probe index and model info
     probes_base = PROJECT_ROOT / "out" / "probes" / config.probe_config_id
@@ -1332,17 +1453,14 @@ def run_random_search_experiment(
     for probe in probes_by_type.values():
         probe_lookup[(probe.layer, probe.token_position_idx)] = probe
 
-    print(f"\nAvailable parameter space:")
+    print(f"\nParameter space:")
     print(f"  Layers: {len(layers)} ({min(layers)}-{max(layers)})")
     print(f"  Positions: {len(positions)}")
     print(f"  Samples: {len(sample_ids)}")
-    print(f"  Strengths: {len(config.steering_strengths)}")
-    total_space = len(layers) * len(positions) * len(sample_ids) * len(config.steering_strengths)
-    print(f"  Total combinations: {total_space:,}")
-    print(f"  Sampling: {config.random_search_iterations} ({100*config.random_search_iterations/total_space:.1f}%)")
+    print(f"  Magnitudes: {config.steering_strengths}")
 
-    # Initialize sampler
-    sampler = RandomSearchSampler(
+    # Initialize cell tracker
+    tracker = CellTracker(
         layers=layers,
         positions=positions,
         sample_ids=sample_ids,
@@ -1360,68 +1478,121 @@ def run_random_search_experiment(
 
     # Run random search
     results: list[RandomSearchResult] = []
-    print(f"\nRunning random search...")
+    print(f"\nRunning random search ({config.random_search_iterations} iterations)...")
 
     for i in range(config.random_search_iterations):
-        combo = sampler.sample()
-        if combo is None:
-            print(f"\n  Exhausted all combinations at iteration {i}")
+        # Sample a cell
+        cell_key = tracker.sample_cell()
+        if cell_key is None:
+            print(f"\n  All cells complete at iteration {i}")
             break
 
-        layer, position, sample_id, strength = combo
+        layer, position, sample_id = cell_key
+        cell = tracker._get_or_create_cell(layer, position, sample_id)
 
-        if (i + 1) % 10 == 0 or i == 0:
-            stats = sampler.get_stats()
-            print(f"  [{i+1}/{config.random_search_iterations}] "
-                  f"Flips: {stats['total_flips']}/{stats['total_tests']} "
-                  f"({stats['flip_rate']:.1%})")
-
-        # Get probe for this layer/position
+        # Get probe and question
         probe = probe_lookup.get((layer, position))
-        if probe is None:
-            # Skip if no probe at this position (shouldn't happen)
-            continue
-
-        # Get question for this sample
         question = questions_by_id.get(sample_id)
-        if question is None:
+        if probe is None or question is None:
             continue
 
-        # Run single steering test
-        probe_id = f"{probe.probe_type.value}_layer{layer}_pos{position}"
-        baseline_choice, steered_choice, flipped = run_steering_for_single_sample(
-            runner, probe, question, strength, debug=debug
+        # Build prompt and labels
+        prompt = build_prompt_from_question(question)
+        pair = question.preference_pair
+        short_label = pair.short_term.label
+        long_label = pair.long_term.label
+        short_value = f"{pair.short_term.reward:,.0f}"
+        long_value = f"{pair.long_term.reward:,.0f}"
+
+        # If cell needs baseline, run baseline first
+        if cell.needs_baseline():
+            baseline_response = runner.generate_baseline(prompt, max_new_tokens=64)
+            baseline_choice = parse_choice_from_response(
+                baseline_response, short_label, long_label, debug=debug,
+                short_value=short_value, long_value=long_value
+            )
+            tracker.record_baseline(layer, position, sample_id, baseline_choice)
+
+            # Record baseline test
+            results.append(RandomSearchResult(
+                layer=layer,
+                position=position,
+                sample_id=sample_id,
+                strength=0.0,
+                baseline_choice=baseline_choice,
+                steered_choice=baseline_choice,
+                flipped=False,
+                flip_direction=None,
+            ))
+
+            # Skip to next iteration if baseline is unknown
+            if baseline_choice not in ("short_term", "long_term"):
+                continue
+
+        # Sample magnitude for steering
+        magnitude = tracker.sample_magnitude(cell)
+        if magnitude is None:
+            continue  # Cell is complete
+
+        # Run steering
+        steering_config_obj = SteeringDirectionConfig(
+            direction=probe.direction,
+            layer=probe.layer,
+            strength=magnitude,
+            option=SteeringOption.APPLY_TO_ALL,
+        )
+        steered_response = runner.generate_with_steering(
+            prompt, steering=steering_config_obj, max_new_tokens=64
+        )
+        steered_choice = parse_choice_from_response(
+            steered_response, short_label, long_label, debug=debug,
+            short_value=short_value, long_value=long_value
         )
 
         # Record result
-        sampler.record_result(layer, position, sample_id, strength, flipped)
+        flipped = tracker.record_steering_result(
+            layer, position, sample_id, magnitude, steered_choice
+        )
 
-        result = RandomSearchResult(
+        # Determine flip direction
+        flip_direction = None
+        if flipped:
+            if cell.baseline_choice == "short_term":
+                flip_direction = "short_to_long"
+            elif cell.baseline_choice == "long_term":
+                flip_direction = "long_to_short"
+
+        results.append(RandomSearchResult(
             layer=layer,
             position=position,
             sample_id=sample_id,
-            strength=strength,
-            baseline_choice=baseline_choice,
+            strength=magnitude,
+            baseline_choice=cell.baseline_choice or "unknown",
             steered_choice=steered_choice,
             flipped=flipped,
-            probe_id=probe_id,
-        )
-        results.append(result)
+            flip_direction=flip_direction,
+        ))
 
-        # Save incrementally every 20 iterations
+        # Progress report
+        if (i + 1) % 10 == 0 or i == 0:
+            stats = tracker.get_stats()
+            print(f"  [{i+1}/{config.random_search_iterations}] "
+                  f"Cells: {stats['total_cells']} | "
+                  f"Flips: S→L={stats['cells_with_flip_to_long']}, "
+                  f"L→S={stats['cells_with_flip_to_short']} | "
+                  f"Coverage: {stats['grid_coverage']:.0%}")
+
+        # Save incrementally
         if (i + 1) % 20 == 0:
             _save_random_search_results(
-                results_dir, timestamp, config, model_name, results, sampler.get_stats()
+                results_dir, timestamp, config, model_name, results, tracker
             )
 
-        # Clear memory periodically
-        if (i + 1) % 50 == 0:
-            clear_memory()
-
     # Final save
-    final_stats = sampler.get_stats()
+    final_stats = tracker.get_stats()
+    cell_results = tracker.get_all_results()
     _save_random_search_results(
-        results_dir, timestamp, config, model_name, results, final_stats
+        results_dir, timestamp, config, model_name, results, tracker
     )
 
     # Print summary
@@ -1429,21 +1600,11 @@ def run_random_search_experiment(
     print("RANDOM SEARCH COMPLETE")
     print(f"{'='*60}")
     print(f"Total iterations: {len(results)}")
-    print(f"Total flips: {final_stats['total_flips']} ({final_stats['flip_rate']:.1%})")
-
-    # Coverage stats (novelty exploration)
-    print(f"\nGrid coverage:")
-    print(f"  Cells tested: {final_stats['tested_cells']}/{final_stats['total_cells']} ({final_stats['grid_coverage']:.0%})")
-    print(f"  Layers: {final_stats['unique_layers_tested']}/{len(layers)}")
-    print(f"  Positions: {final_stats['unique_positions_tested']}/{len(positions)}")
-    print(f"  Avg tests/cell: {final_stats['avg_tests_per_cell']:.1f}")
-    dist = final_stats['test_distribution']
-    print(f"  Test distribution: min={dist['min']}, max={dist['max']}")
-
-    if final_stats['best_layer_positions']:
-        print(f"\nBest (layer, position) by flip rate:")
-        for (layer, pos), flip_rate, tests, flips in final_stats['best_layer_positions'][:5]:
-            print(f"  Layer {layer}, Pos {pos}: {flip_rate:.0%} ({flips}/{tests})")
+    print(f"Cells explored: {final_stats['total_cells']}")
+    print(f"Flips found: short→long={final_stats['cells_with_flip_to_long']}, "
+          f"long→short={final_stats['cells_with_flip_to_short']}")
+    print(f"Grid coverage: {final_stats['unique_layer_pos']}/{final_stats['total_grid_cells']} "
+          f"({final_stats['grid_coverage']:.0%})")
 
     return RandomSearchOutput(
         config_id=config.get_id(),
@@ -1453,7 +1614,8 @@ def run_random_search_experiment(
         n_iterations=len(results),
         timestamp=timestamp,
         results=results,
-        sampler_stats=final_stats,
+        cell_results=cell_results,
+        stats=final_stats,
     )
 
 
@@ -1463,7 +1625,7 @@ def _save_random_search_results(
     config: SteeringConfig,
     model_name: str,
     results: list[RandomSearchResult],
-    stats: dict,
+    tracker: CellTracker,
 ) -> None:
     """Save random search results to JSON."""
     data = {
@@ -1473,7 +1635,8 @@ def _save_random_search_results(
         "model_name": model_name,
         "n_iterations": len(results),
         "timestamp": timestamp,
-        "stats": stats,
+        "stats": tracker.get_stats(),
+        "cell_results": tracker.get_all_results(),
         "results": [
             {
                 "layer": r.layer,
@@ -1483,7 +1646,7 @@ def _save_random_search_results(
                 "baseline_choice": r.baseline_choice,
                 "steered_choice": r.steered_choice,
                 "flipped": r.flipped,
-                "probe_id": r.probe_id,
+                "flip_direction": r.flip_direction,
             }
             for r in results
         ],
@@ -1491,16 +1654,33 @@ def _save_random_search_results(
     save_json(data, results_dir / f"random_search_{timestamp}.json")
 
 
-def create_random_search_heatmap(
+def create_random_search_heatmaps(
     output: RandomSearchOutput,
     output_dir: Path,
     probe_index: Optional[dict] = None,
     token_info: Optional[dict] = None,
 ) -> None:
     """
-    Create heatmap showing flip rates from random search.
+    Create heatmaps showing minimum steering magnitude to flip choice.
 
-    Shows flip rate (flips/tests) for each (layer, position) combination tested.
+    Creates separate heatmaps for:
+    - short->long flips (positive steering)
+    - long->short flips (negative steering)
+
+    Uses cell_results from CellTracker which contains min_flip_to_long and
+    min_flip_to_short for each (layer, position, sample) cell. Aggregates
+    across samples to get per-(layer, position) values.
+
+    Cell values:
+    - Number: mean min |strength| that caused flip across samples
+    - Gray "N/A": not tested
+    - "NEVER": tested but never flipped
+
+    Args:
+        output: Random search experiment results
+        output_dir: Directory to save visualizations
+        probe_index: Full probe index (to show all positions)
+        token_info: Dict with 'tokens' and 'resolved_positions' for x-axis labels
     """
     import matplotlib.pyplot as plt
     from matplotlib.colors import Normalize
@@ -1508,18 +1688,8 @@ def create_random_search_heatmap(
     viz_dir = output_dir / "viz"
     ensure_dir(viz_dir)
 
-    # Collect flip rates by (layer, position)
-    test_counts: dict[tuple[int, int], int] = {}
-    flip_counts: dict[tuple[int, int], int] = {}
-
-    for r in output.results:
-        key = (r.layer, r.position)
-        test_counts[key] = test_counts.get(key, 0) + 1
-        if r.flipped:
-            flip_counts[key] = flip_counts.get(key, 0) + 1
-
-    if not test_counts:
-        print("  No results to visualize")
+    if not output.cell_results:
+        print("  No cell results to visualize")
         return
 
     # Get all layers and positions
@@ -1529,8 +1699,12 @@ def create_random_search_heatmap(
         layers = sorted(set(p["layer"] for p in choice_probes))
         positions = sorted(set(p["position"] for p in choice_probes))
     else:
-        layers = sorted(set(k[0] for k in test_counts.keys()))
-        positions = sorted(set(k[1] for k in test_counts.keys()))
+        layers = sorted(set(c["layer"] for c in output.cell_results))
+        positions = sorted(set(c["position"] for c in output.cell_results))
+
+    if not layers or not positions:
+        print("  No layers/positions to visualize")
+        return
 
     # Build position labels
     def build_position_labels():
@@ -1555,67 +1729,125 @@ def create_random_search_heatmap(
 
     position_labels = build_position_labels()
 
-    # Build matrix
-    matrix = np.full((len(layers), len(positions)), np.nan)
-    not_tested = np.ones((len(layers), len(positions)), dtype=bool)
+    # Aggregate cell results by (layer, position)
+    # Collect all min flip magnitudes for each direction
+    sl_flips: dict[tuple[int, int], list[float]] = {}  # short->long
+    ls_flips: dict[tuple[int, int], list[float]] = {}  # long->short
+    tested_cells: dict[tuple[int, int], int] = {}  # count of cells tested
 
-    for (layer, pos), tests in test_counts.items():
-        if layer in layers and pos in positions:
-            li = layers.index(layer)
-            pi = positions.index(pos)
-            flip_rate = flip_counts.get((layer, pos), 0) / tests
-            matrix[li, pi] = flip_rate
-            not_tested[li, pi] = False
+    for cell in output.cell_results:
+        key = (cell["layer"], cell["position"])
+        tested_cells[key] = tested_cells.get(key, 0) + 1
 
-    # Create heatmap
-    fig_height = max(6, len(layers) * 0.5 + 1)
-    fig_width = max(12, len(positions) * 1.5)
-    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+        if cell.get("min_flip_to_long") is not None:
+            if key not in sl_flips:
+                sl_flips[key] = []
+            sl_flips[key].append(abs(cell["min_flip_to_long"]))
 
-    cmap = plt.cm.RdYlGn.copy()  # Green=high flip rate (good), Red=low
-    cmap.set_bad(color="white")
-    norm = Normalize(vmin=0, vmax=1)
+        if cell.get("min_flip_to_short") is not None:
+            if key not in ls_flips:
+                ls_flips[key] = []
+            ls_flips[key].append(abs(cell["min_flip_to_short"]))
 
-    display_matrix = np.ma.array(matrix)
-    display_matrix[not_tested] = np.ma.masked
+    # Build matrices for each flip direction
+    sl_matrix = np.full((len(layers), len(positions)), np.nan)
+    sl_never = np.zeros((len(layers), len(positions)), dtype=bool)
+    sl_not_tested = np.ones((len(layers), len(positions)), dtype=bool)
 
-    im = ax.imshow(display_matrix, cmap=cmap, norm=norm, aspect="auto", origin="lower")
+    ls_matrix = np.full((len(layers), len(positions)), np.nan)
+    ls_never = np.zeros((len(layers), len(positions)), dtype=bool)
+    ls_not_tested = np.ones((len(layers), len(positions)), dtype=bool)
 
-    cbar = plt.colorbar(im, ax=ax, shrink=0.8)
-    cbar.set_label("Flip Rate", fontsize=10)
+    for key, count in tested_cells.items():
+        layer, pos = key
+        if layer not in layers or pos not in positions:
+            continue
 
-    # Add annotations
-    for i in range(len(layers)):
-        for j in range(len(positions)):
-            key = (layers[i], positions[j])
-            tests = test_counts.get(key, 0)
-            flips = flip_counts.get(key, 0)
+        li = layers.index(layer)
+        pi = positions.index(pos)
 
-            if not_tested[i, j]:
-                ax.text(j, i, "N/A", ha="center", va="center", fontsize=7,
-                        color="#cccccc", style="italic")
-            else:
-                flip_rate = flips / tests
-                color = "white" if flip_rate > 0.5 else "black"
-                ax.text(j, i, f"{flip_rate:.0%}\n({flips}/{tests})",
-                        ha="center", va="center", fontsize=7, color=color)
+        # Short->Long
+        sl_not_tested[li, pi] = False
+        if key in sl_flips and sl_flips[key]:
+            sl_matrix[li, pi] = np.mean(sl_flips[key])
+        else:
+            sl_never[li, pi] = True
 
-    ax.set_xticks(range(len(positions)))
-    ax.set_xticklabels(position_labels, rotation=45, ha="right", fontsize=8)
-    ax.set_yticks(range(len(layers)))
-    ax.set_yticklabels([f"Layer {l}" for l in layers])
-    ax.set_xlabel("Token Position (sequence order)", fontsize=11)
-    ax.set_ylabel("Layer", fontsize=11)
-    ax.set_title(
-        f"Random Search Flip Rates\n"
-        f"Model: {output.model_name} | Iterations: {output.n_iterations}",
-        fontsize=12,
-    )
+        # Long->Short
+        ls_not_tested[li, pi] = False
+        if key in ls_flips and ls_flips[key]:
+            ls_matrix[li, pi] = np.mean(ls_flips[key])
+        else:
+            ls_never[li, pi] = True
 
-    plt.tight_layout()
-    plt.savefig(viz_dir / "random_search_flip_rates.png", dpi=300, bbox_inches="tight", facecolor="white")
-    plt.close()
-    print(f"  Saved: {viz_dir / 'random_search_flip_rates.png'}")
+    # Determine max strength for colorbar from actual data
+    all_vals = [v for vals in sl_flips.values() for v in vals]
+    all_vals += [v for vals in ls_flips.values() for v in vals]
+    max_strength = max(all_vals) if all_vals else 50.0
+
+    # Create heatmaps
+    for matrix, never, not_tested, flips_dict, title, filename in [
+        (sl_matrix, sl_never, sl_not_tested, sl_flips,
+         "Short→Long Flip", "random_search_short_to_long.png"),
+        (ls_matrix, ls_never, ls_not_tested, ls_flips,
+         "Long→Short Flip", "random_search_long_to_short.png"),
+    ]:
+        fig_height = max(6, len(layers) * 0.5 + 1)
+        fig_width = max(12, len(positions) * 1.5)
+        fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+
+        # Colormap: Red=high magnitude (hard to flip), Green=low magnitude (easy)
+        cmap = plt.cm.RdYlGn_r.copy()
+        cmap.set_bad(color="white")
+        norm = Normalize(vmin=0, vmax=max_strength)
+
+        # Create display matrix
+        display_matrix = matrix.copy()
+        display_matrix = np.ma.array(display_matrix)
+        display_matrix[not_tested] = np.ma.masked
+        display_matrix[never] = np.ma.masked  # Show as white (never flipped)
+
+        im = ax.imshow(display_matrix, cmap=cmap, norm=norm, aspect="auto", origin="lower")
+
+        cbar = plt.colorbar(im, ax=ax, shrink=0.8)
+        cbar.set_label("Min |Steering| to Flip", fontsize=10)
+
+        # Add text annotations
+        for i in range(len(layers)):
+            for j in range(len(positions)):
+                key = (layers[i], positions[j])
+
+                if not_tested[i, j]:
+                    ax.text(j, i, "N/A", ha="center", va="center", fontsize=7,
+                            color="#cccccc", style="italic")
+                elif never[i, j]:
+                    # Tested but never flipped - show count
+                    n_samples = tested_cells.get(key, 0)
+                    ax.text(j, i, f"NEVER\n({n_samples})", ha="center", va="center",
+                            fontsize=7, color="#888888")
+                else:
+                    val = matrix[i, j]
+                    n_flips = len(flips_dict.get(key, []))
+                    color = "white" if val > max_strength / 2 else "black"
+                    ax.text(j, i, f"{val:.1f}\n({n_flips})", ha="center", va="center",
+                            fontsize=7, color=color)
+
+        ax.set_xticks(range(len(positions)))
+        ax.set_xticklabels(position_labels, rotation=45, ha="right", fontsize=8)
+        ax.set_yticks(range(len(layers)))
+        ax.set_yticklabels([f"Layer {l}" for l in layers])
+        ax.set_xlabel("Token Position (sequence order)", fontsize=11)
+        ax.set_ylabel("Layer", fontsize=11)
+        ax.set_title(
+            f"Random Search: Min Steering to {title}\n"
+            f"Model: {output.model_name} | Iterations: {output.n_iterations}",
+            fontsize=12,
+        )
+
+        plt.tight_layout()
+        plt.savefig(viz_dir / filename, dpi=300, bbox_inches="tight", facecolor="white")
+        plt.close()
+        print(f"  Saved: {viz_dir / filename}")
 
 
 # =============================================================================
@@ -2553,7 +2785,7 @@ def main() -> int:
 
         # Create random search visualization
         print("\nCreating visualizations...")
-        create_random_search_heatmap(
+        create_random_search_heatmaps(
             random_output, output_dir, probe_index=probe_index, token_info=token_info
         )
     else:
