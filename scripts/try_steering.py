@@ -888,6 +888,11 @@ class RandomSearchSampler:
     - Middle layers (where probes typically have better accuracy)
     - After-horizon positions (where choice info should be encoded)
     - Larger steering magnitudes (more likely to cause flips)
+    - Novelty: less-tested (layer, position) combinations get a boost
+
+    Uses UCB1-inspired exploration/exploitation balance:
+    - Exploitation: favor (layer, position) combos with high flip rates
+    - Exploration: favor less-tested combos (novelty bonus)
 
     Tracks tested combinations to avoid duplicates and updates biases based on results.
     """
@@ -898,8 +903,9 @@ class RandomSearchSampler:
     steering_strengths: list[float]
     probe_index: dict  # For accuracy/metadata lookup
     seed: int = 42
+    novelty_weight: float = 2.0  # How much to favor unexplored (layer, pos) combos
 
-    # Bias parameters
+    # Bias parameters (base weights from probe metadata)
     layer_weights: dict[int, float] = field(default_factory=dict)
     position_weights: dict[int, float] = field(default_factory=dict)
     strength_weights: dict[float, float] = field(default_factory=dict)
@@ -908,6 +914,10 @@ class RandomSearchSampler:
     flip_counts: dict[tuple[int, int], int] = field(default_factory=dict)  # (layer, pos) -> flips
     test_counts: dict[tuple[int, int], int] = field(default_factory=dict)  # (layer, pos) -> tests
     tested_combinations: set[tuple[int, int, int, float]] = field(default_factory=set)
+
+    # Store base weights separately (before adaptive updates)
+    _base_layer_weights: dict[int, float] = field(default_factory=dict)
+    _base_position_weights: dict[int, float] = field(default_factory=dict)
 
     def __post_init__(self):
         import random
@@ -945,7 +955,9 @@ class RandomSearchSampler:
             max_accuracy = max(layer_accuracies) if layer_accuracies else 0.5
             accuracy_weight = max_accuracy  # 0.5 to 1.0 typically
 
-            self.layer_weights[layer] = position_weight * accuracy_weight
+            base_weight = position_weight * accuracy_weight
+            self._base_layer_weights[layer] = base_weight
+            self.layer_weights[layer] = base_weight
 
         # Position weights: bias towards after-horizon positions
         for pos in self.positions:
@@ -960,7 +972,9 @@ class RandomSearchSampler:
             max_accuracy = max(pos_accuracies) if pos_accuracies else 0.5
 
             base_weight = 2.0 if is_after_horizon else 1.0
-            self.position_weights[pos] = base_weight * max_accuracy
+            base_weight *= max_accuracy
+            self._base_position_weights[pos] = base_weight
+            self.position_weights[pos] = base_weight
 
         # Strength weights: bias towards larger magnitudes (more likely to flip)
         for strength in self.steering_strengths:
@@ -985,16 +999,107 @@ class RandomSearchSampler:
                 return item
         return items[-1]
 
+    def _get_novelty_bonus(self, layer: int, position: int) -> float:
+        """
+        Calculate novelty bonus for a (layer, position) combination.
+
+        Uses UCB1-inspired formula: novelty = sqrt(log(total_tests + 1) / (tests + 1))
+        This gives high bonus to untested combos and decreases as we test more.
+        """
+        import math
+
+        total_tests = len(self.tested_combinations)
+        key = (layer, position)
+        tests = self.test_counts.get(key, 0)
+
+        if total_tests == 0:
+            return 1.0  # No tests yet, equal novelty for all
+
+        # UCB1-style exploration bonus
+        # Higher when this (layer, pos) is under-explored relative to total
+        novelty = math.sqrt(math.log(total_tests + 1) / (tests + 1))
+        return novelty
+
+    def _get_effective_weights(self) -> tuple[dict[int, float], dict[int, float]]:
+        """
+        Get effective layer and position weights including novelty bonus.
+
+        Combines:
+        - Base weights (from probe accuracy, layer position, etc.)
+        - Exploitation bonus (flip rate)
+        - Exploration bonus (novelty)
+        """
+        effective_layer_weights = {}
+        effective_position_weights = {}
+
+        # Calculate layer weights with novelty
+        for layer in self.layers:
+            base = self._base_layer_weights.get(layer, 1.0)
+
+            # Average novelty across positions for this layer
+            novelty_sum = sum(
+                self._get_novelty_bonus(layer, pos) for pos in self.positions
+            )
+            avg_novelty = novelty_sum / len(self.positions)
+
+            # Exploitation: average flip rate at this layer
+            flip_rates = []
+            for pos in self.positions:
+                key = (layer, pos)
+                tests = self.test_counts.get(key, 0)
+                if tests > 0:
+                    flip_rates.append(self.flip_counts.get(key, 0) / tests)
+            avg_flip_rate = sum(flip_rates) / len(flip_rates) if flip_rates else 0.0
+
+            # Combine: base * (1 + exploitation + novelty_weight * exploration)
+            effective_layer_weights[layer] = base * (
+                1.0 + avg_flip_rate + self.novelty_weight * avg_novelty
+            )
+
+        # Calculate position weights with novelty
+        for pos in self.positions:
+            base = self._base_position_weights.get(pos, 1.0)
+
+            # Average novelty across layers for this position
+            novelty_sum = sum(
+                self._get_novelty_bonus(layer, pos) for layer in self.layers
+            )
+            avg_novelty = novelty_sum / len(self.layers)
+
+            # Exploitation: average flip rate at this position
+            flip_rates = []
+            for layer in self.layers:
+                key = (layer, pos)
+                tests = self.test_counts.get(key, 0)
+                if tests > 0:
+                    flip_rates.append(self.flip_counts.get(key, 0) / tests)
+            avg_flip_rate = sum(flip_rates) / len(flip_rates) if flip_rates else 0.0
+
+            # Combine: base * (1 + exploitation + novelty_weight * exploration)
+            effective_position_weights[pos] = base * (
+                1.0 + avg_flip_rate + self.novelty_weight * avg_novelty
+            )
+
+        return effective_layer_weights, effective_position_weights
+
     def sample(self) -> Optional[tuple[int, int, int, float]]:
         """
         Sample a random (layer, position, sample_id, strength) combination.
 
+        Uses effective weights that combine:
+        - Base weights (accuracy, layer position, after-horizon)
+        - Exploitation (flip rate from previous tests)
+        - Exploration (novelty bonus for less-tested combos)
+
         Returns None if all combinations have been tested.
         """
+        # Get current effective weights including novelty
+        layer_weights, position_weights = self._get_effective_weights()
+
         max_attempts = 1000
         for _ in range(max_attempts):
-            layer = self._weighted_choice(self.layers, self.layer_weights)
-            position = self._weighted_choice(self.positions, self.position_weights)
+            layer = self._weighted_choice(self.layers, layer_weights)
+            position = self._weighted_choice(self.positions, position_weights)
             sample_id = self._rng.choice(self.sample_ids)
             strength = self._weighted_choice(self.steering_strengths, self.strength_weights)
 
@@ -1013,7 +1118,14 @@ class RandomSearchSampler:
         strength: float,
         flipped: bool,
     ):
-        """Record a result and update adaptive weights."""
+        """
+        Record a result for adaptive weight computation.
+
+        Weights are computed dynamically in _get_effective_weights() using:
+        - Base weights (probe accuracy, layer position, etc.)
+        - Exploitation bonus (flip rate from these counts)
+        - Exploration bonus (novelty based on test counts)
+        """
         combo = (layer, position, sample_id, strength)
         self.tested_combinations.add(combo)
 
@@ -1021,16 +1133,6 @@ class RandomSearchSampler:
         self.test_counts[key] = self.test_counts.get(key, 0) + 1
         if flipped:
             self.flip_counts[key] = self.flip_counts.get(key, 0) + 1
-
-        # Update weights based on observed flip rates
-        # Increase weight for layer/position combos that produce flips
-        tests = self.test_counts.get(key, 0)
-        if tests >= 3:  # Only update after a few observations
-            flip_rate = self.flip_counts.get(key, 0) / tests
-            # Boost weight if we're seeing flips (signal)
-            boost = 1.0 + flip_rate * 2.0  # Up to 3x boost
-            self.layer_weights[layer] = self.layer_weights.get(layer, 1.0) * boost
-            self.position_weights[position] = self.position_weights.get(position, 1.0) * boost
 
     def get_stats(self) -> dict:
         """Get statistics about sampling and results."""
@@ -1047,6 +1149,22 @@ class RandomSearchSampler:
 
         best_combos.sort(key=lambda x: (-x[1], -x[2]))  # Sort by flip rate, then tests
 
+        # Grid coverage: how many (layer, position) cells have been tested?
+        total_cells = len(self.layers) * len(self.positions)
+        tested_cells = len(self.test_counts)
+        coverage = tested_cells / total_cells if total_cells > 0 else 0
+
+        # Test distribution: how evenly spread are tests across cells?
+        if self.test_counts:
+            test_values = list(self.test_counts.values())
+            avg_tests_per_cell = sum(test_values) / len(test_values)
+            max_tests = max(test_values)
+            min_tests = min(test_values)
+        else:
+            avg_tests_per_cell = 0
+            max_tests = 0
+            min_tests = 0
+
         return {
             "total_tests": total_tests,
             "total_flips": total_flips,
@@ -1054,6 +1172,11 @@ class RandomSearchSampler:
             "best_layer_positions": best_combos[:10],
             "unique_layers_tested": len(set(k[0] for k in self.test_counts.keys())),
             "unique_positions_tested": len(set(k[1] for k in self.test_counts.keys())),
+            "grid_coverage": coverage,
+            "tested_cells": tested_cells,
+            "total_cells": total_cells,
+            "avg_tests_per_cell": avg_tests_per_cell,
+            "test_distribution": {"min": min_tests, "max": max_tests},
         }
 
 
@@ -1307,8 +1430,15 @@ def run_random_search_experiment(
     print(f"{'='*60}")
     print(f"Total iterations: {len(results)}")
     print(f"Total flips: {final_stats['total_flips']} ({final_stats['flip_rate']:.1%})")
-    print(f"Unique layers tested: {final_stats['unique_layers_tested']}/{len(layers)}")
-    print(f"Unique positions tested: {final_stats['unique_positions_tested']}/{len(positions)}")
+
+    # Coverage stats (novelty exploration)
+    print(f"\nGrid coverage:")
+    print(f"  Cells tested: {final_stats['tested_cells']}/{final_stats['total_cells']} ({final_stats['grid_coverage']:.0%})")
+    print(f"  Layers: {final_stats['unique_layers_tested']}/{len(layers)}")
+    print(f"  Positions: {final_stats['unique_positions_tested']}/{len(positions)}")
+    print(f"  Avg tests/cell: {final_stats['avg_tests_per_cell']:.1f}")
+    dist = final_stats['test_distribution']
+    print(f"  Test distribution: min={dist['min']}, max={dist['max']}")
 
     if final_stats['best_layer_positions']:
         print(f"\nBest (layer, position) by flip rate:")
