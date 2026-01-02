@@ -6,6 +6,11 @@ Uses probe directions to steer model behavior toward short-term or long-term cho
 Tests steering on dataset samples and measures the minimum steering magnitude
 needed to flip choices.
 
+Two modes:
+1. Grid search (default when random_search=false): Tests all probes systematically
+2. Random search (when random_search=true): Randomly samples (layer, position, sample,
+   strength) combinations with adaptive biasing towards configurations that produce flips
+
 Creates heatmaps showing:
 - Min steering magnitude to flip choice (per layer/position)
 - Separate plots for short->long and long->short flips
@@ -21,18 +26,24 @@ Config file options:
       "n_samples": 10,
       "sample_indices": [123, 456, 789],  // Optional: specific sample IDs
       "only_after_horizon": true,
-      "subsample_probes": 0.25  // Fraction of probes to use (0.0-1.0)
+      "subsample_probes": 0.25,  // Fraction of probes to use (0.0-1.0)
+      "random_search": true,  // Enable random parameter search
+      "random_search_iterations": 100  // Number of random search iterations
     }
 
 Outputs:
-    - results/steering_*.json: Full results with all sample data
+    - results/steering_*.json: Full results with all sample data (grid search)
+    - results/random_search_*.json: Results from random search mode
     - debug_steering.json: Quick summary showing if steering worked, failures, etc.
+    - viz/random_search_flip_rates.png: Heatmap of flip rates (random search)
 
 Usage:
     python scripts/try_steering.py
     python scripts/try_steering.py --config default_steering
     python scripts/try_steering.py --all-probes
     python scripts/try_steering.py --quick  # Fast test with best probe only
+    python scripts/try_steering.py --random-search --iterations 50  # Random search
+    python scripts/try_steering.py --no-random-search  # Force grid search
 """
 
 from __future__ import annotations
@@ -87,6 +98,8 @@ class SteeringConfigSchema(SchemaClass):
     n_samples: int
     only_after_horizon: bool
     subsample_probes: float
+    random_search: bool
+    random_search_iterations: int
     # Note: sample_indices not included in schema - it's for reproducibility, not identity
 
 
@@ -99,6 +112,8 @@ class SteeringConfig:
                        instead of random sampling. Takes precedence over n_samples.
         subsample_probes: Fraction of probes to use (0.0-1.0). Default 1.0 uses all.
                          Probes are sampled randomly but deterministically (seed=42).
+        random_search: If True, use random parameter search instead of grid search.
+        random_search_iterations: Number of random search iterations to run.
     """
 
     probe_config_id: str
@@ -111,6 +126,8 @@ class SteeringConfig:
     only_after_horizon: bool = True  # Only test probes after time horizon
     subsample_probes: float = 1.0  # Fraction of probes to use (0.0-1.0)
     sample_indices: Optional[list[int]] = None  # Specific sample IDs to use
+    random_search: bool = False  # Enable random parameter search
+    random_search_iterations: int = 100  # Number of iterations for random search
 
     def get_schema(self) -> SteeringConfigSchema:
         """Convert to schema for ID generation."""
@@ -122,6 +139,8 @@ class SteeringConfig:
             n_samples=self.n_samples,
             only_after_horizon=self.only_after_horizon,
             subsample_probes=self.subsample_probes,
+            random_search=self.random_search,
+            random_search_iterations=self.random_search_iterations,
         )
 
     def get_id(self) -> str:
@@ -143,6 +162,8 @@ def load_steering_config(path: Path) -> SteeringConfig:
         only_after_horizon=data.get("only_after_horizon", True),
         subsample_probes=data.get("subsample_probes", 1.0),
         sample_indices=data.get("sample_indices"),  # None = random sampling
+        random_search=data.get("random_search", False),
+        random_search_iterations=data.get("random_search_iterations", 100),
     )
 
 
@@ -851,6 +872,620 @@ def run_steering_experiment(
         probe_results=final_probe_results,
         timestamp=timestamp,
     )
+
+
+# =============================================================================
+# Random Search
+# =============================================================================
+
+
+@dataclass
+class RandomSearchSampler:
+    """
+    Samples random parameter combinations for steering experiments.
+
+    Biases sampling towards configurations more likely to produce signal:
+    - Middle layers (where probes typically have better accuracy)
+    - After-horizon positions (where choice info should be encoded)
+    - Larger steering magnitudes (more likely to cause flips)
+
+    Tracks tested combinations to avoid duplicates and updates biases based on results.
+    """
+
+    layers: list[int]
+    positions: list[int]
+    sample_ids: list[int]
+    steering_strengths: list[float]
+    probe_index: dict  # For accuracy/metadata lookup
+    seed: int = 42
+
+    # Bias parameters
+    layer_weights: dict[int, float] = field(default_factory=dict)
+    position_weights: dict[int, float] = field(default_factory=dict)
+    strength_weights: dict[float, float] = field(default_factory=dict)
+
+    # Track results for adaptive biasing
+    flip_counts: dict[tuple[int, int], int] = field(default_factory=dict)  # (layer, pos) -> flips
+    test_counts: dict[tuple[int, int], int] = field(default_factory=dict)  # (layer, pos) -> tests
+    tested_combinations: set[tuple[int, int, int, float]] = field(default_factory=set)
+
+    def __post_init__(self):
+        import random
+        self._rng = random.Random(self.seed)
+        self._initialize_weights()
+
+    def _initialize_weights(self):
+        """Initialize sampling weights based on probe metadata."""
+        # Build lookup for probe accuracy by (layer, position)
+        probe_accuracy: dict[tuple[int, int], float] = {}
+        probe_after_horizon: dict[tuple[int, int], bool] = {}
+
+        for probe_info in self.probe_index.get("probes", []):
+            if probe_info.get("type") != "choice":
+                continue
+            layer = probe_info["layer"]
+            pos = probe_info["position"]
+            key = (layer, pos)
+            probe_accuracy[key] = probe_info.get("accuracy", 0.5)
+            probe_after_horizon[key] = probe_info.get("after_horizon", False)
+
+        # Layer weights: bias towards middle layers (empirically better for steering)
+        # Also weight by max accuracy at that layer
+        n_layers = len(self.layers)
+        for i, layer in enumerate(self.layers):
+            # Bell curve centered on middle layers
+            center = n_layers / 2
+            distance = abs(i - center) / max(center, 1)
+            position_weight = 1.0 - 0.5 * distance  # 0.5 to 1.0
+
+            # Boost by max accuracy at this layer
+            layer_accuracies = [
+                probe_accuracy.get((layer, p), 0.5) for p in self.positions
+            ]
+            max_accuracy = max(layer_accuracies) if layer_accuracies else 0.5
+            accuracy_weight = max_accuracy  # 0.5 to 1.0 typically
+
+            self.layer_weights[layer] = position_weight * accuracy_weight
+
+        # Position weights: bias towards after-horizon positions
+        for pos in self.positions:
+            # Check if any probe at this position is after_horizon
+            is_after_horizon = any(
+                probe_after_horizon.get((layer, pos), False) for layer in self.layers
+            )
+            # Also check accuracy at this position
+            pos_accuracies = [
+                probe_accuracy.get((layer, pos), 0.5) for layer in self.layers
+            ]
+            max_accuracy = max(pos_accuracies) if pos_accuracies else 0.5
+
+            base_weight = 2.0 if is_after_horizon else 1.0
+            self.position_weights[pos] = base_weight * max_accuracy
+
+        # Strength weights: bias towards larger magnitudes (more likely to flip)
+        for strength in self.steering_strengths:
+            if strength == 0:
+                self.strength_weights[strength] = 0.1  # Low weight for baseline
+            else:
+                # Higher weight for larger magnitudes
+                self.strength_weights[strength] = 0.5 + abs(strength) / 100.0
+
+    def _weighted_choice(self, items: list, weights: dict) -> any:
+        """Choose from items with given weights."""
+        item_weights = [weights.get(item, 1.0) for item in items]
+        total = sum(item_weights)
+        if total == 0:
+            return self._rng.choice(items)
+
+        r = self._rng.random() * total
+        cumulative = 0.0
+        for item, weight in zip(items, item_weights):
+            cumulative += weight
+            if r <= cumulative:
+                return item
+        return items[-1]
+
+    def sample(self) -> Optional[tuple[int, int, int, float]]:
+        """
+        Sample a random (layer, position, sample_id, strength) combination.
+
+        Returns None if all combinations have been tested.
+        """
+        max_attempts = 1000
+        for _ in range(max_attempts):
+            layer = self._weighted_choice(self.layers, self.layer_weights)
+            position = self._weighted_choice(self.positions, self.position_weights)
+            sample_id = self._rng.choice(self.sample_ids)
+            strength = self._weighted_choice(self.steering_strengths, self.strength_weights)
+
+            combo = (layer, position, sample_id, strength)
+            if combo not in self.tested_combinations:
+                return combo
+
+        # All combinations tested or couldn't find new one
+        return None
+
+    def record_result(
+        self,
+        layer: int,
+        position: int,
+        sample_id: int,
+        strength: float,
+        flipped: bool,
+    ):
+        """Record a result and update adaptive weights."""
+        combo = (layer, position, sample_id, strength)
+        self.tested_combinations.add(combo)
+
+        key = (layer, position)
+        self.test_counts[key] = self.test_counts.get(key, 0) + 1
+        if flipped:
+            self.flip_counts[key] = self.flip_counts.get(key, 0) + 1
+
+        # Update weights based on observed flip rates
+        # Increase weight for layer/position combos that produce flips
+        tests = self.test_counts.get(key, 0)
+        if tests >= 3:  # Only update after a few observations
+            flip_rate = self.flip_counts.get(key, 0) / tests
+            # Boost weight if we're seeing flips (signal)
+            boost = 1.0 + flip_rate * 2.0  # Up to 3x boost
+            self.layer_weights[layer] = self.layer_weights.get(layer, 1.0) * boost
+            self.position_weights[position] = self.position_weights.get(position, 1.0) * boost
+
+    def get_stats(self) -> dict:
+        """Get statistics about sampling and results."""
+        total_tests = len(self.tested_combinations)
+        total_flips = sum(self.flip_counts.values())
+
+        # Best layer/position combos by flip rate
+        best_combos = []
+        for key, tests in self.test_counts.items():
+            if tests >= 2:
+                flips = self.flip_counts.get(key, 0)
+                flip_rate = flips / tests
+                best_combos.append((key, flip_rate, tests, flips))
+
+        best_combos.sort(key=lambda x: (-x[1], -x[2]))  # Sort by flip rate, then tests
+
+        return {
+            "total_tests": total_tests,
+            "total_flips": total_flips,
+            "flip_rate": total_flips / total_tests if total_tests > 0 else 0,
+            "best_layer_positions": best_combos[:10],
+            "unique_layers_tested": len(set(k[0] for k in self.test_counts.keys())),
+            "unique_positions_tested": len(set(k[1] for k in self.test_counts.keys())),
+        }
+
+
+@dataclass
+class RandomSearchResult:
+    """Result from a single random search iteration."""
+
+    layer: int
+    position: int
+    sample_id: int
+    strength: float
+    baseline_choice: str
+    steered_choice: str
+    flipped: bool
+    probe_id: str
+
+
+@dataclass
+class RandomSearchOutput:
+    """Full output from random search experiment."""
+
+    config_id: str
+    probe_config_id: str
+    dataset_id: str
+    model_name: str
+    n_iterations: int
+    timestamp: str
+    results: list[RandomSearchResult]
+    sampler_stats: dict
+
+
+def run_steering_for_single_sample(
+    runner: ModelRunner,
+    probe: LoadedProbe,
+    question: QuestionOutput,
+    strength: float,
+    max_new_tokens: int = 64,
+    debug: bool = False,
+) -> tuple[str, str, bool]:
+    """
+    Run steering for a single sample at a single strength.
+
+    Returns:
+        (baseline_choice, steered_choice, flipped)
+    """
+    prompt = build_prompt_from_question(question)
+    pair = question.preference_pair
+    short_label = pair.short_term.label
+    long_label = pair.long_term.label
+    short_value = f"{pair.short_term.reward:,.0f}"
+    long_value = f"{pair.long_term.reward:,.0f}"
+
+    # Generate baseline
+    baseline_response = runner.generate_baseline(prompt, max_new_tokens)
+    baseline_choice = parse_choice_from_response(
+        baseline_response, short_label, long_label, debug=debug,
+        short_value=short_value, long_value=long_value
+    )
+
+    if strength == 0:
+        return baseline_choice, baseline_choice, False
+
+    # Generate with steering
+    steering_config = SteeringDirectionConfig(
+        direction=probe.direction,
+        layer=probe.layer,
+        strength=strength,
+        option=SteeringOption.APPLY_TO_ALL,
+    )
+    steered_response = runner.generate_with_steering(
+        prompt, steering=steering_config, max_new_tokens=max_new_tokens
+    )
+    steered_choice = parse_choice_from_response(
+        steered_response, short_label, long_label, debug=debug,
+        short_value=short_value, long_value=long_value
+    )
+
+    # Check if flipped
+    flipped = (
+        baseline_choice in ("short_term", "long_term")
+        and steered_choice in ("short_term", "long_term")
+        and baseline_choice != steered_choice
+    )
+
+    return baseline_choice, steered_choice, flipped
+
+
+def run_random_search_experiment(
+    config: SteeringConfig,
+    debug: bool = False,
+    output_dir: Optional[Path] = None,
+) -> RandomSearchOutput:
+    """
+    Run random search steering experiment.
+
+    Randomly samples (layer, position, sample, strength) combinations,
+    biasing towards configurations more likely to produce signal.
+
+    Args:
+        config: Steering experiment configuration
+        debug: If True, print debug output
+        output_dir: Directory for output (auto-created if None)
+
+    Returns:
+        RandomSearchOutput with all results
+    """
+    # Load probe index and model info
+    probes_base = PROJECT_ROOT / "out" / "probes" / config.probe_config_id
+    probes_dir = probes_base / "probes"
+    index_path = probes_dir / "index.json"
+
+    if not index_path.exists():
+        raise FileNotFoundError(f"Probe index not found: {index_path}")
+
+    index = load_json(index_path)
+    model_name = index.get("model", index.get("model_name"))
+    if not model_name:
+        raise ValueError("No model name found in probe index")
+
+    print(f"Random Search Experiment")
+    print(f"  Probe config: {config.probe_config_id}")
+    print(f"  Model: {model_name}")
+    print(f"  Iterations: {config.random_search_iterations}")
+
+    # Load dataset
+    print(f"\nLoading dataset: {config.dataset_id}")
+    dataset, questions, sample_ids = load_dataset_samples(
+        config.dataset_id, config.n_samples, config.sample_indices
+    )
+    questions_by_id = {q.sample_id: q for q in questions}
+    print(f"  Loaded {len(questions)} samples")
+
+    # Load model
+    runner = load_model_for_steering(model_name)
+
+    # Load all probes of requested types
+    all_probes = load_probes_from_dir(probes_dir)
+    probes_by_type = {
+        pid: p for pid, p in all_probes.items()
+        if p.probe_type.value in config.probe_types
+    }
+
+    # Filter to after-horizon if requested
+    if config.only_after_horizon:
+        probes_by_type = filter_probes_after_horizon(probes_by_type, index)
+
+    # Get available layers and positions
+    layers = sorted(set(p.layer for p in probes_by_type.values()))
+    positions = sorted(set(p.token_position_idx for p in probes_by_type.values()))
+
+    # Build probe lookup by (layer, position)
+    probe_lookup: dict[tuple[int, int], LoadedProbe] = {}
+    for probe in probes_by_type.values():
+        probe_lookup[(probe.layer, probe.token_position_idx)] = probe
+
+    print(f"\nAvailable parameter space:")
+    print(f"  Layers: {len(layers)} ({min(layers)}-{max(layers)})")
+    print(f"  Positions: {len(positions)}")
+    print(f"  Samples: {len(sample_ids)}")
+    print(f"  Strengths: {len(config.steering_strengths)}")
+    total_space = len(layers) * len(positions) * len(sample_ids) * len(config.steering_strengths)
+    print(f"  Total combinations: {total_space:,}")
+    print(f"  Sampling: {config.random_search_iterations} ({100*config.random_search_iterations/total_space:.1f}%)")
+
+    # Initialize sampler
+    sampler = RandomSearchSampler(
+        layers=layers,
+        positions=positions,
+        sample_ids=sample_ids,
+        steering_strengths=config.steering_strengths,
+        probe_index=index,
+    )
+
+    # Setup output
+    if output_dir is None:
+        output_base = PROJECT_ROOT / "out" / "steering"
+        output_dir = output_base / config.get_id()
+    results_dir = output_dir / "results"
+    ensure_dir(results_dir)
+    timestamp = get_timestamp()
+
+    # Run random search
+    results: list[RandomSearchResult] = []
+    print(f"\nRunning random search...")
+
+    for i in range(config.random_search_iterations):
+        combo = sampler.sample()
+        if combo is None:
+            print(f"\n  Exhausted all combinations at iteration {i}")
+            break
+
+        layer, position, sample_id, strength = combo
+
+        if (i + 1) % 10 == 0 or i == 0:
+            stats = sampler.get_stats()
+            print(f"  [{i+1}/{config.random_search_iterations}] "
+                  f"Flips: {stats['total_flips']}/{stats['total_tests']} "
+                  f"({stats['flip_rate']:.1%})")
+
+        # Get probe for this layer/position
+        probe = probe_lookup.get((layer, position))
+        if probe is None:
+            # Skip if no probe at this position (shouldn't happen)
+            continue
+
+        # Get question for this sample
+        question = questions_by_id.get(sample_id)
+        if question is None:
+            continue
+
+        # Run single steering test
+        probe_id = f"{probe.probe_type.value}_layer{layer}_pos{position}"
+        baseline_choice, steered_choice, flipped = run_steering_for_single_sample(
+            runner, probe, question, strength, debug=debug
+        )
+
+        # Record result
+        sampler.record_result(layer, position, sample_id, strength, flipped)
+
+        result = RandomSearchResult(
+            layer=layer,
+            position=position,
+            sample_id=sample_id,
+            strength=strength,
+            baseline_choice=baseline_choice,
+            steered_choice=steered_choice,
+            flipped=flipped,
+            probe_id=probe_id,
+        )
+        results.append(result)
+
+        # Save incrementally every 20 iterations
+        if (i + 1) % 20 == 0:
+            _save_random_search_results(
+                results_dir, timestamp, config, model_name, results, sampler.get_stats()
+            )
+
+        # Clear memory periodically
+        if (i + 1) % 50 == 0:
+            clear_memory()
+
+    # Final save
+    final_stats = sampler.get_stats()
+    _save_random_search_results(
+        results_dir, timestamp, config, model_name, results, final_stats
+    )
+
+    # Print summary
+    print(f"\n{'='*60}")
+    print("RANDOM SEARCH COMPLETE")
+    print(f"{'='*60}")
+    print(f"Total iterations: {len(results)}")
+    print(f"Total flips: {final_stats['total_flips']} ({final_stats['flip_rate']:.1%})")
+    print(f"Unique layers tested: {final_stats['unique_layers_tested']}/{len(layers)}")
+    print(f"Unique positions tested: {final_stats['unique_positions_tested']}/{len(positions)}")
+
+    if final_stats['best_layer_positions']:
+        print(f"\nBest (layer, position) by flip rate:")
+        for (layer, pos), flip_rate, tests, flips in final_stats['best_layer_positions'][:5]:
+            print(f"  Layer {layer}, Pos {pos}: {flip_rate:.0%} ({flips}/{tests})")
+
+    return RandomSearchOutput(
+        config_id=config.get_id(),
+        probe_config_id=config.probe_config_id,
+        dataset_id=config.dataset_id,
+        model_name=model_name,
+        n_iterations=len(results),
+        timestamp=timestamp,
+        results=results,
+        sampler_stats=final_stats,
+    )
+
+
+def _save_random_search_results(
+    results_dir: Path,
+    timestamp: str,
+    config: SteeringConfig,
+    model_name: str,
+    results: list[RandomSearchResult],
+    stats: dict,
+) -> None:
+    """Save random search results to JSON."""
+    data = {
+        "config_id": config.get_id(),
+        "probe_config_id": config.probe_config_id,
+        "dataset_id": config.dataset_id,
+        "model_name": model_name,
+        "n_iterations": len(results),
+        "timestamp": timestamp,
+        "stats": stats,
+        "results": [
+            {
+                "layer": r.layer,
+                "position": r.position,
+                "sample_id": r.sample_id,
+                "strength": r.strength,
+                "baseline_choice": r.baseline_choice,
+                "steered_choice": r.steered_choice,
+                "flipped": r.flipped,
+                "probe_id": r.probe_id,
+            }
+            for r in results
+        ],
+    }
+    save_json(data, results_dir / f"random_search_{timestamp}.json")
+
+
+def create_random_search_heatmap(
+    output: RandomSearchOutput,
+    output_dir: Path,
+    probe_index: Optional[dict] = None,
+    token_info: Optional[dict] = None,
+) -> None:
+    """
+    Create heatmap showing flip rates from random search.
+
+    Shows flip rate (flips/tests) for each (layer, position) combination tested.
+    """
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import Normalize
+
+    viz_dir = output_dir / "viz"
+    ensure_dir(viz_dir)
+
+    # Collect flip rates by (layer, position)
+    test_counts: dict[tuple[int, int], int] = {}
+    flip_counts: dict[tuple[int, int], int] = {}
+
+    for r in output.results:
+        key = (r.layer, r.position)
+        test_counts[key] = test_counts.get(key, 0) + 1
+        if r.flipped:
+            flip_counts[key] = flip_counts.get(key, 0) + 1
+
+    if not test_counts:
+        print("  No results to visualize")
+        return
+
+    # Get all layers and positions
+    if probe_index is not None:
+        all_probes = probe_index.get("probes", [])
+        choice_probes = [p for p in all_probes if p.get("type") == "choice"]
+        layers = sorted(set(p["layer"] for p in choice_probes))
+        positions = sorted(set(p["position"] for p in choice_probes))
+    else:
+        layers = sorted(set(k[0] for k in test_counts.keys()))
+        positions = sorted(set(k[1] for k in test_counts.keys()))
+
+    # Build position labels
+    def build_position_labels():
+        from src.plotting.common import format_token_position_label
+
+        labels = []
+        specs = token_info.get("specs", []) if token_info else []
+        for pos_idx in positions:
+            if specs and pos_idx < len(specs):
+                spec_label = format_token_position_label(specs[pos_idx])
+            else:
+                spec_label = f"pos_{pos_idx}"
+
+            if token_info:
+                token = token_info.get("tokens", {}).get(pos_idx, "")
+                resolved_pos = token_info.get("resolved_positions", {}).get(pos_idx, "?")
+                token_display = repr(token) if token else ""
+                labels.append(f"{spec_label}\n[{resolved_pos}] {token_display}")
+            else:
+                labels.append(spec_label)
+        return labels
+
+    position_labels = build_position_labels()
+
+    # Build matrix
+    matrix = np.full((len(layers), len(positions)), np.nan)
+    not_tested = np.ones((len(layers), len(positions)), dtype=bool)
+
+    for (layer, pos), tests in test_counts.items():
+        if layer in layers and pos in positions:
+            li = layers.index(layer)
+            pi = positions.index(pos)
+            flip_rate = flip_counts.get((layer, pos), 0) / tests
+            matrix[li, pi] = flip_rate
+            not_tested[li, pi] = False
+
+    # Create heatmap
+    fig_height = max(6, len(layers) * 0.5 + 1)
+    fig_width = max(12, len(positions) * 1.5)
+    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+
+    cmap = plt.cm.RdYlGn.copy()  # Green=high flip rate (good), Red=low
+    cmap.set_bad(color="white")
+    norm = Normalize(vmin=0, vmax=1)
+
+    display_matrix = np.ma.array(matrix)
+    display_matrix[not_tested] = np.ma.masked
+
+    im = ax.imshow(display_matrix, cmap=cmap, norm=norm, aspect="auto", origin="lower")
+
+    cbar = plt.colorbar(im, ax=ax, shrink=0.8)
+    cbar.set_label("Flip Rate", fontsize=10)
+
+    # Add annotations
+    for i in range(len(layers)):
+        for j in range(len(positions)):
+            key = (layers[i], positions[j])
+            tests = test_counts.get(key, 0)
+            flips = flip_counts.get(key, 0)
+
+            if not_tested[i, j]:
+                ax.text(j, i, "N/A", ha="center", va="center", fontsize=7,
+                        color="#cccccc", style="italic")
+            else:
+                flip_rate = flips / tests
+                color = "white" if flip_rate > 0.5 else "black"
+                ax.text(j, i, f"{flip_rate:.0%}\n({flips}/{tests})",
+                        ha="center", va="center", fontsize=7, color=color)
+
+    ax.set_xticks(range(len(positions)))
+    ax.set_xticklabels(position_labels, rotation=45, ha="right", fontsize=8)
+    ax.set_yticks(range(len(layers)))
+    ax.set_yticklabels([f"Layer {l}" for l in layers])
+    ax.set_xlabel("Token Position (sequence order)", fontsize=11)
+    ax.set_ylabel("Layer", fontsize=11)
+    ax.set_title(
+        f"Random Search Flip Rates\n"
+        f"Model: {output.model_name} | Iterations: {output.n_iterations}",
+        fontsize=12,
+    )
+
+    plt.tight_layout()
+    plt.savefig(viz_dir / "random_search_flip_rates.png", dpi=300, bbox_inches="tight", facecolor="white")
+    plt.close()
+    print(f"  Saved: {viz_dir / 'random_search_flip_rates.png'}")
 
 
 # =============================================================================
@@ -1687,6 +2322,22 @@ def get_args() -> argparse.Namespace:
         default=None,
         help="Comma-separated steering strengths (e.g., '-50,0,50'). Overrides config.",
     )
+    parser.add_argument(
+        "--random-search",
+        action="store_true",
+        help="Enable random parameter search mode. Overrides config.",
+    )
+    parser.add_argument(
+        "--no-random-search",
+        action="store_true",
+        help="Disable random parameter search mode. Overrides config.",
+    )
+    parser.add_argument(
+        "--iterations",
+        type=int,
+        default=None,
+        help="Number of random search iterations. Overrides config.",
+    )
     return parser.parse_args()
 
 
@@ -1717,6 +2368,12 @@ def main() -> int:
         config.subsample_probes = args.subsample_probes
     if args.steering_strengths is not None:
         config.steering_strengths = [float(x.strip()) for x in args.steering_strengths.split(",")]
+    if args.random_search:
+        config.random_search = True
+    if args.no_random_search:
+        config.random_search = False
+    if args.iterations is not None:
+        config.random_search_iterations = args.iterations
 
     print("=" * 60)
     print("STEERING EXPERIMENT")
@@ -1727,6 +2384,9 @@ def main() -> int:
     print(f"N samples: {config.n_samples}")
     print(f"Only after horizon: {config.only_after_horizon}")
     print(f"Subsample probes: {config.subsample_probes:.0%}")
+    print(f"Random search: {config.random_search}")
+    if config.random_search:
+        print(f"Random search iterations: {config.random_search_iterations}")
     print(f"Quick mode: {args.quick}")
     print(f"Reuse existing: {args.reuse}")
 
@@ -1736,38 +2396,7 @@ def main() -> int:
     ensure_dir(output_dir)
     results_dir = output_dir / "results"
 
-    # Check if we should reuse existing results
-    output = None
-    if args.reuse:
-        print("\nLooking for existing results...")
-        output = load_existing_results(results_dir)
-        if output:
-            print(f"  Loaded {len(output.probe_results)} probe results")
-        else:
-            print("  No existing results found, will run experiment")
-
-    # Run experiment if not reusing or no results found
-    if output is None:
-        output = run_steering_experiment(
-            config,
-            quick_mode=args.quick,
-            debug=args.debug,
-            output_dir=output_dir,
-        )
-
-        # Print summary (results already saved incrementally by run_steering_experiment)
-        print_summary(output)
-    else:
-        # Print summary for loaded results
-        print_summary(output)
-
-    # Always create debug summary
-    create_debug_summary(output, output_dir)
-
-    # Create visualizations
-    print("\nCreating visualizations...")
-
-    # Load probe index for heatmaps (needed in quick mode to show all positions)
+    # Load probe index for visualizations
     probe_index = None
     probes_dir = PROJECT_ROOT / "out" / "probes" / config.probe_config_id / "probes"
     index_path = probes_dir / "index.json"
@@ -1779,10 +2408,59 @@ def main() -> int:
     if token_info:
         print(f"  Loaded token info: {len(token_info.get('tokens', {}))} positions")
 
-    create_steering_heatmaps(
-        output, output_dir, probe_index=probe_index, token_info=token_info
-    )
-    create_summary_plots(output, output_dir)
+    # Branch based on random search mode
+    if config.random_search:
+        # Random search mode
+        print("\n" + "=" * 60)
+        print("RANDOM SEARCH MODE")
+        print("=" * 60)
+
+        random_output = run_random_search_experiment(
+            config,
+            debug=args.debug,
+            output_dir=output_dir,
+        )
+
+        # Create random search visualization
+        print("\nCreating visualizations...")
+        create_random_search_heatmap(
+            random_output, output_dir, probe_index=probe_index, token_info=token_info
+        )
+    else:
+        # Grid search mode (original behavior)
+        output = None
+        if args.reuse:
+            print("\nLooking for existing results...")
+            output = load_existing_results(results_dir)
+            if output:
+                print(f"  Loaded {len(output.probe_results)} probe results")
+            else:
+                print("  No existing results found, will run experiment")
+
+        # Run experiment if not reusing or no results found
+        if output is None:
+            output = run_steering_experiment(
+                config,
+                quick_mode=args.quick,
+                debug=args.debug,
+                output_dir=output_dir,
+            )
+
+            # Print summary (results already saved incrementally by run_steering_experiment)
+            print_summary(output)
+        else:
+            # Print summary for loaded results
+            print_summary(output)
+
+        # Always create debug summary
+        create_debug_summary(output, output_dir)
+
+        # Create visualizations
+        print("\nCreating visualizations...")
+        create_steering_heatmaps(
+            output, output_dir, probe_index=probe_index, token_info=token_info
+        )
+        create_summary_plots(output, output_dir)
 
     return 0
 

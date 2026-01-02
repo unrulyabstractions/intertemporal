@@ -5,5 +5,7 @@
   "steering_strengths": [-50.0, 0, 50.0],
   "n_samples": 5,
   "only_after_horizon": true,
-  "subsample_probes": 0.1
+  "subsample_probes": 0.1,
+  "random_search": true,
+  "random_search_iterations": 100
 }
