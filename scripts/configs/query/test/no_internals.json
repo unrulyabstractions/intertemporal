@@ -1,0 +1,17 @@
+{
+  "models": ["gpt2"],
+  "dataset": {
+    "name": "test_no_horizon",
+    "id": "test_dataset_id_no_horizon"
+  },
+  "formatting": {
+    "name": "default_formatting"
+  },
+  "decoding": {
+    "max_new_tokens": 50,
+    "temperature": 0.0,
+    "top_k": 0,
+    "top_p": 1.0
+  },
+  "internals": {}
+}

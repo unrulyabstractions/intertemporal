@@ -1,0 +1,12 @@
+{
+  "query_ids": {
+    "train_test": [
+      "714f880e609407a8e201d025622b0b72"
+    ]
+  },
+  "layers": [
+    -1
+  ],
+  "token_position_idx": -1,
+  "test_split": 0.25
+}

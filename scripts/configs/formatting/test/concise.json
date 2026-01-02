@@ -1,0 +1,7 @@
+{
+  "question_template": "[LEFT_TERM_LABEL][LEFT_TERM_REWARD] in [LEFT_TERM_TIME] vs [RIGHT_TERM_LABEL][RIGHT_TERM_REWARD] in [RIGHT_TERM_TIME]",
+  "response_format": "\nAnswer: [CHOICE_PREFIX]",
+  "choice_prefix": "",
+  "time_horizon_spec": "",
+  "max_reasoning_length": "none"
+}

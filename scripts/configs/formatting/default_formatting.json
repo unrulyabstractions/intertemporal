@@ -1,0 +1,8 @@
+{
+  "question_template": "SITUATION: [SITUATION] [EXTRA_SITUATION] \nTASK: You, [ROLE], are tasked to decide to either [ACTION_IN_QUESTION]:\n[LEFT_TERM_LABEL] [LEFT_TERM_REWARD] [REWARD_UNITS] in [LEFT_TERM_TIME]\n[RIGHT_TERM_LABEL] [RIGHT_TERM_REWARD] [REWARD_UNITS] in [RIGHT_TERM_TIME]\nCONSIDER:Think deeply about WHICH option is preferable.\n[TIME_HORIZON_SPEC]\n ACTION:Select one of the two options, and provide reasoning on [REASONING_ASK].",
+  "response_format": "\n\nRespond in this format:\n[CHOICE_PREFIX] <[LEFT_TERM_LABEL] or [RIGHT_TERM_LABEL]>.\n [REASONING_PREFIX] <reasoning in [MAX_REASONING_LENGTH]>",
+  "choice_prefix": "I select:",
+  "reasoning_prefix": "My reasoning:",
+  "time_horizon_spec": "You are primarily concerned about outcome in [TIME_HORIZON].",
+  "max_reasoning_length": "1-3 sentences"
+}

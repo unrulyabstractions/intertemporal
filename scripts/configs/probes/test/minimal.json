@@ -1,0 +1,8 @@
+{
+  "query_ids": {
+    "train_test": ["TO_BE_FILLED_FROM_QUERY_LLM"]
+  },
+  "layers": [-1],
+  "token_position_idx": -1,
+  "test_split": 0.2
+}

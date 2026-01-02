@@ -1,0 +1,38 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "probe_type": "choice",
+  "layer": 14,
+  "token_position_idx": 1,
+  "training": {
+    "n_samples": 1431,
+    "n_features": 3584,
+    "train_query_ids": [
+      "7af8b316feb64ef4dd8ac94497fedf5b"
+    ],
+    "test_query_ids": [
+      "7af8b316feb64ef4dd8ac94497fedf5b"
+    ]
+  },
+  "metrics": {
+    "cv_accuracy": {
+      "mean": 0.5380863039399624,
+      "std": 0.0007504690431519468
+    },
+    "test": {
+      "accuracy": 0.5,
+      "f1": 0.0
+    }
+  },
+  "files": {
+    "model": "choice_layer14_pos1.joblib",
+    "direction": "choice_layer14_pos1_direction.npy",
+    "intercept": "choice_layer14_pos1_intercept.npy"
+  },
+  "position": {
+    "sequence_position": 1,
+    "after_choices_presented": false,
+    "after_time_horizon": false,
+    "after_choice_made": false,
+    "in_response": false
+  }
+}

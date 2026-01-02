@@ -1,0 +1,24 @@
+{
+  "models": ["Qwen/Qwen2.5-0.5B-Instruct"],
+  "datasets": [
+    {
+      "name": "pipeline_test",
+      "dataset_id": "c20d03d983af2c70c038d5de93c2791f"
+    }
+  ],
+  "formatting": {
+    "name": "default_formatting"
+  },
+  "decoding": {
+    "max_new_tokens": 50,
+    "temperature": 0.0,
+    "top_k": 0,
+    "top_p": 1.0
+  },
+  "internals": {
+    "resid_post": {
+      "layers": [-1]
+    }
+  },
+  "token_positions": [-1]
+}

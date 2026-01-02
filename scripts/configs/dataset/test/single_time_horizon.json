@@ -1,0 +1,32 @@
+{
+  "name": "test_single_horizon",
+  "context": {
+    "reward_unit": "dollars",
+    "role": "an investor",
+    "situation": "Choose an investment.",
+    "action_in_question": "invest in",
+    "reasoning_ask": "your investment rationale",
+    "domain": "finance",
+    "labels": ["A)", "B)"],
+    "method": "grid",
+    "seed": 42
+  },
+  "options": {
+    "short_term": {
+      "reward_range": [1000, 2000],
+      "time_range": [[3, "months"], [6, "months"]],
+      "reward_steps": [1, "linear"],
+      "time_steps": [1, "linear"]
+    },
+    "long_term": {
+      "reward_range": [5000, 10000],
+      "time_range": [[2, "years"], [5, "years"]],
+      "reward_steps": [1, "linear"],
+      "time_steps": [1, "linear"]
+    }
+  },
+  "time_horizons": [
+    [1, "years"]
+  ],
+  "add_formatting_variations": false
+}

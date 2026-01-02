@@ -1,0 +1,6 @@
+{
+  "query_ids" : {
+    "train_data": ["6b17big"],
+    "test_data": ["9550big"]
+  }
+}

@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Output directories (but keep test fixtures)
+# Ignore specific output subdirs, but not test/
+out/datasets/*
+!out/datasets/test/
+out/preference_data/*
+!out/preference_data/test/
+out/choice_modeling/*
+!out/choice_modeling/test/
+out/internals/*
+!out/internals/test/
+
+# Scratchpad
+scratchpad/
+scratchpad.pdf
+
+# Paper (LaTeX build artifacts and figures)
+paper/
+
+# OS files
+.DS_Store

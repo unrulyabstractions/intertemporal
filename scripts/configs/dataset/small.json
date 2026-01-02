@@ -1,0 +1,32 @@
+{
+  "name": "small",
+  "context": {
+    "reward_unit": "housing units",
+    "role": "the city administration",
+    "situation": "Plan for housing in the city.",
+    "action_in_question": "build",
+    "reasoning_ask": "why choice was made",
+    "domain": "housing",
+    "labels": ["a)", "b)"],
+    "method": "grid",
+    "seed": 42
+  },
+  "options": {
+    "short_term": {
+      "reward_range": [2000, 5000],
+      "time_range": [[3, "months"], [1, "years"]],
+      "reward_steps": [0, "linear"],
+      "time_steps": [0, "linear"]
+    },
+    "long_term": {
+      "reward_range": [20000, 50000],
+      "time_range": [[10, "years"] , [50, "years"]],
+      "reward_steps": [0, "linear"],
+      "time_steps": [0, "logarithmic"]
+    }
+  },
+  "time_horizons": [
+    [1, "years"],
+  ],
+  "add_formatting_variations" : false
+}

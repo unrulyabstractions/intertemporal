@@ -1,0 +1,98 @@
+"""
+Probe training for analyzing model internals.
+
+Provides data loading, probe models, and training utilities.
+"""
+
+from .data import (
+    ActivationSample,
+    ChoiceLabels,
+    CombinedPreferenceData,
+    ProbeDataset,
+    TimeHorizonCategoryLabels,
+    TimeHorizonValueLabels,
+    TokenPositionSpec,
+    build_choice_labels,
+    build_probe_datasets,
+    build_time_horizon_category_labels,
+    build_time_horizon_value_labels,
+    categorize_time_horizon,
+    class_balanced_train_test_split,
+    find_preference_data_by_query_id,
+    load_combined_preference_data,
+    time_to_months,
+)
+from .models import (
+    BaseProbe,
+    ChoiceProbe,
+    ClassificationMetrics,
+    ProbeResult,
+    ProbeType,
+    RegressionMetrics,
+    TimeHorizonCategoryProbe,
+    TimeHorizonValueProbe,
+    create_probe,
+)
+from .training import (
+    LoadedProbe,
+    NoHorizonProbeResult,
+    NoHorizonResults,
+    ProbeTrainingConfig,
+    ProbeTrainingOutput,
+    TrainedProbe,
+    evaluate_category_probe_on_null_horizons,
+    evaluate_probes_on_no_horizon,
+    get_steering_direction,
+    load_probe,
+    load_probes_from_dir,
+    save_probes,
+    train_all_probes,
+    train_classification_probe,
+    train_regression_probe,
+)
+
+__all__ = [
+    # data
+    "ActivationSample",
+    "ChoiceLabels",
+    "CombinedPreferenceData",
+    "ProbeDataset",
+    "TimeHorizonCategoryLabels",
+    "TimeHorizonValueLabels",
+    "TokenPositionSpec",
+    "build_choice_labels",
+    "build_probe_datasets",
+    "build_time_horizon_category_labels",
+    "build_time_horizon_value_labels",
+    "categorize_time_horizon",
+    "class_balanced_train_test_split",
+    "find_preference_data_by_query_id",
+    "load_combined_preference_data",
+    "time_to_months",
+    # models
+    "BaseProbe",
+    "ChoiceProbe",
+    "ClassificationMetrics",
+    "ProbeResult",
+    "ProbeType",
+    "RegressionMetrics",
+    "TimeHorizonCategoryProbe",
+    "TimeHorizonValueProbe",
+    "create_probe",
+    # training
+    "LoadedProbe",
+    "NoHorizonProbeResult",
+    "NoHorizonResults",
+    "ProbeTrainingConfig",
+    "ProbeTrainingOutput",
+    "TrainedProbe",
+    "evaluate_category_probe_on_null_horizons",
+    "evaluate_probes_on_no_horizon",
+    "get_steering_direction",
+    "load_probe",
+    "load_probes_from_dir",
+    "save_probes",
+    "train_all_probes",
+    "train_classification_probe",
+    "train_regression_probe",
+]

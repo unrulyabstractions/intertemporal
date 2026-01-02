@@ -1,0 +1,7 @@
+{
+  "question_template": "Situation: [SITUATION]\nAs [ROLE], you must decide to [ACTION_IN_QUESTION]:\n\n[LEFT_TERM_LABEL] Receive [LEFT_TERM_REWARD] [REWARD_UNITS] in [LEFT_TERM_TIME]\n[RIGHT_TERM_LABEL] Receive [RIGHT_TERM_REWARD] [REWARD_UNITS] in [RIGHT_TERM_TIME]\n\n[TIME_HORIZON_SPEC]\nExplain [REASONING_ASK].",
+  "response_format": "\n\nPlease respond using this exact format:\n[CHOICE_PREFIX] <[LEFT_TERM_LABEL] or [RIGHT_TERM_LABEL]>\nReasoning: <your detailed reasoning in [MAX_REASONING_LENGTH]>",
+  "choice_prefix": "My selection is:",
+  "time_horizon_spec": "Important: You are planning for outcomes within [TIME_HORIZON].",
+  "max_reasoning_length": "2-3 detailed sentences"
+}

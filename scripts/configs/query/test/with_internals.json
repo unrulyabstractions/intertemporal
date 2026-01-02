@@ -1,0 +1,22 @@
+{
+  "models": ["gpt2"],
+  "dataset": {
+    "name": "test_single_horizon",
+    "id": "test_dataset_id_single_horizon"
+  },
+  "formatting": {
+    "name": "default_formatting"
+  },
+  "decoding": {
+    "max_new_tokens": 20,
+    "temperature": 0.0,
+    "top_k": 0,
+    "top_p": 1.0
+  },
+  "internals": {
+    "resid_post": {
+      "layers": [0, -1]
+    }
+  },
+  "token_positions": [0]
+}

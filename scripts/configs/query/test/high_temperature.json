@@ -1,0 +1,17 @@
+{
+  "models": ["gpt2"],
+  "dataset": {
+    "name": "test_minimal",
+    "id": "test_dataset_id_minimal"
+  },
+  "formatting": {
+    "name": "default_formatting"
+  },
+  "decoding": {
+    "max_new_tokens": 30,
+    "temperature": 1.0,
+    "top_k": 50,
+    "top_p": 0.95
+  },
+  "internals": {}
+}

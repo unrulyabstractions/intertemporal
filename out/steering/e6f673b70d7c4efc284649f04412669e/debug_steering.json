@@ -1,0 +1,50 @@
+{
+    "config_id": "e6f673b70d7c4efc284649f04412669e",
+    "probe_config_id": "7c7dfcf3d544239e7badadfd89859c38",
+    "dataset_id": "c35e217b8473d84a41b79c38e5b3c059",
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "n_samples": 2,
+    "sample_indices": [
+        456,
+        102
+    ],
+    "steering_strengths": [
+        -50.0,
+        0,
+        50.0
+    ],
+    "probes_tested": 1,
+    "probe_summaries": [
+        {
+            "probe_id": "choice_layer14_pos7",
+            "layer": 14,
+            "position": 7,
+            "valid_baseline": 2,
+            "invalid_baseline": 0,
+            "failed_degenerate": 0,
+            "flips_short_to_long": 2,
+            "flips_long_to_short": 0,
+            "total_flips": 2,
+            "steering_worked": true,
+            "flipped_samples": [
+                {
+                    "sample_id": 456,
+                    "direction": "short->long",
+                    "magnitude": 50.0
+                },
+                {
+                    "sample_id": 102,
+                    "direction": "short->long",
+                    "magnitude": 50.0
+                }
+            ]
+        }
+    ],
+    "overall": {
+        "total_flips": 2,
+        "total_failed": 0,
+        "total_invalid_baseline": 0,
+        "any_steering_worked": true,
+        "status": "SUCCESS"
+    }
+}

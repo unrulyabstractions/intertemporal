@@ -1,0 +1,42 @@
+{
+  "models": [
+    "Qwen/Qwen2.5-0.5B-Instruct"
+  ],
+  "datasets": [
+    {"name": "default", "dataset_id": "dbe43ba7fff2f3f98dcc2b6d41775be2"}
+  ],
+  "formatting": {
+    "name": "default_formatting"
+  },
+  "decoding": {
+    "max_new_tokens": 250,
+    "temperature": 0.0,
+    "top_k": 0,
+    "top_p": 1.0
+  },
+  "internals": {
+    "resid_post": {
+      "layers": [8, 14, -8, -4, -2]
+    }
+  },
+  "token_positions": [
+    {
+      "text": "what option is preferable.",
+      "location": "prompt"
+    },
+    {
+      "text": "I select:",
+      "location": "continuation"
+    },
+    {
+      "index": 0
+    },
+    {
+      "prompt_index": -1
+    },
+    {
+      "continuation_index": -1
+    }
+  ],
+  "subsample": 1.0
+}

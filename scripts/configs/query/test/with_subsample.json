@@ -1,0 +1,15 @@
+{
+  "models": ["test-model"],
+  "dataset": {
+    "name": "test",
+    "id": "test123"
+  },
+  "formatting": {
+    "name": "default_formatting"
+  },
+  "decoding": {
+    "max_new_tokens": 10,
+    "temperature": 0.0
+  },
+  "subsample": 0.1
+}

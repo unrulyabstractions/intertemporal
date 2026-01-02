@@ -1,0 +1,18 @@
+{
+  "train_data": {
+    "name": "test_minimal",
+    "model": "gpt2",
+    "query_id": "test_query_id_minimal"
+  },
+  "test_data": {
+    "name": "test_minimal",
+    "model": "gpt2",
+    "query_id": "test_query_id_minimal"
+  },
+  "models": [
+    {"utility_type": "linear", "discount_type": "exponential"}
+  ],
+  "learning_rate": 0.01,
+  "num_iterations": 50,
+  "temperature": 0.0
+}

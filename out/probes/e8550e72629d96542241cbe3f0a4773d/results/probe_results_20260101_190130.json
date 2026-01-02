@@ -1,0 +1,24 @@
+{
+    "train_data_query_ids": [
+        "714f880e609407a8e201d025622b0b72"
+    ],
+    "test_data_query_ids": [
+        "714f880e609407a8e201d025622b0b72"
+    ],
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "config": {
+        "probe_types": [
+            "choice"
+        ],
+        "n_cv_folds": 5,
+        "random_state": 42,
+        "regularization_C": 1.0,
+        "regularization_alpha": 1.0
+    },
+    "best_by_type": {},
+    "results": [],
+    "config_path": "scripts/configs/probes/test/_pipeline_dynamic.json",
+    "timestamp": "20260101_190130",
+    "train_test_mode": true,
+    "train_test_split": 0.7
+}

@@ -1,0 +1,270 @@
+{
+    "config_id": "767ccbf6792c0f7b9c46a1268a19fcd3",
+    "probe_config_id": "7c7dfcf3d544239e7badadfd89859c38",
+    "dataset_id": "c35e217b8473d84a41b79c38e5b3c059",
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "steering_strengths": [
+        -50.0,
+        0,
+        50.0
+    ],
+    "n_samples": 5,
+    "sample_indices": [
+        456,
+        102,
+        1126,
+        1003,
+        914
+    ],
+    "timestamp": "20260101_222446",
+    "probe_results": [
+        {
+            "probe_id": "choice_layer14_pos7",
+            "probe_type": "choice",
+            "layer": 14,
+            "token_position_idx": 7,
+            "after_horizon": true,
+            "samples": [
+                {
+                    "sample_id": 456,
+                    "time_horizon": [
+                        1,
+                        "months"
+                    ],
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "unknown",
+                        "0": "short_term",
+                        "50.0": "long_term"
+                    },
+                    "min_flip_to_long": 50.0,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 102,
+                    "time_horizon": null,
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "unknown",
+                        "0": "short_term",
+                        "50.0": "long_term"
+                    },
+                    "min_flip_to_long": 50.0,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 1126,
+                    "time_horizon": [
+                        5,
+                        "years"
+                    ],
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "unknown",
+                        "0": "short_term",
+                        "50.0": "long_term"
+                    },
+                    "min_flip_to_long": 50.0,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 1003,
+                    "time_horizon": [
+                        2,
+                        "years"
+                    ],
+                    "baseline_choice": "long_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "long_term",
+                        "50.0": "short_term"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": 50.0
+                },
+                {
+                    "sample_id": 914,
+                    "time_horizon": [
+                        2,
+                        "years"
+                    ],
+                    "baseline_choice": "long_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "long_term",
+                        "50.0": "short_term"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": 50.0
+                }
+            ]
+        },
+        {
+            "probe_id": "choice_layer14_pos10",
+            "probe_type": "choice",
+            "layer": 14,
+            "token_position_idx": 10,
+            "after_horizon": true,
+            "samples": [
+                {
+                    "sample_id": 456,
+                    "time_horizon": [
+                        1,
+                        "months"
+                    ],
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "long_term",
+                        "0": "short_term",
+                        "50.0": "long_term"
+                    },
+                    "min_flip_to_long": 50.0,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 102,
+                    "time_horizon": null,
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "long_term",
+                        "0": "short_term",
+                        "50.0": "long_term"
+                    },
+                    "min_flip_to_long": 50.0,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 1126,
+                    "time_horizon": [
+                        5,
+                        "years"
+                    ],
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "long_term",
+                        "0": "short_term",
+                        "50.0": "long_term"
+                    },
+                    "min_flip_to_long": 50.0,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 1003,
+                    "time_horizon": [
+                        2,
+                        "years"
+                    ],
+                    "baseline_choice": "long_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "long_term",
+                        "50.0": "short_term"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": 50.0
+                },
+                {
+                    "sample_id": 914,
+                    "time_horizon": [
+                        2,
+                        "years"
+                    ],
+                    "baseline_choice": "long_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "long_term",
+                        "50.0": "short_term"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": 50.0
+                }
+            ]
+        },
+        {
+            "probe_id": "choice_layer8_pos10",
+            "probe_type": "choice",
+            "layer": 8,
+            "token_position_idx": 10,
+            "after_horizon": true,
+            "samples": [
+                {
+                    "sample_id": 456,
+                    "time_horizon": [
+                        1,
+                        "months"
+                    ],
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "short_term",
+                        "50.0": "unknown"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 102,
+                    "time_horizon": null,
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "short_term",
+                        "50.0": "unknown"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 1126,
+                    "time_horizon": [
+                        5,
+                        "years"
+                    ],
+                    "baseline_choice": "short_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "short_term",
+                        "50.0": "unknown"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 1003,
+                    "time_horizon": [
+                        2,
+                        "years"
+                    ],
+                    "baseline_choice": "long_term",
+                    "steered_choices": {
+                        "-50.0": "long_term",
+                        "0": "long_term",
+                        "50.0": "unknown"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": null
+                },
+                {
+                    "sample_id": 914,
+                    "time_horizon": [
+                        2,
+                        "years"
+                    ],
+                    "baseline_choice": "long_term",
+                    "steered_choices": {
+                        "-50.0": "short_term",
+                        "0": "long_term",
+                        "50.0": "unknown"
+                    },
+                    "min_flip_to_long": null,
+                    "min_flip_to_short": 50.0
+                }
+            ]
+        }
+    ],
+    "_completed_probe_ids": [
+        "choice_layer14_pos7",
+        "choice_layer14_pos10",
+        "choice_layer8_pos10"
+    ]
+}

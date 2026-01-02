@@ -1,0 +1,9 @@
+{
+  "probe_config_id": "7c7dfcf3d544239e7badadfd89859c38",
+  "dataset_id": "c35e217b8473d84a41b79c38e5b3c059",
+  "probe_types": ["choice"],
+  "steering_strengths": [-50.0, 0, 50.0],
+  "n_samples": 5,
+  "only_after_horizon": true,
+  "subsample_probes": 0.1
+}

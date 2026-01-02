@@ -1,0 +1,57 @@
+{
+    "metadata": {
+        "version": "1.0",
+        "dataset_id": "test_dataset_id_minimal",
+        "config": {
+            "name": "test_minimal",
+            "context": {
+                "reward_unit": "dollars",
+                "role": "a decision maker",
+                "situation": "Choose between options.",
+                "action_in_question": "select",
+                "reasoning_ask": "why you chose this",
+                "domain": "test",
+                "labels": ["a)", "b)"],
+                "method": "grid",
+                "seed": 42
+            },
+            "options": {
+                "short_term": {
+                    "reward_range": [100, 100],
+                    "time_range": [[1, "months"], [1, "months"]],
+                    "reward_steps": [0, "linear"],
+                    "time_steps": [0, "linear"]
+                },
+                "long_term": {
+                    "reward_range": [500, 500],
+                    "time_range": [[1, "years"], [1, "years"]],
+                    "reward_steps": [0, "linear"],
+                    "time_steps": [0, "linear"]
+                }
+            },
+            "time_horizons": [null],
+            "add_formatting_variations": false
+        },
+        "num_questions": 1,
+        "timestamp": "20251230_000000"
+    },
+    "questions": [
+        {
+            "sample_id": 0,
+            "question_text": "a) 100 dollars in 1 months or b) 500 dollars in 1 years?",
+            "time_horizon": null,
+            "preference_pair": {
+                "short_term": {
+                    "label": "a)",
+                    "time": [1, "months"],
+                    "reward": 100.0
+                },
+                "long_term": {
+                    "label": "b)",
+                    "time": [1, "years"],
+                    "reward": 500.0
+                }
+            }
+        }
+    ]
+}

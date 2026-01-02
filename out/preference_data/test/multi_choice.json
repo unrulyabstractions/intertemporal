@@ -1,0 +1,118 @@
+{
+    "metadata": {
+        "version": "1.0",
+        "dataset_id": "test_dataset_id_multi",
+        "formatting_id": "test_formatting_id_multi",
+        "query_id": "test_query_id_multi",
+        "model": "gpt2",
+        "query_config": {
+            "models": ["gpt2"],
+            "dataset_name": "test_multi",
+            "dataset_id": "test_dataset_id_multi",
+            "formatting_name": "default_formatting",
+            "formatting_id": "test_formatting_id_multi",
+            "decoding": {
+                "max_new_tokens": 20,
+                "temperature": 0.0,
+                "top_k": 0,
+                "top_p": 1.0
+            },
+            "internals": {
+                "activations": {},
+                "token_positions": []
+            },
+            "device": null,
+            "limit": 0
+        }
+    },
+    "preferences": [
+        {
+            "sample_id": 0,
+            "time_horizon": null,
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [1, "months"], "reward": 100.0},
+                "long_term": {"label": "B)", "time": [1, "years"], "reward": 500.0}
+            },
+            "choice": "long_term",
+            "internals": null,
+            "debug": null
+        },
+        {
+            "sample_id": 1,
+            "time_horizon": null,
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [1, "months"], "reward": 100.0},
+                "long_term": {"label": "B)", "time": [1, "years"], "reward": 1000.0}
+            },
+            "choice": "long_term",
+            "internals": null,
+            "debug": null
+        },
+        {
+            "sample_id": 2,
+            "time_horizon": null,
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [3, "months"], "reward": 200.0},
+                "long_term": {"label": "B)", "time": [2, "years"], "reward": 500.0}
+            },
+            "choice": "short_term",
+            "internals": null,
+            "debug": null
+        },
+        {
+            "sample_id": 3,
+            "time_horizon": null,
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [3, "months"], "reward": 200.0},
+                "long_term": {"label": "B)", "time": [2, "years"], "reward": 1000.0}
+            },
+            "choice": "long_term",
+            "internals": null,
+            "debug": null
+        },
+        {
+            "sample_id": 4,
+            "time_horizon": [6, "months"],
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [1, "months"], "reward": 100.0},
+                "long_term": {"label": "B)", "time": [1, "years"], "reward": 500.0}
+            },
+            "choice": "short_term",
+            "internals": null,
+            "debug": null
+        },
+        {
+            "sample_id": 5,
+            "time_horizon": [6, "months"],
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [1, "months"], "reward": 100.0},
+                "long_term": {"label": "B)", "time": [1, "years"], "reward": 1000.0}
+            },
+            "choice": "short_term",
+            "internals": null,
+            "debug": null
+        },
+        {
+            "sample_id": 6,
+            "time_horizon": [6, "months"],
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [3, "months"], "reward": 200.0},
+                "long_term": {"label": "B)", "time": [2, "years"], "reward": 500.0}
+            },
+            "choice": "short_term",
+            "internals": null,
+            "debug": null
+        },
+        {
+            "sample_id": 7,
+            "time_horizon": [6, "months"],
+            "preference_pair": {
+                "short_term": {"label": "A)", "time": [3, "months"], "reward": 200.0},
+                "long_term": {"label": "B)", "time": [2, "years"], "reward": 1000.0}
+            },
+            "choice": "short_term",
+            "internals": null,
+            "debug": null
+        }
+    ]
+}

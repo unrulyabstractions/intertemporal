@@ -1,0 +1,19 @@
+{
+  "train_data": {
+    "name": "test_log_steps",
+    "model": "gpt2",
+    "query_id": "test_query_id_log_steps"
+  },
+  "test_data": {
+    "name": "test_log_steps",
+    "model": "gpt2",
+    "query_id": "test_query_id_log_steps"
+  },
+  "models": [
+    {"utility_type": "linear", "discount_type": "exponential"},
+    {"utility_type": "linear", "discount_type": "hyperbolic"}
+  ],
+  "learning_rate": 0.01,
+  "num_iterations": 100,
+  "temperature": 0.0
+}

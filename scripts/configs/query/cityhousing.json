@@ -1,0 +1,73 @@
+{
+  "models": [
+    "Qwen/Qwen2.5-7B-Instruct"
+  ],
+  "datasets": [
+    {"name": "housingneutral", "dataset_id": "c35e217b8473d84a41b79c38e5b3c059"},
+    {"name": "housingdeficit", "dataset_id": "81650c7221f3f508627a2536676146cd"},
+    {"name": "housingexcess", "dataset_id": "4e60f4e8455f45e7024e0e4a9b66a03c"}
+  ],
+  "formatting": {
+    "name": "default_formatting"
+  },
+  "decoding": {
+    "max_new_tokens": 64,
+    "temperature": 0.0,
+    "top_k": 0,
+    "top_p": 1.0
+  },
+  "internals": {
+    "resid_post": {
+      "layers": [8, 14, -8, -4, -2]
+    }
+  },
+  "token_positions": [
+    {
+      "text": "SITUATION:",
+      "location": "prompt"
+    },
+    {
+      "text": "TASK:",
+      "location": "prompt"
+    },
+    {
+      "text": "are tasked to decide to either",
+      "location": "prompt"
+    },
+    {
+      "text": "CONSIDER:",
+      "location": "prompt"
+    },
+    {
+      "text": "ACTION:",
+      "location": "prompt",
+      "after_time_horizon_spec": true
+    },
+    {
+      "text": "WHICH option is preferable.",
+      "location": "prompt"
+    },
+    {
+      "text": "Select one of the two options,",
+      "location": "prompt"
+    },
+    {
+      "prompt_index": -1
+    },
+    {
+      "index": 0
+    },
+    {
+      "text": "I select:",
+      "location": "continuation"
+    },
+    {
+      "text": "My reasoning:",
+      "location": "continuation"
+    },
+    {
+      "continuation_index": -1
+    }
+  ],
+  "subsample": 1.00
+}

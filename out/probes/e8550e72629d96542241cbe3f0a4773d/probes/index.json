@@ -1,0 +1,11 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "created": "2026-01-01T19:02:03.302076",
+  "data": {
+    "train_query_ids": [
+      "714f880e609407a8e201d025622b0b72"
+    ]
+  },
+  "probes": [],
+  "best_by_type": {}
+}

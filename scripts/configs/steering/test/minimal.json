@@ -1,0 +1,8 @@
+{
+  "probe_config_id": "TO_BE_FILLED_FROM_PROBE_TRAINING",
+  "dataset_id": "TO_BE_FILLED_FROM_DATASET_GENERATION",
+  "probe_types": ["choice"],
+  "steering_strengths": [-50.0, 0, 50.0],
+  "n_samples": 5,
+  "only_after_horizon": true
+}

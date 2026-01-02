@@ -1,0 +1,7 @@
+{
+  "question_template": "[LEFT_TERM_LABEL] [LEFT_TERM_REWARD] [REWARD_UNITS] in [LEFT_TERM_TIME] or [RIGHT_TERM_LABEL] [RIGHT_TERM_REWARD] [REWARD_UNITS] in [RIGHT_TERM_TIME]?",
+  "response_format": "\n[CHOICE_PREFIX] <choice>",
+  "choice_prefix": "I choose:",
+  "time_horizon_spec": "",
+  "max_reasoning_length": "1 sentence"
+}

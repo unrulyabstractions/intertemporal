@@ -1,0 +1,30 @@
+{
+  "name": "test_log_steps",
+  "context": {
+    "reward_unit": "housing units",
+    "role": "city planners",
+    "situation": "Plan housing development.",
+    "action_in_question": "build",
+    "reasoning_ask": "the planning rationale",
+    "domain": "housing",
+    "labels": ["[1]", "[2]"],
+    "method": "grid",
+    "seed": 42
+  },
+  "options": {
+    "short_term": {
+      "reward_range": [100, 1000],
+      "time_range": [[1, "months"], [1, "years"]],
+      "reward_steps": [2, "logarithmic"],
+      "time_steps": [2, "logarithmic"]
+    },
+    "long_term": {
+      "reward_range": [5000, 50000],
+      "time_range": [[5, "years"], [50, "years"]],
+      "reward_steps": [2, "logarithmic"],
+      "time_steps": [2, "logarithmic"]
+    }
+  },
+  "time_horizons": [null, [10, "years"]],
+  "add_formatting_variations": false
+}
