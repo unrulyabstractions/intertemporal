@@ -628,6 +628,15 @@ def save_probes(
         # Build structured metadata
         is_classification = tp.probe_type in (ProbeType.CHOICE, ProbeType.TIME_HORIZON_CATEGORY)
 
+        # Get actual token position and word if available
+        token_position = None
+        token_position_word = None
+        if tp_info is not None:
+            if hasattr(tp_info, 'resolved_positions') and tp.token_position_idx in tp_info.resolved_positions:
+                token_position = tp_info.resolved_positions[tp.token_position_idx]
+            if hasattr(tp_info, 'tokens') and tp.token_position_idx in tp_info.tokens:
+                token_position_word = tp_info.tokens[tp.token_position_idx]
+
         metadata = {
             # Model info
             "model": output.model_name,
@@ -636,6 +645,8 @@ def save_probes(
             "probe_type": tp.probe_type.value,
             "layer": tp.layer,
             "token_position_idx": tp.token_position_idx,
+            "token_position": token_position,  # Actual position in token sequence
+            "token_position_word": token_position_word,  # Token/word at that position
 
             # Training info
             "training": {

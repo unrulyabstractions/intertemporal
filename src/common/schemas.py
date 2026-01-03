@@ -382,3 +382,4 @@ class QueryConfig(SchemaClass):
     device: str = None
     limit: int = 0
     subsample: float = 1.0  # Fraction of samples to use (0.1 = 10%, 1.0 = all)
+    batch_size: int = 8  # Batch size for processing multiple prompts

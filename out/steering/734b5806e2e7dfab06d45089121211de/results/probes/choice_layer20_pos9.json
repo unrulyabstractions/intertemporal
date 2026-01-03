@@ -1,0 +1,3183 @@
+{
+    "probe_id": "choice_layer20_pos9",
+    "probe_type": "choice",
+    "layer": 20,
+    "token_position_idx": 9,
+    "after_horizon": true,
+    "steering_strengths": [
+        -300.0,
+        -180.0,
+        -96.0,
+        -36.0,
+        36.0,
+        96.0,
+        180.0,
+        300.0
+    ],
+    "steering_id": "734b5806e2e7dfab06d45089121211de",
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "samples": [
+        {
+            "sample_id": 2,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> 习俗习俗\n= = 习俗"
+            }
+        },
+        {
+            "sample_id": 13,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "理由最终规定具体具体具体具体具体最终"
+            }
+        },
+        {
+            "sample_id": 26,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: <i) 10",
+                "300.0": ">>  = = =  specified specified ="
+            }
+        },
+        {
+            "sample_id": 47,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">>  =具体最终使用最终最最终"
+            }
+        },
+        {
+            "sample_id": 79,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: <a) 20",
+                "300.0": ">> >>  =>>  =>>"
+            }
+        },
+        {
+            "sample_id": 102,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> =>>具体最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 108,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: (A: 20",
+                "180.0": "I select: <A) 20",
+                "300.0": ">> >>  =>>  =>>"
+            }
+        },
+        {
+            "sample_id": 122,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: OPTION ONE: 20",
+                "180.0": "I select: OPTION_?>\n\n\n理由： ",
+                "300.0": ">> =>>具体最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 130,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: (A: 3,",
+                "180.0": "I select: <=A) 3",
+                "300.0": "I = = =  = = = "
+            }
+        },
+        {
+            "sample_id": 131,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B B B B B B B",
+                "180.0": "I select: [A) 10",
+                "300.0": ">>  specified specified\n=>>  specified"
+            }
+        },
+        {
+            "sample_id": 177,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": "= = = \n= = =  specified"
+            }
+        },
+        {
+            "sample_id": 187,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: (A: 30",
+                "300.0": "理由最终全部最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 192,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [1) 10",
+                "300.0": "理由最终一定一定一定一定最终一定最终"
+            }
+        },
+        {
+            "sample_id": 229,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [1) 22",
+                "300.0": ">> =>>具体最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 260,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> =>> specified specified =>> = specified"
+            }
+        },
+        {
+            "sample_id": 271,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: [a) 10",
+                "300.0": ">> 习俗习俗ldr具体具体最终最终"
+            }
+        },
+        {
+            "sample_id": 284,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [i) 15",
+                "300.0": "我全部 specified = = = 具体使用"
+            }
+        },
+        {
+            "sample_id": 292,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": "= =习俗习俗ldr\n= =具体"
+            }
+        },
+        {
+            "sample_id": 322,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [2) 20",
+                "300.0": ">>  = =  specified specified = ="
+            }
+        },
+        {
+            "sample_id": 326,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I B B B B B B B B",
+                "-180.0": "I select: [II: 2,",
+                "180.0": "I select: [I) 24",
+                "300.0": "I = = =  = = = "
+            }
+        },
+        {
+            "sample_id": 356,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "Budw Budw B B B",
+                "300.0": ">> = = = specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 372,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B B B B B B B",
+                "180.0": "I select: <a) 2,",
+                "300.0": ">> Outcome =  =  = ="
+            }
+        },
+        {
+            "sample_id": 379,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> =>> specified specified specified specified =>>"
+            }
+        },
+        {
+            "sample_id": 383,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Option Option: Option ",
+                "300.0": "理由最终一定一定一定一定最终一定具体"
+            }
+        },
+        {
+            "sample_id": 396,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [1\n= = =",
+                "300.0": ">>  specified = = = specified = specified"
+            }
+        },
+        {
+            "sample_id": 413,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> 习俗习俗ldr具体具体具体具体"
+            }
+        },
+        {
+            "sample_id": 418,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwthww",
+                "180.0": "I select: <[I) 3",
+                "300.0": "I = = =  = = = "
+            }
+        },
+        {
+            "sample_id": 419,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">> = = = specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 435,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Choice : Choice: Choice",
+                "300.0": ">>  specified specified = specified specified specified specified"
+            }
+        },
+        {
+            "sample_id": 449,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Option One: 4,",
+                "300.0": "= = = \n= = =  specified"
+            }
+        },
+        {
+            "sample_id": 456,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 180.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I B B B B B B B B",
+                "300.0": "= = = \n= = =  specified"
+            }
+        },
+        {
+            "sample_id": 458,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "= = = \n= = =  specified"
+            }
+        },
+        {
+            "sample_id": 469,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": " Islide = = = 具体最终最终"
+            }
+        },
+        {
+            "sample_id": 511,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwthww",
+                "180.0": "I select: [I) 15",
+                "300.0": "I = = =  = = = "
+            }
+        },
+        {
+            "sample_id": 566,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: OPTION ONE: 13",
+                "180.0": "I select: OPTION_?>\n\n\n理由：最终",
+                "300.0": "= = = \n= = =  specified"
+            }
+        },
+        {
+            "sample_id": 571,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "= =  specified specified = =  specified"
+            }
+        },
+        {
+            "sample_id": 585,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">>  =具体最终使用最终全部全部"
+            }
+        },
+        {
+            "sample_id": 626,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: (A: 2,",
+                "180.0": "I select: <A) 20",
+                "300.0": ">> Outcome = = = = = ="
+            }
+        },
+        {
+            "sample_id": 636,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwthww",
+                "180.0": "I select: <I) 20",
+                "300.0": ">> 具体最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 647,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: (A: 3,",
+                "180.0": "I select: <=specific number from the",
+                "300.0": "我全部 specified最终使用特定具体最终最终"
+            }
+        },
+        {
+            "sample_id": 653,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: [A: 30",
+                "180.0": "I select: [A) 30",
+                "300.0": "inely specified some specific details, some specific details"
+            }
+        },
+        {
+            "sample_id": 655,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [i) 15",
+                "300.0": ">> = = = specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 661,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": "我最终的全部区别具体具体具体区别"
+            }
+        },
+        {
+            "sample_id": 666,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "= = specified specified = specified specified specified ="
+            }
+        },
+        {
+            "sample_id": 669,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> 习俗习俗\n最终具体最终最终"
+            }
+        },
+        {
+            "sample_id": 700,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: (B - 3,",
+                "180.0": "I select: <A) 1.",
+                "300.0": "理由最终一定一定一定一定一定一定最终"
+            }
+        },
+        {
+            "sample_id": 731,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: 6 = full digits from",
+                "300.0": ">> _FLAGS = specified = = = specified"
+            }
+        },
+        {
+            "sample_id": 787,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B B B B B B B",
+                "-180.0": "I select: (B: 1,",
+                "180.0": "I select: <A) 10",
+                "300.0": ">>  specified specified\n=>> specified specified"
+            }
+        },
+        {
+            "sample_id": 814,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [1) 10",
+                "300.0": ">>  specified specified\n=>> specified specified"
+            }
+        },
+        {
+            "sample_id": 858,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 180.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "Budw Bwthw Bw",
+                "-180.0": "Option: Option  Option: Option 1",
+                "300.0": ">>  =具体最终使用最终具体具体"
+            }
+        },
+        {
+            "sample_id": 864,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">>  specified specified specified specified specified specified specified"
+            }
+        },
+        {
+            "sample_id": 870,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: A specific subset of data from",
+                "300.0": ">>  =具体最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 881,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: <A) 10",
+                "300.0": ">>  specified specified = specified specified specified specified"
+            }
+        },
+        {
+            "sample_id": 895,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 180.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "Budw Budw: B B",
+                "-180.0": "I select: Choice : Choice 1",
+                "300.0": ">> = = = specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 898,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [i) 30",
+                "300.0": "inely specified some specific details, some specific details"
+            }
+        },
+        {
+            "sample_id": 899,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: [a) 10",
+                "300.0": ">> =>> specified specified specified specified specified\n"
+            }
+        },
+        {
+            "sample_id": 902,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [1) 26",
+                "300.0": ">>  = =  specified specified = ="
+            }
+        },
+        {
+            "sample_id": 914,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">>  specified specified\n=>>  specified"
+            }
+        },
+        {
+            "sample_id": 933,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: <a) 30",
+                "300.0": "= = = \n= = =  specified"
+            }
+        },
+        {
+            "sample_id": 938,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "Budw B B B B B B",
+                "-180.0": "I select: Choice : Choice 1",
+                "180.0": "I select: Choice 3 = typically from",
+                "300.0": " Islegideldendide specified specified specified"
+            }
+        },
+        {
+            "sample_id": 952,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": "我最终的全部区别最终 specified具体最终"
+            }
+        },
+        {
+            "sample_id": 953,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: [A) 6 =",
+                "300.0": ">>  = =  specified specified = ="
+            }
+        },
+        {
+            "sample_id": 1002,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [4.24 ",
+                "300.0": "= = = \n= = =  ="
+            }
+        },
+        {
+            "sample_id": 1003,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> =>>具体最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1010,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 180.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> 习俗习俗\n最终具体具体最终"
+            }
+        },
+        {
+            "sample_id": 1029,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">> =>> specified specified =>> = specified"
+            }
+        },
+        {
+            "sample_id": 1076,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">> =具体最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1078,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": " Islineleidegend specified specified specified specified"
+            }
+        },
+        {
+            "sample_id": 1083,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Option Option: Option ",
+                "300.0": ">> =>> specified specified specified specified =>>"
+            }
+        },
+        {
+            "sample_id": 1084,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">>  specified specified\n= = specified specified"
+            }
+        },
+        {
+            "sample_id": 1092,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": "= =习俗习俗最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1093,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Option  Option: Option ",
+                "300.0": ">> =具体最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1096,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": "理由最终全部最终具体具体具体具体最终"
+            }
+        },
+        {
+            "sample_id": 1105,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [i) 10",
+                "300.0": ">>  = specified parameters from specified specified ="
+            }
+        },
+        {
+            "sample_id": 1126,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">> =>> =>>  =>> "
+            }
+        },
+        {
+            "sample_id": 1138,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "-180.0": "I select: (A: 2,",
+                "180.0": "I select: <A) 20",
+                "300.0": ">> =>> specified specified =>> = specified"
+            }
+        },
+        {
+            "sample_id": 1139,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">>  specified specified\n=>>  specified"
+            }
+        },
+        {
+            "sample_id": 1185,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> Outcome = 5 =  specified"
+            }
+        },
+        {
+            "sample_id": 1200,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B and B: B: B",
+                "-180.0": "I select: [B: 3,",
+                "180.0": "I select: [A) 10",
+                "300.0": ">>  specified specified\n=>> specified specified"
+            }
+        },
+        {
+            "sample_id": 1202,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">> =>>具体最终使用最终具体具体"
+            }
+        },
+        {
+            "sample_id": 1222,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Choice : Choice 1",
+                "180.0": "I select: 24,62",
+                "300.0": ">> =具体最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1288,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: [i) 6i",
+                "300.0": ">> =>>具体最终使用参数最终最终"
+            }
+        },
+        {
+            "sample_id": 1292,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "Budw Budw: B B",
+                "-180.0": "I select: Choice : Choice 1",
+                "300.0": ">>  specified specified\n= = specified specified"
+            }
+        },
+        {
+            "sample_id": 1327,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "理由最终一定一定一定一定最终一定具体"
+            }
+        },
+        {
+            "sample_id": 1328,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">>  specified specified specified specified specified\n="
+            }
+        },
+        {
+            "sample_id": 1378,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B B B B B B B",
+                "180.0": "I select: <a) 10",
+                "300.0": ">> =>> specified = =>> =>>"
+            }
+        },
+        {
+            "sample_id": 1393,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwwthw",
+                "180.0": "I select: [I) 10",
+                "300.0": "I = 10 = 1方"
+            }
+        },
+        {
+            "sample_id": 1408,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I Bthwth Bthwth",
+                "300.0": ">>  specified specified specified\n=>> specified"
+            }
+        },
+        {
+            "sample_id": 1455,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> = = = specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 1470,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": " Islinely = =  specified specified specified specified"
+            }
+        },
+        {
+            "sample_id": 1481,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwthww",
+                "180.0": "I select: <[II) 4",
+                "300.0": "= = = \n= = = IRM"
+            }
+        },
+        {
+            "sample_id": 1482,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> =>> specified specified =>> = specified"
+            }
+        },
+        {
+            "sample_id": 1486,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "= =习俗习俗ldr具体具体最终最终"
+            }
+        },
+        {
+            "sample_id": 1494,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: <a) 22",
+                "300.0": ">> =具体最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1516,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: [A) 40",
+                "300.0": "双方具体最终具体具体具体具体具体具体"
+            }
+        },
+        {
+            "sample_id": 1531,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: 一般情况下，最终选定",
+                "300.0": ">> =具体最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1550,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "= =习俗习俗最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1554,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "理由最终一定一定一定一定最终一定最终"
+            }
+        },
+        {
+            "sample_id": 1556,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "Budw B B B B B B",
+                "180.0": "I select: <[i) 1",
+                "300.0": ">>  = =  specified specified = ="
+            }
+        },
+        {
+            "sample_id": 1563,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "Budw B B B B B B",
+                "-180.0": "I select: Choice : Choice 1",
+                "300.0": "= = specified specified\n= = = ="
+            }
+        },
+        {
+            "sample_id": 1576,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">>  = =  specified specified = ="
+            }
+        },
+        {
+            "sample_id": 1620,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">>  = =  specified specified = ="
+            }
+        },
+        {
+            "sample_id": 1635,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> = = > specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 1643,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">> = = = specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 1718,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwthww",
+                "180.0": "I select: [I) 22",
+                "300.0": "I = = =  = = = "
+            }
+        },
+        {
+            "sample_id": 1728,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Option Option: B:",
+                "300.0": "理由最终一定一定一定一定最终一定具体"
+            }
+        },
+        {
+            "sample_id": 1729,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> = =>>  specified specified =>>"
+            }
+        },
+        {
+            "sample_id": 1731,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "Budw Budw: B B",
+                "-180.0": "I select: Choice : 1:",
+                "180.0": "I select: Choice 4000",
+                "300.0": "= =  specified specified = =  specified"
+            }
+        },
+        {
+            "sample_id": 1754,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "= = = \n= = =  ="
+            }
+        },
+        {
+            "sample_id": 1780,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: <i) 20",
+                "300.0": ">> = = > specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 1839,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwthww",
+                "180.0": "I select: [I) 10",
+                "300.0": ">> inely specified some specific reasons from specified"
+            }
+        },
+        {
+            "sample_id": 1857,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": "理由最终一定一定一定一定一定最终一定"
+            }
+        },
+        {
+            "sample_id": 1858,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I Bthwthwthww",
+                "180.0": "I select: [II) 20",
+                "300.0": ">> =>> =>>  specified =>>"
+            }
+        },
+        {
+            "sample_id": 1879,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: Option  Option: Option ",
+                "300.0": ">> = =  specified specified = = "
+            }
+        },
+        {
+            "sample_id": 1881,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "180.0": "I select: 6 = full digits from",
+                "300.0": "理由最终全部最终 specified具体具体具体最终"
+            }
+        },
+        {
+            "sample_id": 1893,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "300.0": ">> =具体最终最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 1917,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "300.0": ">> = = = specified specified = = ="
+            }
+        },
+        {
+            "sample_id": 2001,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: <a) 10",
+                "300.0": ">>  specified specified\n=>>  specified"
+            }
+        },
+        {
+            "sample_id": 2021,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "B B B B B B B B B",
+                "-180.0": "I select: [2: 4,",
+                "180.0": "I select: [1\n= = ",
+                "300.0": "= =习俗习俗最终最终最终最终最终"
+            }
+        },
+        {
+            "sample_id": 2044,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "degenerate",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "unknown"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "B: B: B: B: B",
+                "180.0": "I select: 150,0",
+                "300.0": ">>  specified specified\n= = specified specified"
+            }
+        }
+    ]
+}

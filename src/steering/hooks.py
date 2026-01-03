@@ -46,7 +46,7 @@ def create_steering_hook(
     )
 
     if config.option == SteeringOption.APPLY_TO_ALL:
-        return _create_apply_to_all_hook(direction_tensor, config.strength, debug=True), None
+        return _create_apply_to_all_hook(direction_tensor, config.strength, debug=False), None
     else:
         return _create_token_position_hook(
             direction_tensor,
@@ -119,21 +119,27 @@ def _create_token_position_hook(
     """
     scaled_direction = strength * direction
 
-    if target.index is not None:
-        # Fixed index targeting
-        target_index = target.index
+    if target.index is not None or target.indices is not None:
+        # Fixed index/indices targeting
+        target_indices = set([target.index]) if target.index is not None else set(target.indices)
 
         def hook(activation: torch.Tensor, hook=None) -> torch.Tensor:
-            # Only apply if we're processing the target position
-            # During full forward pass, check if target_index is within sequence
             # Note: hook parameter is passed by TransformerLens but not used here
             seq_len = activation.shape[1]
+
             if seq_len > 1:
-                # Full sequence - apply at specific position
-                if target_index < seq_len:
-                    activation[:, target_index, :] += scaled_direction
-            # During generation (seq_len=1), we can't know which position
-            # we're at without additional state tracking, so skip
+                # Full sequence (prefill) - apply at specific position(s)
+                for idx in target_indices:
+                    if idx < seq_len:
+                        activation[:, idx, :] += scaled_direction
+                # Also apply at last position for consistency with generation behavior
+                # This ensures probability computation reflects steered model's predictions
+                activation[:, -1, :] += scaled_direction
+            else:
+                # During generation (seq_len=1), also apply steering
+                # This affects the new token being generated
+                activation[:, 0, :] += scaled_direction
+
             return activation
 
         return hook, None

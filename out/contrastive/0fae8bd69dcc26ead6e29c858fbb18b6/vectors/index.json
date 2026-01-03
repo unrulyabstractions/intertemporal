@@ -1,0 +1,544 @@
+{
+    "vectors": [
+        {
+            "layer": 8,
+            "position": 0,
+            "token_position": 28,
+            "token_position_word": ":",
+            "file": "caa_layer8_pos0.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 1,
+            "token_position": 39,
+            "token_position_word": ":",
+            "file": "caa_layer8_pos1.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 2,
+            "token_position": 51,
+            "token_position_word": " either",
+            "file": "caa_layer8_pos2.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 3,
+            "token_position": 86,
+            "token_position_word": ":",
+            "file": "caa_layer8_pos3.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 4,
+            "token_position": 96,
+            "token_position_word": ":",
+            "file": "caa_layer8_pos4.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 5,
+            "token_position": 94,
+            "token_position_word": ".\n\n",
+            "file": "caa_layer8_pos5.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 6,
+            "token_position": 103,
+            "token_position_word": ",",
+            "file": "caa_layer8_pos6.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 7,
+            "token_position": 146,
+            "token_position_word": "\n",
+            "file": "caa_layer8_pos7.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 8,
+            "token_position": 147,
+            "token_position_word": "I",
+            "file": "caa_layer8_pos8.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 9,
+            "token_position": 149,
+            "token_position_word": ":",
+            "file": "caa_layer8_pos9.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 10,
+            "token_position": 167,
+            "token_position_word": ":",
+            "file": "caa_layer8_pos10.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 8,
+            "position": 11,
+            "token_position": 210,
+            "token_position_word": " urban",
+            "file": "caa_layer8_pos11.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 0,
+            "token_position": 28,
+            "token_position_word": ":",
+            "file": "caa_layer14_pos0.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 1,
+            "token_position": 39,
+            "token_position_word": ":",
+            "file": "caa_layer14_pos1.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 2,
+            "token_position": 51,
+            "token_position_word": " either",
+            "file": "caa_layer14_pos2.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 3,
+            "token_position": 86,
+            "token_position_word": ":",
+            "file": "caa_layer14_pos3.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 4,
+            "token_position": 96,
+            "token_position_word": ":",
+            "file": "caa_layer14_pos4.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 5,
+            "token_position": 94,
+            "token_position_word": ".\n\n",
+            "file": "caa_layer14_pos5.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 6,
+            "token_position": 103,
+            "token_position_word": ",",
+            "file": "caa_layer14_pos6.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 7,
+            "token_position": 146,
+            "token_position_word": "\n",
+            "file": "caa_layer14_pos7.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 8,
+            "token_position": 147,
+            "token_position_word": "I",
+            "file": "caa_layer14_pos8.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 9,
+            "token_position": 149,
+            "token_position_word": ":",
+            "file": "caa_layer14_pos9.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 10,
+            "token_position": 167,
+            "token_position_word": ":",
+            "file": "caa_layer14_pos10.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 14,
+            "position": 11,
+            "token_position": 210,
+            "token_position_word": " urban",
+            "file": "caa_layer14_pos11.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 0,
+            "token_position": 28,
+            "token_position_word": ":",
+            "file": "caa_layer20_pos0.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 1,
+            "token_position": 39,
+            "token_position_word": ":",
+            "file": "caa_layer20_pos1.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 2,
+            "token_position": 51,
+            "token_position_word": " either",
+            "file": "caa_layer20_pos2.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 3,
+            "token_position": 86,
+            "token_position_word": ":",
+            "file": "caa_layer20_pos3.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 4,
+            "token_position": 96,
+            "token_position_word": ":",
+            "file": "caa_layer20_pos4.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 5,
+            "token_position": 94,
+            "token_position_word": ".\n\n",
+            "file": "caa_layer20_pos5.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 6,
+            "token_position": 103,
+            "token_position_word": ",",
+            "file": "caa_layer20_pos6.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 7,
+            "token_position": 146,
+            "token_position_word": "\n",
+            "file": "caa_layer20_pos7.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 8,
+            "token_position": 147,
+            "token_position_word": "I",
+            "file": "caa_layer20_pos8.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 9,
+            "token_position": 149,
+            "token_position_word": ":",
+            "file": "caa_layer20_pos9.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 10,
+            "token_position": 167,
+            "token_position_word": ":",
+            "file": "caa_layer20_pos10.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 20,
+            "position": 11,
+            "token_position": 210,
+            "token_position_word": " urban",
+            "file": "caa_layer20_pos11.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 0,
+            "token_position": 28,
+            "token_position_word": ":",
+            "file": "caa_layer24_pos0.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 1,
+            "token_position": 39,
+            "token_position_word": ":",
+            "file": "caa_layer24_pos1.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 2,
+            "token_position": 51,
+            "token_position_word": " either",
+            "file": "caa_layer24_pos2.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 3,
+            "token_position": 86,
+            "token_position_word": ":",
+            "file": "caa_layer24_pos3.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 4,
+            "token_position": 96,
+            "token_position_word": ":",
+            "file": "caa_layer24_pos4.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 5,
+            "token_position": 94,
+            "token_position_word": ".\n\n",
+            "file": "caa_layer24_pos5.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 6,
+            "token_position": 103,
+            "token_position_word": ",",
+            "file": "caa_layer24_pos6.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 7,
+            "token_position": 146,
+            "token_position_word": "\n",
+            "file": "caa_layer24_pos7.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 8,
+            "token_position": 147,
+            "token_position_word": "I",
+            "file": "caa_layer24_pos8.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 9,
+            "token_position": 149,
+            "token_position_word": ":",
+            "file": "caa_layer24_pos9.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 10,
+            "token_position": 167,
+            "token_position_word": ":",
+            "file": "caa_layer24_pos10.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 24,
+            "position": 11,
+            "token_position": 210,
+            "token_position_word": " urban",
+            "file": "caa_layer24_pos11.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 0,
+            "token_position": 28,
+            "token_position_word": ":",
+            "file": "caa_layer26_pos0.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 1,
+            "token_position": 39,
+            "token_position_word": ":",
+            "file": "caa_layer26_pos1.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 2,
+            "token_position": 51,
+            "token_position_word": " either",
+            "file": "caa_layer26_pos2.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 3,
+            "token_position": 86,
+            "token_position_word": ":",
+            "file": "caa_layer26_pos3.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 4,
+            "token_position": 96,
+            "token_position_word": ":",
+            "file": "caa_layer26_pos4.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 5,
+            "token_position": 94,
+            "token_position_word": ".\n\n",
+            "file": "caa_layer26_pos5.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 6,
+            "token_position": 103,
+            "token_position_word": ",",
+            "file": "caa_layer26_pos6.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 7,
+            "token_position": 146,
+            "token_position_word": "\n",
+            "file": "caa_layer26_pos7.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 8,
+            "token_position": 147,
+            "token_position_word": "I",
+            "file": "caa_layer26_pos8.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 9,
+            "token_position": 149,
+            "token_position_word": ":",
+            "file": "caa_layer26_pos9.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 10,
+            "token_position": 167,
+            "token_position_word": ":",
+            "file": "caa_layer26_pos10.npy",
+            "n_short": 1102,
+            "n_long": 946
+        },
+        {
+            "layer": 26,
+            "position": 11,
+            "token_position": 210,
+            "token_position_word": " urban",
+            "file": "caa_layer26_pos11.npy",
+            "n_short": 1102,
+            "n_long": 946
+        }
+    ]
+}

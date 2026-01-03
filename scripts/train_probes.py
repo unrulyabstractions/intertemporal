@@ -146,8 +146,18 @@ def get_config_id(
 # =============================================================================
 
 
-def serialize_probe_result(result: ProbeResult) -> dict:
-    """Serialize a ProbeResult to dict."""
+def serialize_probe_result(
+    result: ProbeResult,
+    resolved_positions: Optional[dict] = None,
+    tokens: Optional[dict] = None,
+) -> dict:
+    """Serialize a ProbeResult to dict.
+
+    Args:
+        result: The probe result to serialize
+        resolved_positions: Optional dict mapping token_position_idx -> actual position
+        tokens: Optional dict mapping token_position_idx -> token word
+    """
     output = {
         "layer": result.layer,
         "token_position_idx": result.token_position_idx,
@@ -156,6 +166,12 @@ def serialize_probe_result(result: ProbeResult) -> dict:
         "n_test": result.n_test,
         "n_features": result.n_features,
     }
+
+    # Add actual token position and word if available
+    if resolved_positions and result.token_position_idx in resolved_positions:
+        output["token_position"] = resolved_positions[result.token_position_idx]
+    if tokens and result.token_position_idx in tokens:
+        output["token_position_word"] = tokens[result.token_position_idx]
 
     # Add classification-specific fields
     if result.probe_type in (ProbeType.CHOICE, ProbeType.TIME_HORIZON_CATEGORY):
@@ -187,13 +203,30 @@ def serialize_probe_result(result: ProbeResult) -> dict:
     return output
 
 
-def serialize_training_output(output: ProbeTrainingOutput) -> dict:
-    """Serialize full training output to dict."""
-    results = [serialize_probe_result(r) for r in output.results]
+def serialize_training_output(
+    output: ProbeTrainingOutput,
+    tp_info: Optional[TokenPositionInfo] = None,
+) -> dict:
+    """Serialize full training output to dict.
+
+    Args:
+        output: The training output to serialize
+        tp_info: Optional token position info for resolved positions and words
+    """
+    # Extract position mappings from tp_info
+    resolved_positions = tp_info.resolved_positions if tp_info else None
+    tokens = tp_info.tokens if tp_info else None
+
+    results = [
+        serialize_probe_result(r, resolved_positions, tokens)
+        for r in output.results
+    ]
 
     best_by_type = {}
     for probe_type, result in output.best_by_type.items():
-        best_by_type[probe_type.value] = serialize_probe_result(result)
+        best_by_type[probe_type.value] = serialize_probe_result(
+            result, resolved_positions, tokens
+        )
 
     config_dict = {
         "probe_types": [pt.value for pt in output.config.probe_types],
@@ -1276,7 +1309,7 @@ def main() -> int:
         # Only save results if we trained (not reusing)
         if not reuse_success:
             timestamp = get_timestamp()
-            output_dict = serialize_training_output(output)
+            output_dict = serialize_training_output(output, tp_info=tp_info)
             output_dict["config_path"] = str(config_path.relative_to(PROJECT_ROOT))
             output_dict["timestamp"] = timestamp
 
@@ -1289,6 +1322,11 @@ def main() -> int:
             output_path = results_dir / f"probe_results_{timestamp}.json"
             save_json(output_dict, output_path)
             print(f"\nResults saved to: {output_path}")
+
+            # Also save as probe_results_final.json for easy reference
+            final_results_path = results_dir / "probe_results_final.json"
+            save_json(output_dict, final_results_path)
+            print(f"Final results: {final_results_path}")
 
             # Save trained probes for future experiments (e.g., steering)
             probes_model_dir = run_dir / "probes"

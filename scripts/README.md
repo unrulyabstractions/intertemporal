@@ -58,7 +58,7 @@ uv run python scripts/train_probes.py --config <name>
 uv run python scripts/train_probes.py --config default_probes
 ```
 
-**Output:** `out/probes/<probe_config_id>/` - Trained probe weights and metrics
+**Output:** `out/probes/<config_id>/` - Trained probe weights and metrics
 
 ### try_steering.py
 Apply activation steering using trained probe directions.

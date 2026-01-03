@@ -48,13 +48,17 @@ class TokenPositionTarget(SchemaClass):
     """
     Specification for which token position to apply steering to.
 
-    Supports two modes:
+    Supports three modes:
     1. Fixed index: Apply at a specific token position (0-indexed from prompt start)
-    2. Pattern trigger: Wait until a text pattern is generated, then apply to next token
+    2. Multiple indices: Apply at multiple specific token positions
+    3. Pattern trigger: Wait until a text pattern is generated, then apply to next token
 
     Examples:
         # Apply at token position 10
         TokenPositionTarget(index=10)
+
+        # Apply at positions 5, 10, and 15
+        TokenPositionTarget(indices=[5, 10, 15])
 
         # Apply after "I select:" is generated
         TokenPositionTarget(pattern="I select:")
@@ -63,14 +67,18 @@ class TokenPositionTarget(SchemaClass):
     # Fixed position index (0-indexed from start of sequence)
     index: Optional[int] = None
 
+    # Multiple position indices
+    indices: Optional[list[int]] = None
+
     # Pattern to wait for - steering applied to token AFTER this pattern
     pattern: Optional[str] = None
 
     def __post_init__(self):
-        if self.index is None and self.pattern is None:
-            raise ValueError("TokenPositionTarget requires either index or pattern")
-        if self.index is not None and self.pattern is not None:
-            raise ValueError("TokenPositionTarget cannot have both index and pattern")
+        set_count = sum(x is not None for x in [self.index, self.indices, self.pattern])
+        if set_count == 0:
+            raise ValueError("TokenPositionTarget requires index, indices, or pattern")
+        if set_count > 1:
+            raise ValueError("TokenPositionTarget can only have one of: index, indices, pattern")
         super().__post_init__()
 
     @classmethod

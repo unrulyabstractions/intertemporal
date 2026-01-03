@@ -1,36 +1,38 @@
 {
-  "model": "Qwen/Qwen2.5-7B-Instruct",
-  "probe_type": "time_horizon_value",
-  "layer": 26,
-  "token_position_idx": 9,
-  "training": {
-    "n_samples": 1253,
-    "n_features": 3584,
-    "train_query_ids": [
-      "7af8b316feb64ef4dd8ac94497fedf5b"
-    ],
-    "test_query_ids": [
-      "7af8b316feb64ef4dd8ac94497fedf5b"
-    ]
-  },
-  "metrics": {
-    "train": {
-      "mae_months": 2.5270879584161747
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "probe_type": "time_horizon_value",
+    "layer": 26,
+    "token_position_idx": 9,
+    "training": {
+        "n_samples": 1253,
+        "n_features": 3584,
+        "train_query_ids": [
+            "7af8b316feb64ef4dd8ac94497fedf5b"
+        ],
+        "test_query_ids": [
+            "7af8b316feb64ef4dd8ac94497fedf5b"
+        ]
     },
-    "test": {
-      "mae_months": 71.59141016476863,
-      "rmse_months": 98.77583875707698
-    }
-  },
-  "files": {
-    "model": "time_horizon_value_layer26_pos9.joblib",
-    "direction": "time_horizon_value_layer26_pos9_direction.npy"
-  },
-  "position": {
-    "sequence_position": 9,
-    "after_choices_presented": true,
-    "after_time_horizon": true,
-    "after_choice_made": false,
-    "in_response": true
-  }
+    "metrics": {
+        "train": {
+            "mae_months": 2.5270879584161747
+        },
+        "test": {
+            "mae_months": 71.59141016476863,
+            "rmse_months": 98.77583875707698
+        }
+    },
+    "files": {
+        "model": "time_horizon_value_layer26_pos9.joblib",
+        "direction": "time_horizon_value_layer26_pos9_direction.npy"
+    },
+    "position": {
+        "sequence_position": 9,
+        "after_choices_presented": true,
+        "after_time_horizon": true,
+        "after_choice_made": false,
+        "in_response": true
+    },
+    "token_position": 149,
+    "token_position_word": ":"
 }

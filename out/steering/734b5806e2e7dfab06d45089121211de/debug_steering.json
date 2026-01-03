@@ -1,0 +1,1066 @@
+{
+    "steering_id": "734b5806e2e7dfab06d45089121211de",
+    "dataset_id": "c35e217b8473d84a41b79c38e5b3c059",
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "n_samples": 120,
+    "sample_indices": [
+        2,
+        13,
+        26,
+        47,
+        79,
+        102,
+        108,
+        122,
+        130,
+        131,
+        177,
+        187,
+        192,
+        229,
+        260,
+        271,
+        284,
+        292,
+        322,
+        326,
+        356,
+        372,
+        379,
+        383,
+        396,
+        413,
+        418,
+        419,
+        435,
+        449,
+        456,
+        458,
+        469,
+        511,
+        566,
+        571,
+        585,
+        626,
+        636,
+        647,
+        653,
+        655,
+        661,
+        666,
+        669,
+        700,
+        731,
+        787,
+        814,
+        858,
+        864,
+        870,
+        881,
+        895,
+        898,
+        899,
+        902,
+        914,
+        933,
+        938,
+        952,
+        953,
+        1002,
+        1003,
+        1010,
+        1029,
+        1076,
+        1078,
+        1083,
+        1084,
+        1092,
+        1093,
+        1096,
+        1105,
+        1126,
+        1138,
+        1139,
+        1185,
+        1200,
+        1202,
+        1222,
+        1288,
+        1292,
+        1327,
+        1328,
+        1378,
+        1393,
+        1408,
+        1455,
+        1470,
+        1481,
+        1482,
+        1486,
+        1494,
+        1516,
+        1531,
+        1550,
+        1554,
+        1556,
+        1563,
+        1576,
+        1620,
+        1635,
+        1643,
+        1718,
+        1728,
+        1729,
+        1731,
+        1754,
+        1780,
+        1839,
+        1857,
+        1858,
+        1879,
+        1881,
+        1893,
+        1917,
+        2001,
+        2021,
+        2044
+    ],
+    "steering_strengths": [
+        -300.0,
+        -180.0,
+        -96.0,
+        -36.0,
+        36.0,
+        96.0,
+        180.0,
+        300.0
+    ],
+    "probes_tested": 2,
+    "probe_summaries": [
+        {
+            "probe_id": "choice_layer20_pos9",
+            "layer": 20,
+            "position": 9,
+            "valid_baseline": 120,
+            "invalid_baseline": 0,
+            "failed_degenerate": 105,
+            "flips_short_to_long": 32,
+            "flips_long_to_short": 35,
+            "total_flips": 67,
+            "steering_worked": true,
+            "failed_sample_ids": [
+                2,
+                13,
+                26,
+                47,
+                79,
+                102,
+                108,
+                122,
+                130,
+                131,
+                177,
+                187,
+                192,
+                229,
+                260,
+                271,
+                284,
+                292,
+                322,
+                326,
+                372,
+                379,
+                383,
+                396,
+                413,
+                418,
+                419,
+                435,
+                449,
+                456,
+                458,
+                469,
+                511,
+                566,
+                571,
+                585,
+                626,
+                647,
+                653,
+                655,
+                661,
+                666,
+                669,
+                700,
+                731,
+                787,
+                814,
+                864,
+                870,
+                881,
+                898,
+                899,
+                902,
+                914,
+                933,
+                952,
+                953,
+                1002,
+                1003,
+                1010,
+                1029,
+                1076,
+                1078,
+                1083,
+                1084,
+                1092,
+                1093,
+                1096,
+                1105,
+                1126,
+                1138,
+                1139,
+                1185,
+                1202,
+                1222,
+                1288,
+                1327,
+                1328,
+                1378,
+                1455,
+                1470,
+                1482,
+                1486,
+                1494,
+                1516,
+                1531,
+                1550,
+                1554,
+                1576,
+                1620,
+                1635,
+                1643,
+                1718,
+                1728,
+                1729,
+                1754,
+                1780,
+                1857,
+                1879,
+                1881,
+                1893,
+                1917,
+                2001,
+                2021,
+                2044
+            ],
+            "flipped_samples": [
+                {
+                    "sample_id": 2,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 47,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 131,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 177,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 284,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 322,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 326,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 356,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 372,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 379,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 383,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 413,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 435,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 456,
+                    "direction": "short->long",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 511,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 566,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 585,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 655,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 669,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 700,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 731,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 787,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 858,
+                    "direction": "short->long",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 864,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 870,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 881,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 895,
+                    "direction": "short->long",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 899,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 914,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 953,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1003,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1010,
+                    "direction": "short->long",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1029,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1076,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1083,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1084,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1092,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1093,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1096,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1139,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1200,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1202,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1327,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1378,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1408,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1481,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1482,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1494,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1516,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1531,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1550,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1554,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1556,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1563,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1576,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1620,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1643,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1729,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1731,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1754,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1839,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1857,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1858,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1879,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1893,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 2001,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 2021,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                }
+            ]
+        },
+        {
+            "probe_id": "time_horizon_category_layer20_pos9",
+            "layer": 20,
+            "position": 9,
+            "valid_baseline": 120,
+            "invalid_baseline": 0,
+            "failed_degenerate": 120,
+            "flips_short_to_long": 23,
+            "flips_long_to_short": 42,
+            "total_flips": 65,
+            "steering_worked": true,
+            "failed_sample_ids": [
+                2,
+                13,
+                26,
+                47,
+                79,
+                102,
+                108,
+                122,
+                130,
+                131,
+                177,
+                187,
+                192,
+                229,
+                260,
+                271,
+                284,
+                292,
+                322,
+                326,
+                356,
+                372,
+                379,
+                383,
+                396,
+                413,
+                418,
+                419,
+                435,
+                449,
+                456,
+                458,
+                469,
+                511,
+                566,
+                571,
+                585,
+                626,
+                636,
+                647,
+                653,
+                655,
+                661,
+                666,
+                669,
+                700,
+                731,
+                787,
+                814,
+                858,
+                864,
+                870,
+                881,
+                895,
+                898,
+                899,
+                902,
+                914,
+                933,
+                938,
+                952,
+                953,
+                1002,
+                1003,
+                1010,
+                1029,
+                1076,
+                1078,
+                1083,
+                1084,
+                1092,
+                1093,
+                1096,
+                1105,
+                1126,
+                1138,
+                1139,
+                1185,
+                1200,
+                1202,
+                1222,
+                1288,
+                1292,
+                1327,
+                1328,
+                1378,
+                1393,
+                1408,
+                1455,
+                1470,
+                1481,
+                1482,
+                1486,
+                1494,
+                1516,
+                1531,
+                1550,
+                1554,
+                1556,
+                1563,
+                1576,
+                1620,
+                1635,
+                1643,
+                1718,
+                1728,
+                1729,
+                1731,
+                1754,
+                1780,
+                1839,
+                1857,
+                1858,
+                1879,
+                1881,
+                1893,
+                1917,
+                2001,
+                2021,
+                2044
+            ],
+            "flipped_samples": [
+                {
+                    "sample_id": 122,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 131,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 177,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 187,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 192,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 229,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 284,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 292,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 322,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 326,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 356,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 372,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 383,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 396,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 435,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 511,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 566,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 585,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 655,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 814,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 870,
+                    "direction": "short->long",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 898,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 902,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 914,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 952,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1002,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1029,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1076,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1083,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1084,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1092,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1093,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1096,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1105,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1126,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1202,
+                    "direction": "short->long",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1222,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1288,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1292,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1327,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1378,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1393,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1481,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1494,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1516,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1531,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1550,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1554,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1556,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1563,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1620,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1643,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1718,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1728,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1729,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1731,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1754,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 1839,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1857,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1858,
+                    "direction": "long->short",
+                    "magnitude": 180.0
+                },
+                {
+                    "sample_id": 1879,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1881,
+                    "direction": "long->short",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 1893,
+                    "direction": "long->short",
+                    "magnitude": 36.0
+                },
+                {
+                    "sample_id": 2001,
+                    "direction": "short->long",
+                    "magnitude": 96.0
+                },
+                {
+                    "sample_id": 2021,
+                    "direction": "short->long",
+                    "magnitude": 36.0
+                }
+            ]
+        }
+    ],
+    "probes_id": "7c7dfcf3d544239e7badadfd89859c38",
+    "overall": {
+        "total_flips": 132,
+        "total_failed": 225,
+        "total_invalid_baseline": 0,
+        "any_steering_worked": true,
+        "status": "SUCCESS"
+    }
+}

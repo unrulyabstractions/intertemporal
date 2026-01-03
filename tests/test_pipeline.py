@@ -197,7 +197,8 @@ def test_full_pipeline():
         prompt = build_prompt_from_question(question, formatting_config, model_name=model_name)
 
         # Run generation without internals first
-        response, _ = runner.run(prompt, decoding=decoding)
+        run_output = runner.run(prompt, decoding=decoding)
+        response = run_output.response
 
         # Now get activations via run_with_cache on the prompt
         formatted = runner._apply_chat_template(prompt)
@@ -291,10 +292,11 @@ def test_full_pipeline():
     test_prompt = build_prompt_from_question(test_question, formatting_config, model_name=model_name)
 
     # Baseline (no steering)
-    baseline_response, _ = runner.run(
+    baseline_output = runner.run(
         test_prompt,
         decoding=decoding,
     )
+    baseline_response = baseline_output.response
     baseline_labels = [test_question.preference_pair.short_term.label, test_question.preference_pair.long_term.label]
     baseline_label = parse_label_from_response(baseline_response, baseline_labels, formatting_config.choice_prefix, model_name)
     baseline_choice = determine_choice(

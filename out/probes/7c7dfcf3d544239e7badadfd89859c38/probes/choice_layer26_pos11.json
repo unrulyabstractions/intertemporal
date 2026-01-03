@@ -1,38 +1,40 @@
 {
-  "model": "Qwen/Qwen2.5-7B-Instruct",
-  "probe_type": "choice",
-  "layer": 26,
-  "token_position_idx": 11,
-  "training": {
-    "n_samples": 1431,
-    "n_features": 3584,
-    "train_query_ids": [
-      "7af8b316feb64ef4dd8ac94497fedf5b"
-    ],
-    "test_query_ids": [
-      "7af8b316feb64ef4dd8ac94497fedf5b"
-    ]
-  },
-  "metrics": {
-    "cv_accuracy": {
-      "mean": 0.9322116907482763,
-      "std": 0.010763184726742299
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "probe_type": "choice",
+    "layer": 26,
+    "token_position_idx": 11,
+    "training": {
+        "n_samples": 1431,
+        "n_features": 3584,
+        "train_query_ids": [
+            "7af8b316feb64ef4dd8ac94497fedf5b"
+        ],
+        "test_query_ids": [
+            "7af8b316feb64ef4dd8ac94497fedf5b"
+        ]
     },
-    "test": {
-      "accuracy": 0.9498520397378989,
-      "f1": 0.9464285714285714
-    }
-  },
-  "files": {
-    "model": "choice_layer26_pos11.joblib",
-    "direction": "choice_layer26_pos11_direction.npy",
-    "intercept": "choice_layer26_pos11_intercept.npy"
-  },
-  "position": {
-    "sequence_position": 11,
-    "after_choices_presented": true,
-    "after_time_horizon": true,
-    "after_choice_made": true,
-    "in_response": true
-  }
+    "metrics": {
+        "cv_accuracy": {
+            "mean": 0.9322116907482763,
+            "std": 0.010763184726742299
+        },
+        "test": {
+            "accuracy": 0.9498520397378989,
+            "f1": 0.9464285714285714
+        }
+    },
+    "files": {
+        "model": "choice_layer26_pos11.joblib",
+        "direction": "choice_layer26_pos11_direction.npy",
+        "intercept": "choice_layer26_pos11_intercept.npy"
+    },
+    "position": {
+        "sequence_position": 11,
+        "after_choices_presented": true,
+        "after_time_horizon": true,
+        "after_choice_made": true,
+        "in_response": true
+    },
+    "token_position": 210,
+    "token_position_word": " urban"
 }

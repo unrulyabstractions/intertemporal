@@ -1,0 +1,3210 @@
+{
+    "probe_id": "time_horizon_category_layer20_pos9",
+    "probe_type": "time_horizon_category",
+    "layer": 20,
+    "token_position_idx": 9,
+    "after_horizon": true,
+    "steering_strengths": [
+        -300.0,
+        -180.0,
+        -96.0,
+        -36.0,
+        36.0,
+        96.0,
+        180.0,
+        300.0
+    ],
+    "steering_id": "734b5806e2e7dfab06d45089121211de",
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "samples": [
+        {
+            "sample_id": 2,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasiupoasm连夜连夜",
+                "180.0": "Select: b. 1000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 13,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I��upo��olianht连夜Markdown",
+                "180.0": "Select: B) 150,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 26,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "illaumelianlianlian\n\ni连夜连夜减",
+                "-180.0": "I selected: [i]\n\nWe cannot immediately",
+                "180.0": "Select: [[[21.4",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 47,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: Option B: 1,0",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 79,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "(aucursallianlian_hht {?>\nMarkdownMarkdown",
+                "180.0": "Select: (a) 2, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 102,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: a) 2, 2",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 108,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasiupoupo��upo",
+                "180.0": "Select: (A) 2, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 122,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtary.lngrylianht",
+                "180.0": "SELECT: OPTION TWO: 2,0",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 130,
+            "time_horizon": null,
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasiupoupo��upo",
+                "180.0": "Select: (A) 3, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 131,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upo��lianht连夜连夜Markdown",
+                "180.0": "Select: [B] 3, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 177,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 187,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 192,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourcerylianupo\n\n1连夜",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 229,
+            "time_horizon": null,
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourcerylianupohtac AudioSource",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 260,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtac AudioSourceMarkdownMarkdownMarkdown",
+                "180.0": "Select: B) 24, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 271,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 284,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I��文MarkdownMarkdownlianupoasmih",
+                "180.0": "Select: [[[[[[[[[",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 292,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "��文MarkdownMarkdown��文MarkdownMarkdownMarkdown",
+                "-180.0": "I selected: FIRST: 1.0",
+                "180.0": "SELECT: <SECOND:)\nMy reasoning:",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 322,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "long_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "-180.0": "I selected: [1]\n\nWe cannot immediately",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 326,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upo��lianlianlianlianlian",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 356,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "SELECT: OPTION <AFTER 20",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 372,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "(a\n\n�� AudioSourceMarkdownMarkdownMarkdownMarkdown\n\n",
+                "180.0": "Select: (a) 2,1",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 379,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <B: 200",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 383,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownhtlianlianht1",
+                "180.0": "Select: Option 2: 2,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 396,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSource连夜连夜连夜 AudioSourcelianlian",
+                "180.0": "I select: [2) 3,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 413,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "��文MarkdownMarkdownlianht111",
+                "-180.0": "I selected: Option B: 15",
+                "180.0": "Select: Option B: 300",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 418,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtlian.lngupoupoupo",
+                "180.0": "Select: [I] 3, [",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 419,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume��ryucursalupo\n\n1_dictionary_h",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 435,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_h_dictionary_dictionary_dictionary_dictionary",
+                "-180.0": "I select: Choice ₁: 1",
+                "180.0": "Select: <Choice 2: 3",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 449,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "SELECT: OPTION 2: 10",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 456,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "��文MarkdownMarkdown��文MarkdownMarkdownMarkdown",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 458,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtac AudioSourceMarkdownMarkdownMarkdown",
+                "180.0": "Select: a. 4, 2",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 469,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaumeucursalupo��\n\n我们（Markdownlian",
+                "180.0": "Select: a. 4, 2",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 511,
+            "time_horizon": [
+                1,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I��upo��rylianht连夜Markdown",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 566,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "��文MarkdownMarkdown_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "-180.0": "I selected: OPTION_ONE: 24",
+                "180.0": "SELECT: OPTION TWO: 1,0",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 571,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "��文(1ryht111",
+                "-180.0": "I selected: Choice A: 1.",
+                "180.0": "Select: <Choice B: 60",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 585,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upo�� AudioSourceMarkdownMarkdownMarkdown\n\n",
+                "180.0": "Select: Option 2: 20",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 626,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownhtlianlianht AudioSource",
+                "180.0": "Select: (A) 2, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 636,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I连夜连夜连夜lian连夜lianlianlian",
+                "180.0": "I select: [[[**[**",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 647,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasiupoasm连夜upo",
+                "180.0": "Select: (A) 3, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 653,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": " Await弼lianlian1ryucursallianlian",
+                "180.0": "Select: [B] 150",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 655,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "180.0": "Select: [[[[[[[[[[",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 661,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "I select: <FIRST: 30",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 666,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "illaume��ryucursalupo\n\nillaume��Markdown",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 669,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "��文MarkdownMarkdown��文MarkdownMarkdownMarkdown",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 700,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourcerylianupohtac AudioSource",
+                "-180.0": "I select: (B (1-hour,",
+                "180.0": "Select: (B) 300",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 731,
+            "time_horizon": [
+                6,
+                "months"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: <B: 40,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 787,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: (B) 1,0",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 814,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: [[2] 15",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 858,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "illaumeucursalrightlianht连夜连夜\n\n1",
+                "180.0": "Select: Option 2: 60",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 864,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "180.0": "Select: Option B: 200",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 870,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 180.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: <B: 20.",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 881,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourcery.lngry AudioSourcery��",
+                "180.0": "Select: (B) 2, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 895,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <Choice 2: 1",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 898,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaumelianlianlian\n\nillaumelianlianlian",
+                "180.0": "I select: [[[[**[",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 899,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upo��lian��lianupo��",
+                "180.0": "Select: [[[[**[**",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 902,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 914,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume��ryucursalupo\n\nillaume��oro",
+                "180.0": "Select: b. 3, 2",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 933,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "(a\n\n��成语我们MarkdownMarkdown\n\n我们",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 938,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_h_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <Choice 2: 6",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 952,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "180.0": "SELECT: <SECOND:)\nMy reasoning:",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 953,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: [B] 300",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1002,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: [2] [to be ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1003,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: b. 4000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1010,
+            "time_horizon": [
+                2,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown\n\n",
+                "180.0": "Select: Option B: 400",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1029,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi_x)\n\n连夜连夜",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1076,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "180.0": "Select: <2) 1,0",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1078,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <Choice A: 1,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1083,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: Option 2: 1,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1084,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourcerylianupohtac AudioSource",
+                "180.0": "Select: B. 1,00",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1092,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "unknown",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaumelianlianlianlianlianlianlian\n\n",
+                "-180.0": "I selected: FIRST: 2.0",
+                "180.0": "SELECT: SECOND: 22.2",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1093,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upo�� AudioSourceMarkdownMarkdownMarkdown\n\n",
+                "180.0": "Select: Option 2: 20",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1096,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceryucursal\n\n连夜连夜\n\n",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1105,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasiLCi��upo",
+                "180.0": "Select: [[[[[[[[[",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1126,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "SELECT: <SECOND:)\nMy reasoning:",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1138,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": " Awaitrylianucursalupohtac AudioSource_dictionary",
+                "180.0": "Select: (A) 2, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1139,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "180.0": "Select: B) 2000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1185,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdown/html",
+                "180.0": "Select: A) 3, 2",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1200,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upo��rylianht连夜Markdown",
+                "180.0": "Select: [B] 300",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1202,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 180.0,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "SELECT: <SECOND: 3,0",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1222,
+            "time_horizon": [
+                5,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��ResponseType",
+                "180.0": "Select: <Choice 2: 4",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1288,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: [[[[[[[[[",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1292,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_h_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <Choice 2: 1",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1327,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: b. 150,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1328,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtary连夜连夜MarkdownMarkdown",
+                "180.0": "Select: A. 10, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1378,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaumeucursalrightlianht连夜连夜\n\n1",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1393,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upo��rylianht连夜Markdown",
+                "180.0": "Select: [II] 200",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1408,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: X) 10,0",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1455,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: a) 3000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1470,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 3000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: a. 3000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1481,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upo��lianupo��lianlian",
+                "180.0": "Select: [II] 60,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1482,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: b. 4000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1486,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: <Choice B: 15",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1494,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upo��lianupo��o��",
+                "180.0": "Select: (b) 400",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1516,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "连夜连夜 AudioSource连夜 AudioSource\n\nMarkdownMarkdown\n\n",
+                "180.0": "Select: [B] 100",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1531,
+            "time_horizon": [
+                10,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownhtlianlianht AudioSource",
+                "180.0": "Select: <B: 40,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1550,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I��ResponseTypeMarkdownResponseTypeMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: B. \nMy reasoning: The",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1554,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourcerylianupoorohtoro",
+                "180.0": "Select: B) 10, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1556,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 1000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: [ii] 22.",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1563,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <Choice 2: 6",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1576,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 1000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi_x)\n\n��upo",
+                "180.0": "Select: y) 1000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1620,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi(1 (1",
+                "180.0": "Select: (2) 200",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1635,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: <a. 13.",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1643,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "short_term",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1718,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 3000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upo��rylianht连夜Markdown",
+                "180.0": "Select: [II] 300",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1728,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "��文MarkdownMarkdownMarkdown\n\n1ht1",
+                "180.0": "Select: Option 2: 40",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1729,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_dictionary_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <B) 400",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1731,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "illaume�� AudioSource_dictionary_h_dictionary_dictionary_dictionary_dictionary",
+                "180.0": "Select: <Choice 2: 1",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1754,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 4000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: b. 60, ",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1780,
+            "time_horizon": [
+                30,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtaryihtac AudioSource",
+                "180.0": "Select: [[[[[[[[",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1839,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 1000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��lian",
+                "180.0": "Select: [II] 150",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1857,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownMarkdownMarkdownMarkdownMarkdownMarkdown",
+                "180.0": "Select: B. 2000",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1858,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 180.0,
+            "short_reward": 2000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "I��upo��lianupo��lianlian",
+                "180.0": "Select: [II] 10,",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1879,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��o",
+                "180.0": "Select: Option 2: 20",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1881,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 96.0,
+            "short_reward": 2000.0,
+            "long_reward": 60822.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasiupoasm连夜upo",
+                "180.0": "Select: <2) 200",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1893,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": 36.0,
+            "short_reward": 2000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I��upohtasi��o��1",
+                "180.0": "Select: (2) 200",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 1917,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "short_term",
+                "-96.0": "short_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 2000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "illaume��rylianupo\n\nillaume��lian",
+                "180.0": "Select: <Choice B: 15",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 2001,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "short_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 96.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 10000.0,
+            "failed_responses": {
+                "-300.0": "(a�� AudioSource连夜连夜MarkdownMarkdownMarkdown/html",
+                "180.0": "Select: (b) 400",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 2021,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "short_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "short_term",
+                "96.0": "short_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": 36.0,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 24662.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSource连夜连夜连夜 AudioSourcelianlian",
+                "180.0": "I select: [[2] 4",
+                "300.0": "*********"
+            }
+        },
+        {
+            "sample_id": 2044,
+            "time_horizon": [
+                50,
+                "years"
+            ],
+            "baseline_choice": "long_term",
+            "steered_choices": {
+                "-300.0": "unknown",
+                "-180.0": "long_term",
+                "-96.0": "long_term",
+                "-36.0": "long_term",
+                "36.0": "long_term",
+                "96.0": "long_term",
+                "180.0": "unknown",
+                "300.0": "degenerate"
+            },
+            "min_flip_to_long": null,
+            "min_flip_to_short": null,
+            "short_reward": 4000.0,
+            "long_reward": 150000.0,
+            "failed_responses": {
+                "-300.0": "I�� AudioSourceMarkdownhtlian AudioSourceMarkdownMarkdown",
+                "180.0": "Select: <Choice B: 40",
+                "300.0": "*********"
+            }
+        }
+    ]
+}

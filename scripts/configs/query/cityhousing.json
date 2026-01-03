@@ -69,5 +69,6 @@
       "continuation_index": -1
     }
   ],
-  "subsample": 1.00
+  "subsample": 1.00,
+  "batch_size": 8
 }

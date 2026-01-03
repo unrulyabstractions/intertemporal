@@ -30,7 +30,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from src.dataset_generator import DatasetGenerator
 from src.common.io import ensure_dir, load_json
-from src.model_runner import ModelRunner, CapturedInternals
+from src.model_runner import ModelRunner, CapturedInternals, LabelProbsOutput, RunOutput
 from src.common.profiling import get_profiler
 from src.common.schemas import SCHEMA_VERSION, DatasetSpec, DecodingConfig, InternalsConfig, QueryConfig, FormattingConfig, SingleQuerySpec
 
@@ -154,6 +154,7 @@ def load_query_config(path: Path) -> QueryConfig:
         device=data.get("device"),
         limit=data.get("limit", 0),
         subsample=data.get("subsample", 1.0),
+        batch_size=data.get("batch_size", 8),
     )
 
 
@@ -482,12 +483,14 @@ def query_llm(
         time_horizon_spec_text = build_time_horizon_spec_text(
             question.time_horizon, dataset_info.formatting_config
         )
-        response_text, captured = model.run(
+        run_output = model.run(
             full_prompt,
             decoding=config.decoding,
             internals_config=internals_setup.config,
             marker_text=time_horizon_spec_text,
         )
+        response_text = run_output.response
+        captured = run_output.internals
 
         # Process response
         chosen_label, choice = process_response(
@@ -500,7 +503,8 @@ def query_llm(
         # Get label probabilities
         pair = question.preference_pair
         labels = (pair.short_term.label, pair.long_term.label)
-        short_prob, long_prob = model.get_label_probs(full_prompt, labels)
+        label_probs = model.get_label_probs(full_prompt, labels)
+        short_prob, long_prob = label_probs.prob1, label_probs.prob2
 
         # Determine choice and alternative probabilities
         if choice == "short_term":

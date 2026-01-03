@@ -1,0 +1,5 @@
+{
+  "query_ids": ["7af8b316feb64ef4dd8ac94497fedf5b"],
+  "normalize": true,
+  "min_samples_per_class": 200
+}

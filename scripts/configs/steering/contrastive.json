@@ -1,0 +1,13 @@
+{
+  "contrastive_id": "0fae8bd69dcc26ead6e29c858fbb18b6",
+  "starting_steering_strength": 100.0,
+  "fractions": [-1, 1.5, 2.0],
+  "batch_size": 4,
+  "specific_contrastive": [
+    {"layer": 20, "token_pos": "CONSIDER:"}
+  ],
+  "baseline_choice": "long",
+  "specific_positions": ["CONSIDER:"],
+  "max_samples" : 20,
+  "controls": false
+}

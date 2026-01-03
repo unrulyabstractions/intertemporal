@@ -7,6 +7,7 @@ and activation steering for behavior modification.
 Key features:
 - Model loading with automatic device/dtype detection
 - Text generation with configurable decoding
+- Batch processing support for all methods
 - Internals capture at specified token positions
 - Activation steering during generation
 
@@ -22,7 +23,11 @@ Example with steering:
         option=SteeringOption.APPLY_TO_ALL,
     )
 
-    response, _ = runner.run(prompt, steering=config)
+    response = runner.run(prompt, steering=config)
+
+Example with batching:
+    prompts = ["Question 1?", "Question 2?", "Question 3?"]
+    responses = runner.run(prompts, batch_size=2)  # Returns list[RunOutput]
 """
 
 from __future__ import annotations
@@ -30,8 +35,9 @@ from __future__ import annotations
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional, Union
+from typing import Optional, Union, overload
 
+import numpy as np
 import torch
 from transformer_lens import HookedTransformer
 
@@ -44,6 +50,11 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from common.utils import extract_flip_tokens
+
+
+# =============================================================================
+# Output Schemas
+# =============================================================================
 
 
 @dataclass
@@ -60,6 +71,26 @@ class CapturedInternals:
     activations: dict = field(default_factory=dict)
     token_positions: list = field(default_factory=list)
     tokens: list = field(default_factory=list)
+
+
+@dataclass
+class RunOutput:
+    """Output from a single run() call."""
+    response: str
+    internals: Optional[CapturedInternals] = None
+
+
+@dataclass
+class LabelProbsOutput:
+    """Output from get_label_probs()."""
+    prob1: float
+    prob2: float
+
+
+@dataclass
+class NextTokenProbsOutput:
+    """Output from get_next_token_probs()."""
+    probs: dict[str, float]
 
 
 class ModelRunner:
@@ -165,6 +196,7 @@ class ModelRunner:
         return self.model.to_str_tokens(token_ids)
 
 
+    @overload
     def run(
         self,
         prompt: str,
@@ -172,26 +204,76 @@ class ModelRunner:
         internals_config: Optional[InternalsConfig] = None,
         marker_text: Optional[str] = None,
         steering: Optional[SteeringConfig] = None,
-    ) -> tuple[str, Optional[CapturedInternals]]:
+    ) -> RunOutput: ...
+
+    @overload
+    def run(
+        self,
+        prompt: list[str],
+        decoding: Optional[DecodingConfig] = None,
+        internals_config: Optional[InternalsConfig] = None,
+        marker_text: Optional[str | list[str]] = None,
+        steering: Optional[SteeringConfig] = None,
+        batch_size: int = 8,
+    ) -> list[RunOutput]: ...
+
+    def run(
+        self,
+        prompt: str | list[str],
+        decoding: Optional[DecodingConfig] = None,
+        internals_config: Optional[InternalsConfig] = None,
+        marker_text: Optional[str | list[str]] = None,
+        steering: Optional[SteeringConfig] = None,
+        batch_size: int = 8,
+    ) -> RunOutput | list[RunOutput]:
         """
         Run inference and optionally capture internals.
 
+        Supports both single prompts and batched processing.
+
         Args:
-            prompt: Text prompt
+            prompt: Text prompt or list of prompts for batch processing
             decoding: Decoding configuration (uses defaults if None)
             internals_config: Configuration for internals capture (None = no capture)
-            marker_text: Reference text in the prompt for token position resolution.
-                        When capturing internals, some token positions may be specified
-                        relative to this marker (e.g., "after the time horizon specification").
-                        Pass the actual text that appears in the prompt so positions can
-                        be resolved correctly. Example: "within the next 2 years"
+            marker_text: Reference text(s) for token position resolution.
+                        For batch, can be single string (used for all) or list matching prompts.
             steering: Optional steering configuration to modify model behavior.
-                     When provided, applies the steering direction vector to activations
-                     at the specified layer during generation.
+            batch_size: Batch size for processing multiple prompts (default 8)
 
         Returns:
-            Tuple of (generated_text, captured_internals or None)
+            RunOutput for single prompt, list[RunOutput] for batch
         """
+        # Handle single prompt
+        if isinstance(prompt, str):
+            return self._run_single(prompt, decoding, internals_config, marker_text, steering)
+
+        # Handle batch
+        results = []
+        for i in range(0, len(prompt), batch_size):
+            batch_prompts = prompt[i:i + batch_size]
+            # Handle marker_text for batch
+            if marker_text is None:
+                batch_markers = [None] * len(batch_prompts)
+            elif isinstance(marker_text, str):
+                batch_markers = [marker_text] * len(batch_prompts)
+            else:
+                batch_markers = marker_text[i:i + batch_size]
+
+            # Process batch one at a time (TransformerLens generate doesn't support true batching well)
+            for p, m in zip(batch_prompts, batch_markers):
+                results.append(self._run_single(p, decoding, internals_config, m, steering))
+
+        return results
+
+    def _run_single(
+        self,
+        prompt: str,
+        decoding: Optional[DecodingConfig] = None,
+        internals_config: Optional[InternalsConfig] = None,
+        marker_text: Optional[str] = None,
+        steering: Optional[SteeringConfig] = None,
+    ) -> RunOutput:
+        """Run inference for a single prompt."""
         if decoding is None:
             decoding = DecodingConfig()
 
@@ -208,6 +290,7 @@ class ModelRunner:
             "max_new_tokens": decoding.max_new_tokens,
             "do_sample": do_sample,
             "stop_at_eos": True,
+            "verbose": False,  # Disable tqdm progress bars
         }
         if do_sample:
             gen_kwargs["temperature"] = decoding.temperature
@@ -246,7 +329,7 @@ class ModelRunner:
                 marker_text,
             )
 
-        return response_text, captured
+        return RunOutput(response=response_text, internals=captured)
 
     def _capture_internals(
         self,
@@ -415,21 +498,54 @@ class ModelRunner:
         """Vocabulary size."""
         return self.model.cfg.d_vocab
 
+    @overload
     def get_next_token_probs(
         self,
         prompt: str,
         target_tokens: list[str],
-    ) -> dict[str, float]:
+    ) -> NextTokenProbsOutput: ...
+
+    @overload
+    def get_next_token_probs(
+        self,
+        prompt: list[str],
+        target_tokens: list[str],
+        batch_size: int = 8,
+    ) -> list[NextTokenProbsOutput]: ...
+
+    def get_next_token_probs(
+        self,
+        prompt: str | list[str],
+        target_tokens: list[str],
+        batch_size: int = 8,
+    ) -> NextTokenProbsOutput | list[NextTokenProbsOutput]:
         """
         Get probabilities for specific tokens at the next token position.
 
         Args:
-            prompt: Text prompt (will have chat template applied if instruct model)
+            prompt: Text prompt or list of prompts
             target_tokens: List of token strings to get probabilities for
+            batch_size: Batch size for processing multiple prompts
 
         Returns:
-            Dict mapping token string to probability
+            NextTokenProbsOutput for single, list for batch
         """
+        if isinstance(prompt, str):
+            return self._get_next_token_probs_single(prompt, target_tokens)
+
+        results = []
+        for i in range(0, len(prompt), batch_size):
+            batch = prompt[i:i + batch_size]
+            for p in batch:
+                results.append(self._get_next_token_probs_single(p, target_tokens))
+        return results
+
+    def _get_next_token_probs_single(
+        self,
+        prompt: str,
+        target_tokens: list[str],
+    ) -> NextTokenProbsOutput:
+        """Get next token probabilities for a single prompt."""
         # Apply chat template for instruct models
         formatted_prompt = self._apply_chat_template(prompt)
 
@@ -458,13 +574,29 @@ class ModelRunner:
             else:
                 result[token_str] = 0.0
 
-        return result
+        return NextTokenProbsOutput(probs=result)
 
+    @overload
     def get_label_probs(
         self,
         prompt: str,
         labels: tuple[str, str],
-    ) -> tuple[float, float]:
+    ) -> LabelProbsOutput: ...
+
+    @overload
+    def get_label_probs(
+        self,
+        prompt: list[str],
+        labels: tuple[str, str] | list[tuple[str, str]],
+        batch_size: int = 8,
+    ) -> list[LabelProbsOutput]: ...
+
+    def get_label_probs(
+        self,
+        prompt: str | list[str],
+        labels: tuple[str, str] | list[tuple[str, str]],
+        batch_size: int = 8,
+    ) -> LabelProbsOutput | list[LabelProbsOutput]:
         """
         Get probabilities for two label options.
 
@@ -472,24 +604,49 @@ class ModelRunner:
         gets probabilities for those tokens with case variations.
 
         Args:
-            prompt: Text prompt
-            labels: Tuple of (label1, label2) strings
+            prompt: Text prompt or list of prompts
+            labels: Tuple of (label1, label2) or list of tuples for batch
+            batch_size: Batch size for processing multiple prompts
 
         Returns:
-            Tuple of (prob1, prob2) for the two labels
+            LabelProbsOutput for single, list for batch
         """
+        if isinstance(prompt, str):
+            return self._get_label_probs_single(prompt, labels)
+
+        # Handle batch
+        results = []
+        for i in range(0, len(prompt), batch_size):
+            batch_prompts = prompt[i:i + batch_size]
+            if isinstance(labels, list):
+                batch_labels = labels[i:i + batch_size]
+            else:
+                batch_labels = [labels] * len(batch_prompts)
+
+            for p, lbl in zip(batch_prompts, batch_labels):
+                results.append(self._get_label_probs_single(p, lbl))
+        return results
+
+    def _get_label_probs_single(
+        self,
+        prompt: str,
+        labels: tuple[str, str],
+    ) -> LabelProbsOutput:
+        """Get label probabilities for a single prompt."""
         # Extract the distinguishing flip tokens
         flip1, flip2 = extract_flip_tokens(labels)
 
         # Generate case and space variations for each flip token
         def get_variations(token: str) -> list[str]:
             """Get case and leading space variations for a token."""
-            # Base case variations
             base_vars = [token, token.upper(), token.lower()]
-            # Add leading space variations (models often predict " A" not "A")
+            # Also add first-char variations for multi-char tokens
+            # (tokenizers often encode " F" differently than first token of " FIRST")
+            if len(token) > 1:
+                first_char = token[0]
+                base_vars.extend([first_char, first_char.upper(), first_char.lower()])
             space_vars = [" " + v for v in base_vars]
             variations = base_vars + space_vars
-            # Remove duplicates while preserving order
             seen = set()
             unique = []
             for v in variations:
@@ -503,13 +660,14 @@ class ModelRunner:
 
         # Get all probabilities
         all_tokens = flip1_vars + flip2_vars
-        probs = self.get_next_token_probs(prompt, all_tokens)
+        probs_output = self._get_next_token_probs_single(prompt, all_tokens)
+        probs = probs_output.probs
 
         # Take max probability across variations
         prob1 = max(probs.get(v, 0.0) for v in flip1_vars)
         prob2 = max(probs.get(v, 0.0) for v in flip2_vars)
 
-        return prob1, prob2
+        return LabelProbsOutput(prob1=prob1, prob2=prob2)
 
     def get_first_continuation_position(self, prompt: str) -> int:
         """
@@ -528,12 +686,30 @@ class ModelRunner:
         tokens = self.tokenize(formatted_prompt)
         return tokens.shape[1]
 
+    @overload
     def generate_with_steering(
         self,
         prompt: str,
         steering: SteeringConfig,
         max_new_tokens: int = 64,
-    ) -> str:
+    ) -> str: ...
+
+    @overload
+    def generate_with_steering(
+        self,
+        prompt: list[str],
+        steering: SteeringConfig,
+        max_new_tokens: int = 64,
+        batch_size: int = 8,
+    ) -> list[str]: ...
+
+    def generate_with_steering(
+        self,
+        prompt: str | list[str],
+        steering: SteeringConfig,
+        max_new_tokens: int = 64,
+        batch_size: int = 8,
+    ) -> str | list[str]:
         """
         Generate text with activation steering applied.
 
@@ -541,22 +717,42 @@ class ModelRunner:
         Uses greedy decoding (temperature=0).
 
         Args:
-            prompt: Text prompt
+            prompt: Text prompt or list of prompts
             steering: Steering configuration (direction, layer, strength, option)
             max_new_tokens: Maximum tokens to generate
+            batch_size: Batch size for processing multiple prompts
 
         Returns:
-            Generated text (continuation only, excluding prompt)
+            Generated text for single, list of texts for batch
         """
         decoding = DecodingConfig(max_new_tokens=max_new_tokens, temperature=0.0)
-        response, _ = self.run(prompt, decoding=decoding, steering=steering)
-        return response
+        result = self.run(prompt, decoding=decoding, steering=steering, batch_size=batch_size)
 
+        if isinstance(result, list):
+            return [r.response for r in result]
+        return result.response
+
+    @overload
     def generate_baseline(
         self,
         prompt: str,
         max_new_tokens: int = 64,
-    ) -> str:
+    ) -> str: ...
+
+    @overload
+    def generate_baseline(
+        self,
+        prompt: list[str],
+        max_new_tokens: int = 64,
+        batch_size: int = 8,
+    ) -> list[str]: ...
+
+    def generate_baseline(
+        self,
+        prompt: str | list[str],
+        max_new_tokens: int = 64,
+        batch_size: int = 8,
+    ) -> str | list[str]:
         """
         Generate text without steering (baseline).
 
@@ -564,12 +760,205 @@ class ModelRunner:
         Uses greedy decoding (temperature=0).
 
         Args:
-            prompt: Text prompt
+            prompt: Text prompt or list of prompts
             max_new_tokens: Maximum tokens to generate
+            batch_size: Batch size for processing multiple prompts
 
         Returns:
-            Generated text (continuation only, excluding prompt)
+            Generated text for single, list of texts for batch
         """
         decoding = DecodingConfig(max_new_tokens=max_new_tokens, temperature=0.0)
-        response, _ = self.run(prompt, decoding=decoding)
-        return response
+        result = self.run(prompt, decoding=decoding, batch_size=batch_size)
+
+        if isinstance(result, list):
+            return [r.response for r in result]
+        return result.response
+
+    def get_label_probs_with_steering(
+        self,
+        prompt: str,
+        labels: tuple[str, str],
+        steering: SteeringConfig,
+        choice_prefix: str = "I select:",
+    ) -> LabelProbsOutput:
+        """
+        Get label probabilities with steering applied.
+
+        Runs a forward pass with the steering hook active to get probabilities
+        that reflect what the steered model would predict.
+
+        Args:
+            prompt: Text prompt (user message content)
+            labels: Tuple of (label1, label2) e.g. ("a)", "b)")
+            steering: Steering configuration
+            choice_prefix: Prefix for the choice (added to assistant turn)
+
+        Returns:
+            LabelProbsOutput with prob1 and prob2
+        """
+        from src.steering import create_steering_hook
+
+        # Extract the distinguishing flip tokens (same as get_label_probs)
+        flip1, flip2 = extract_flip_tokens(labels)
+
+        # Generate case and space variations for each flip token
+        def get_variations(token: str) -> list[str]:
+            """Get case and leading space variations for a token."""
+            base_vars = [token, token.upper(), token.lower()]
+            # Also add first-char variations for multi-char tokens
+            # (tokenizers often encode " F" differently than first token of " FIRST")
+            if len(token) > 1:
+                first_char = token[0]
+                base_vars.extend([first_char, first_char.upper(), first_char.lower()])
+            space_vars = [" " + v for v in base_vars]
+            variations = base_vars + space_vars
+            seen = set()
+            unique = []
+            for v in variations:
+                if v not in seen:
+                    seen.add(v)
+                    unique.append(v)
+            return unique
+
+        flip1_vars = get_variations(flip1)
+        flip2_vars = get_variations(flip2)
+        all_tokens = flip1_vars + flip2_vars
+
+        # Find common prefix of labels (e.g., "(" for "(A)" and "(B)")
+        label1, label2 = labels
+        common_prefix = ""
+        for c1, c2 in zip(label1, label2):
+            if c1 == c2:
+                common_prefix += c1
+            else:
+                break
+
+        # Format prompt with choice_prefix as partial assistant response
+        if self._is_chat_model and hasattr(self.model.tokenizer, "apply_chat_template"):
+            messages = [{"role": "user", "content": prompt}]
+            formatted_prompt = self.model.tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
+            # Add choice_prefix, space, and common prefix so next token is the distinguishing char
+            formatted_prompt = formatted_prompt + choice_prefix + " " + common_prefix
+        else:
+            formatted_prompt = prompt + "\n" + choice_prefix + " " + common_prefix
+
+        # Tokenize prompt
+        input_ids = self.tokenize(formatted_prompt)
+
+        # Create steering hook
+        hook_fn, _ = create_steering_hook(
+            steering,
+            model_dtype=self.model.cfg.dtype,
+            model_device=str(self.model.cfg.device),
+            tokenizer=self.model.tokenizer,
+        )
+
+        # Hook name for the target layer
+        hook_name = f"blocks.{steering.layer}.hook_resid_post"
+
+        # Run forward pass with hook
+        with torch.no_grad():
+            logits = self.model.run_with_hooks(
+                input_ids,
+                fwd_hooks=[(hook_name, hook_fn)],
+            )
+
+        # Get logits at last position (next token prediction)
+        next_logits = logits[0, -1, :]  # [vocab]
+
+        # Convert to probabilities
+        probs_tensor = torch.softmax(next_logits, dim=-1)
+
+        # Get probabilities for all token variations
+        probs = {}
+        for token_str in all_tokens:
+            token_ids = self.model.tokenizer.encode(token_str, add_special_tokens=False)
+            if token_ids:
+                token_id = token_ids[0]
+                probs[token_str] = probs_tensor[token_id].item()
+            else:
+                probs[token_str] = 0.0
+
+        # Take max probability across variations
+        prob1 = max(probs.get(v, 0.0) for v in flip1_vars)
+        prob2 = max(probs.get(v, 0.0) for v in flip2_vars)
+
+        return LabelProbsOutput(prob1=prob1, prob2=prob2)
+
+    def get_activation_with_steering(
+        self,
+        prompt: str,
+        layer: int,
+        position: int,
+        steering: SteeringConfig,
+    ) -> Optional[np.ndarray]:
+        """
+        Get activation at a specific layer/position after applying steering.
+
+        Runs forward pass with steering hook and captures activation.
+        This is for single-prompt use (not batched).
+
+        Args:
+            prompt: Single text prompt (not a list)
+            layer: Layer to extract activation from
+            position: Token position to extract activation from
+            steering: Steering configuration
+
+        Returns:
+            Activation array of shape (d_model,), or None if position out of bounds
+        """
+        from src.steering import create_steering_hook
+
+        # Format prompt
+        formatted_prompt = self._apply_chat_template(prompt)
+        input_ids = self.tokenize(formatted_prompt)
+        seq_len = input_ids.shape[1]
+
+        # Validate position
+        if position >= seq_len:
+            return None
+
+        # Create steering hook
+        hook_fn, _ = create_steering_hook(
+            steering,
+            model_dtype=self.model.cfg.dtype,
+            model_device=str(self.model.cfg.device),
+            tokenizer=self.model.tokenizer,
+        )
+
+        # Hook to capture activation at specified position
+        captured_activation = [None]
+        capture_hook_name = f"blocks.{layer}.hook_resid_post"
+
+        def capture_hook(activation: torch.Tensor, hook=None) -> torch.Tensor:
+            # activation shape: [batch, seq_len, d_model]
+            captured_activation[0] = activation[0, position, :].detach().cpu().numpy()
+            return activation
+
+        # Steering hook name
+        steering_hook_name = f"blocks.{steering.layer}.hook_resid_post"
+
+        # Build hook list
+        hooks = []
+        if steering.layer == layer:
+            # Same layer: combine hooks (steering first, then capture)
+            def combined_hook(activation: torch.Tensor, hook=None) -> torch.Tensor:
+                activation = hook_fn(activation, hook)
+                captured_activation[0] = activation[0, position, :].detach().cpu().numpy()
+                return activation
+            hooks.append((steering_hook_name, combined_hook))
+        else:
+            # Different layers: separate hooks
+            hooks.append((steering_hook_name, hook_fn))
+            hooks.append((capture_hook_name, capture_hook))
+
+        # Run forward pass with hooks
+        with torch.no_grad():
+            self.model.run_with_hooks(input_ids, fwd_hooks=hooks)
+
+        if captured_activation[0] is None:
+            return None
+
+        return np.asarray(captured_activation[0])

@@ -41,7 +41,9 @@
                     0,
                     285
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         "time_horizon_category": {
             "layer": 20,
@@ -66,7 +68,9 @@
                     2,
                     378
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         "time_horizon_value": {
             "layer": 8,
@@ -84,7 +88,9 @@
             "test_rmse": 39.78336240749342,
             "test_mse": 1582.7159244459606,
             "test_r2": 0.9643735711067948,
-            "test_normalized_mae": 0.13972118636929381
+            "test_normalized_mae": 0.13972118636929381,
+            "token_position": 96,
+            "token_position_word": ":"
         }
     },
     "results": [
@@ -111,7 +117,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -136,7 +144,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -154,7 +164,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -179,7 +191,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -204,7 +218,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -222,7 +238,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -247,7 +265,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 8,
@@ -272,7 +292,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 8,
@@ -290,7 +312,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 8,
@@ -315,7 +339,9 @@
                     73,
                     212
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -340,7 +366,9 @@
                     158,
                     222
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -358,7 +386,9 @@
             "test_rmse": 222.91809728125926,
             "test_mse": 49692.47809549697,
             "test_r2": -0.11856177729184636,
-            "test_normalized_mae": 0.8652264120642519
+            "test_normalized_mae": 0.8652264120642519,
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -383,7 +413,9 @@
                     55,
                     230
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -408,7 +440,9 @@
                     5,
                     375
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -426,7 +460,9 @@
             "test_rmse": 39.78336240749342,
             "test_mse": 1582.7159244459606,
             "test_r2": 0.9643735711067948,
-            "test_normalized_mae": 0.13972118636929381
+            "test_normalized_mae": 0.13972118636929381,
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -451,7 +487,9 @@
                     77,
                     208
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 8,
@@ -476,7 +514,9 @@
                     167,
                     213
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 8,
@@ -494,7 +534,9 @@
             "test_rmse": 222.56637473053905,
             "test_mse": 49535.79116069473,
             "test_r2": -0.11503480453886783,
-            "test_normalized_mae": 0.8720585075895614
+            "test_normalized_mae": 0.8720585075895614,
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 8,
@@ -519,7 +561,9 @@
                     47,
                     238
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 8,
@@ -544,7 +588,9 @@
                     9,
                     371
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 8,
@@ -562,7 +608,9 @@
             "test_rmse": 45.5928282062274,
             "test_mse": 2078.7059838425653,
             "test_r2": 0.953208993616987,
-            "test_normalized_mae": 0.15826799501384212
+            "test_normalized_mae": 0.15826799501384212,
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 8,
@@ -587,7 +635,9 @@
                     66,
                     219
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 8,
@@ -612,7 +662,9 @@
                     40,
                     340
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 8,
@@ -630,7 +682,9 @@
             "test_rmse": 118.91000749997914,
             "test_mse": 14139.589883645098,
             "test_r2": 0.6817223572542845,
-            "test_normalized_mae": 0.4315650434074656
+            "test_normalized_mae": 0.4315650434074656,
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 8,
@@ -655,7 +709,9 @@
                     58,
                     227
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 8,
@@ -680,7 +736,9 @@
                     21,
                     359
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 8,
@@ -698,7 +756,9 @@
             "test_rmse": 103.63287979045961,
             "test_mse": 10739.773773663852,
             "test_r2": 0.7582511297404908,
-            "test_normalized_mae": 0.3723801349728391
+            "test_normalized_mae": 0.3723801349728391,
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 8,
@@ -723,7 +783,9 @@
                     54,
                     231
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -748,7 +810,9 @@
                     30,
                     350
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -766,7 +830,9 @@
             "test_rmse": 111.12714059597111,
             "test_mse": 12349.241377036731,
             "test_r2": 0.722022529116817,
-            "test_normalized_mae": 0.39642902337173636
+            "test_normalized_mae": 0.39642902337173636,
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -791,7 +857,9 @@
                     0,
                     285
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -816,7 +884,9 @@
                     70,
                     310
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -834,7 +904,9 @@
             "test_rmse": 126.89686977299978,
             "test_mse": 16102.815558185666,
             "test_r2": 0.6375307756728847,
-            "test_normalized_mae": 0.44318708962078546
+            "test_normalized_mae": 0.44318708962078546,
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 8,
@@ -859,7 +931,9 @@
                     38,
                     247
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 8,
@@ -884,7 +958,9 @@
                     68,
                     312
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 8,
@@ -902,7 +978,9 @@
             "test_rmse": 357.47593606693476,
             "test_mse": 127789.04486693125,
             "test_r2": -1.8764904996302656,
-            "test_normalized_mae": 1.1700676055798707
+            "test_normalized_mae": 1.1700676055798707,
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 14,
@@ -927,7 +1005,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -952,7 +1032,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -970,7 +1052,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -995,7 +1079,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1020,7 +1106,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1038,7 +1126,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1063,7 +1153,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 14,
@@ -1088,7 +1180,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 14,
@@ -1106,7 +1200,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 14,
@@ -1131,7 +1227,9 @@
                     76,
                     209
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1156,7 +1254,9 @@
                     152,
                     228
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1174,7 +1274,9 @@
             "test_rmse": 230.86475912145713,
             "test_mse": 53298.537004208425,
             "test_r2": -0.199733009167137,
-            "test_normalized_mae": 0.8895062496729764
+            "test_normalized_mae": 0.8895062496729764,
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1199,7 +1301,9 @@
                     57,
                     228
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1224,7 +1328,9 @@
                     1,
                     379
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1242,7 +1348,9 @@
             "test_rmse": 42.07009918978914,
             "test_mse": 1769.893245838697,
             "test_r2": 0.960160269510456,
-            "test_normalized_mae": 0.14302429480247517
+            "test_normalized_mae": 0.14302429480247517,
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1267,7 +1375,9 @@
                     71,
                     214
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 14,
@@ -1292,7 +1402,9 @@
                     162,
                     218
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 14,
@@ -1310,7 +1422,9 @@
             "test_rmse": 229.00056436455588,
             "test_mse": 52441.2584792851,
             "test_r2": -0.18043594395276874,
-            "test_normalized_mae": 0.8806960561367527
+            "test_normalized_mae": 0.8806960561367527,
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 14,
@@ -1335,7 +1449,9 @@
                     49,
                     236
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 14,
@@ -1360,7 +1476,9 @@
                     3,
                     377
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 14,
@@ -1378,7 +1496,9 @@
             "test_rmse": 41.739333354768576,
             "test_mse": 1742.1719489004965,
             "test_r2": 0.9607842670320214,
-            "test_normalized_mae": 0.1420013393280264
+            "test_normalized_mae": 0.1420013393280264,
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 14,
@@ -1403,7 +1523,9 @@
                     40,
                     245
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 14,
@@ -1428,7 +1550,9 @@
                     9,
                     371
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 14,
@@ -1446,7 +1570,9 @@
             "test_rmse": 64.66284888007358,
             "test_mse": 4181.284025287234,
             "test_r2": 0.9058806348578716,
-            "test_normalized_mae": 0.22160195879518152
+            "test_normalized_mae": 0.22160195879518152,
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 14,
@@ -1471,7 +1597,9 @@
                     39,
                     246
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 14,
@@ -1496,7 +1624,9 @@
                     9,
                     371
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 14,
@@ -1514,7 +1644,9 @@
             "test_rmse": 63.32627109301719,
             "test_mse": 4010.2166105463043,
             "test_r2": 0.9097313076116355,
-            "test_normalized_mae": 0.2177572311974261
+            "test_normalized_mae": 0.2177572311974261,
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 14,
@@ -1539,7 +1671,9 @@
                     41,
                     244
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1564,7 +1698,9 @@
                     11,
                     369
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1582,7 +1718,9 @@
             "test_rmse": 76.80336314979331,
             "test_mse": 5898.75659111903,
             "test_r2": 0.8672208770974534,
-            "test_normalized_mae": 0.26617718384334216
+            "test_normalized_mae": 0.26617718384334216,
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1607,7 +1745,9 @@
                     0,
                     285
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1632,7 +1772,9 @@
                     9,
                     371
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1650,7 +1792,9 @@
             "test_rmse": 62.15399637615159,
             "test_mse": 3863.1192655266645,
             "test_r2": 0.9130424217678641,
-            "test_normalized_mae": 0.209427618748156
+            "test_normalized_mae": 0.209427618748156,
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 14,
@@ -1675,7 +1819,9 @@
                     26,
                     259
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 14,
@@ -1700,7 +1846,9 @@
                     50,
                     330
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 14,
@@ -1718,7 +1866,9 @@
             "test_rmse": 277.9661742871187,
             "test_mse": 77265.19404781684,
             "test_r2": -0.7392147884200031,
-            "test_normalized_mae": 0.9473596871667594
+            "test_normalized_mae": 0.9473596871667594,
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 20,
@@ -1743,7 +1893,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1768,7 +1920,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1786,7 +1940,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1811,7 +1967,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1836,7 +1994,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1854,7 +2014,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1879,7 +2041,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 20,
@@ -1904,7 +2068,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 20,
@@ -1922,7 +2088,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 20,
@@ -1947,7 +2115,9 @@
                     77,
                     208
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1972,7 +2142,9 @@
                     148,
                     232
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -1990,7 +2162,9 @@
             "test_rmse": 260.6799012088012,
             "test_mse": 67954.01089423036,
             "test_r2": -0.5296230357819034,
-            "test_normalized_mae": 0.9925600831965327
+            "test_normalized_mae": 0.9925600831965327,
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2015,7 +2189,9 @@
                     40,
                     245
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2040,7 +2216,9 @@
                     2,
                     378
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2058,7 +2236,9 @@
             "test_rmse": 43.064684683116866,
             "test_mse": 1854.5670668562807,
             "test_r2": 0.9582542889001612,
-            "test_normalized_mae": 0.1439998071963829
+            "test_normalized_mae": 0.1439998071963829,
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2083,7 +2263,9 @@
                     76,
                     209
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 20,
@@ -2108,7 +2290,9 @@
                     150,
                     230
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 20,
@@ -2126,7 +2310,9 @@
             "test_rmse": 240.2538571530138,
             "test_mse": 57721.915876900755,
             "test_r2": -0.299301851839169,
-            "test_normalized_mae": 0.9162712920610605
+            "test_normalized_mae": 0.9162712920610605,
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 20,
@@ -2151,7 +2337,9 @@
                     45,
                     240
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 20,
@@ -2176,7 +2364,9 @@
                     3,
                     377
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 20,
@@ -2194,7 +2384,9 @@
             "test_rmse": 43.57175737353127,
             "test_mse": 1898.4980406178765,
             "test_r2": 0.957265416741391,
-            "test_normalized_mae": 0.1457923865682332
+            "test_normalized_mae": 0.1457923865682332,
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 20,
@@ -2219,7 +2411,9 @@
                     33,
                     252
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 20,
@@ -2244,7 +2438,9 @@
                     4,
                     376
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 20,
@@ -2262,7 +2458,9 @@
             "test_rmse": 61.342399191717014,
             "test_mse": 3762.889938595964,
             "test_r2": 0.9152985518375482,
-            "test_normalized_mae": 0.21257822969386345
+            "test_normalized_mae": 0.21257822969386345,
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 20,
@@ -2287,7 +2485,9 @@
                     28,
                     257
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 20,
@@ -2312,7 +2512,9 @@
                     5,
                     375
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 20,
@@ -2330,7 +2532,9 @@
             "test_rmse": 65.20044537372712,
             "test_mse": 4251.098076932374,
             "test_r2": 0.9043091429001138,
-            "test_normalized_mae": 0.2228971569520241
+            "test_normalized_mae": 0.2228971569520241,
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 20,
@@ -2355,7 +2559,9 @@
                     23,
                     262
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2380,7 +2586,9 @@
                     6,
                     374
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2398,7 +2606,9 @@
             "test_rmse": 73.12031691746981,
             "test_mse": 5346.580746111222,
             "test_r2": 0.8796501786384754,
-            "test_normalized_mae": 0.24805587487064398
+            "test_normalized_mae": 0.24805587487064398,
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2423,7 +2633,9 @@
                     0,
                     285
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2448,7 +2660,9 @@
                     1,
                     379
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2466,7 +2680,9 @@
             "test_rmse": 63.09887437946644,
             "test_mse": 3981.4679479556858,
             "test_r2": 0.9103784308052167,
-            "test_normalized_mae": 0.21334384205862503
+            "test_normalized_mae": 0.21334384205862503,
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 20,
@@ -2491,7 +2707,9 @@
                     17,
                     268
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 20,
@@ -2516,7 +2734,9 @@
                     55,
                     325
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 20,
@@ -2534,7 +2754,9 @@
             "test_rmse": 279.1279410988366,
             "test_mse": 77912.40750207557,
             "test_r2": -0.753783356127405,
-            "test_normalized_mae": 0.9502155095559732
+            "test_normalized_mae": 0.9502155095559732,
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 24,
@@ -2559,7 +2781,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2584,7 +2808,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2602,7 +2828,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2627,7 +2855,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2652,7 +2882,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2670,7 +2902,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2695,7 +2929,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 24,
@@ -2720,7 +2956,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 24,
@@ -2738,7 +2976,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 24,
@@ -2763,7 +3003,9 @@
                     91,
                     194
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2788,7 +3030,9 @@
                     139,
                     241
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2806,7 +3050,9 @@
             "test_rmse": 328.33832827137894,
             "test_mse": 107806.0578120438,
             "test_r2": -1.4266798568050216,
-            "test_normalized_mae": 1.2206494674889872
+            "test_normalized_mae": 1.2206494674889872,
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2831,7 +3077,9 @@
                     45,
                     240
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2856,7 +3104,9 @@
                     3,
                     377
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2874,7 +3124,9 @@
             "test_rmse": 44.231416147994686,
             "test_mse": 1956.418174457085,
             "test_r2": 0.9559616530666621,
-            "test_normalized_mae": 0.15187202815010184
+            "test_normalized_mae": 0.15187202815010184,
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -2899,7 +3151,9 @@
                     91,
                     194
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 24,
@@ -2924,7 +3178,9 @@
                     141,
                     239
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 24,
@@ -2942,7 +3198,9 @@
             "test_rmse": 263.8220227921409,
             "test_mse": 69602.0597101369,
             "test_r2": -0.566720087151358,
-            "test_normalized_mae": 0.9962093197503952
+            "test_normalized_mae": 0.9962093197503952,
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 24,
@@ -2967,7 +3225,9 @@
                     41,
                     244
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 24,
@@ -2992,7 +3252,9 @@
                     3,
                     377
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 24,
@@ -3010,7 +3272,9 @@
             "test_rmse": 48.09856652446627,
             "test_mse": 2313.4721017085076,
             "test_r2": 0.9479244834433671,
-            "test_normalized_mae": 0.16490116092577306
+            "test_normalized_mae": 0.16490116092577306,
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 24,
@@ -3035,7 +3299,9 @@
                     32,
                     253
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 24,
@@ -3060,7 +3326,9 @@
                     2,
                     378
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 24,
@@ -3078,7 +3346,9 @@
             "test_rmse": 56.812849931454444,
             "test_mse": 3227.6999173339636,
             "test_r2": 0.9273455079225564,
-            "test_normalized_mae": 0.19497700681821764
+            "test_normalized_mae": 0.19497700681821764,
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 24,
@@ -3103,7 +3373,9 @@
                     27,
                     258
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 24,
@@ -3128,7 +3400,9 @@
                     3,
                     377
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 24,
@@ -3146,7 +3420,9 @@
             "test_rmse": 59.93398476999154,
             "test_mse": 3592.082530409578,
             "test_r2": 0.9191433719269873,
-            "test_normalized_mae": 0.2061902769492191
+            "test_normalized_mae": 0.2061902769492191,
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 24,
@@ -3171,7 +3447,9 @@
                     21,
                     264
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -3196,7 +3474,9 @@
                     7,
                     373
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -3214,7 +3494,9 @@
             "test_rmse": 94.82491854017015,
             "test_mse": 8991.765176149904,
             "test_r2": 0.7975982438006731,
-            "test_normalized_mae": 0.32116176709439337
+            "test_normalized_mae": 0.32116176709439337,
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -3239,7 +3521,9 @@
                     0,
                     285
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -3264,7 +3548,9 @@
                     4,
                     376
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -3282,7 +3568,9 @@
             "test_rmse": 78.1737146647993,
             "test_mse": 6111.129664493458,
             "test_r2": 0.8624404271881912,
-            "test_normalized_mae": 0.27017398025641554
+            "test_normalized_mae": 0.27017398025641554,
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 24,
@@ -3307,7 +3595,9 @@
                     22,
                     263
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 24,
@@ -3332,7 +3622,9 @@
                     70,
                     310
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 24,
@@ -3350,7 +3642,9 @@
             "test_rmse": 377.1455041598022,
             "test_mse": 142238.73130795138,
             "test_r2": -2.2017483166325946,
-            "test_normalized_mae": 1.239118258355935
+            "test_normalized_mae": 1.239118258355935,
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 26,
@@ -3375,7 +3669,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3400,7 +3696,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3418,7 +3716,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 28,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3443,7 +3743,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3468,7 +3770,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3486,7 +3790,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 39,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3511,7 +3817,9 @@
                     285,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 26,
@@ -3536,7 +3844,9 @@
                     380,
                     0
                 ]
-            ]
+            ],
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 26,
@@ -3554,7 +3864,9 @@
             "test_rmse": 210.86035954783924,
             "test_mse": 44462.09122864404,
             "test_r2": -0.0008274429632650904,
-            "test_normalized_mae": 0.8564517620196003
+            "test_normalized_mae": 0.8564517620196003,
+            "token_position": 51,
+            "token_position_word": " either"
         },
         {
             "layer": 26,
@@ -3579,7 +3891,9 @@
                     100,
                     185
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3604,7 +3918,9 @@
                     135,
                     245
                 ]
-            ]
+            ],
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3622,7 +3938,9 @@
             "test_rmse": 353.4128834198923,
             "test_mse": 124900.6661671624,
             "test_r2": -1.8114740195566323,
-            "test_normalized_mae": 1.3368249500135683
+            "test_normalized_mae": 1.3368249500135683,
+            "token_position": 86,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3647,7 +3965,9 @@
                     42,
                     243
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3672,7 +3992,9 @@
                     3,
                     377
                 ]
-            ]
+            ],
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3690,7 +4012,9 @@
             "test_rmse": 46.165181813681436,
             "test_mse": 2131.2240118902632,
             "test_r2": 0.9520268296146202,
-            "test_normalized_mae": 0.15519211789130935
+            "test_normalized_mae": 0.15519211789130935,
+            "token_position": 96,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -3715,7 +4039,9 @@
                     91,
                     194
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 26,
@@ -3740,7 +4066,9 @@
                     139,
                     241
                 ]
-            ]
+            ],
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 26,
@@ -3758,7 +4086,9 @@
             "test_rmse": 307.2443281276467,
             "test_mse": 94399.07716660906,
             "test_r2": -1.124893013531576,
-            "test_normalized_mae": 1.145424525653105
+            "test_normalized_mae": 1.145424525653105,
+            "token_position": 94,
+            "token_position_word": ".\n\n"
         },
         {
             "layer": 26,
@@ -3783,7 +4113,9 @@
                     39,
                     246
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 26,
@@ -3808,7 +4140,9 @@
                     2,
                     378
                 ]
-            ]
+            ],
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 26,
@@ -3826,7 +4160,9 @@
             "test_rmse": 52.17699310036828,
             "test_mse": 2722.438608995879,
             "test_r2": 0.9387187782586692,
-            "test_normalized_mae": 0.1799621293609353
+            "test_normalized_mae": 0.1799621293609353,
+            "token_position": 103,
+            "token_position_word": ","
         },
         {
             "layer": 26,
@@ -3851,7 +4187,9 @@
                     35,
                     250
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 26,
@@ -3876,7 +4214,9 @@
                     2,
                     378
                 ]
-            ]
+            ],
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 26,
@@ -3894,7 +4234,9 @@
             "test_rmse": 59.985265365049635,
             "test_mse": 3598.2320609154235,
             "test_r2": 0.9190049479635273,
-            "test_normalized_mae": 0.20567546206690104
+            "test_normalized_mae": 0.20567546206690104,
+            "token_position": 146,
+            "token_position_word": "\n"
         },
         {
             "layer": 26,
@@ -3919,7 +4261,9 @@
                     26,
                     259
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 26,
@@ -3944,7 +4288,9 @@
                     4,
                     376
                 ]
-            ]
+            ],
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 26,
@@ -3962,7 +4308,9 @@
             "test_rmse": 63.229481055440246,
             "test_mse": 3997.967274540277,
             "test_r2": 0.9100070362445931,
-            "test_normalized_mae": 0.21940560056550706
+            "test_normalized_mae": 0.21940560056550706,
+            "token_position": 147,
+            "token_position_word": "I"
         },
         {
             "layer": 26,
@@ -3987,7 +4335,9 @@
                     17,
                     268
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -4012,7 +4362,9 @@
                     7,
                     373
                 ]
-            ]
+            ],
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -4030,7 +4382,9 @@
             "test_rmse": 98.77583875707698,
             "test_mse": 9756.666322164072,
             "test_r2": 0.7803805638191286,
-            "test_normalized_mae": 0.33966091634378587
+            "test_normalized_mae": 0.33966091634378587,
+            "token_position": 149,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -4055,7 +4409,9 @@
                     0,
                     285
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -4080,7 +4436,9 @@
                     7,
                     373
                 ]
-            ]
+            ],
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -4098,7 +4456,9 @@
             "test_rmse": 84.45236915462868,
             "test_mse": 7132.2026558296775,
             "test_r2": 0.8394564009591342,
-            "test_normalized_mae": 0.2941328353147594
+            "test_normalized_mae": 0.2941328353147594,
+            "token_position": 167,
+            "token_position_word": ":"
         },
         {
             "layer": 26,
@@ -4123,7 +4483,9 @@
                     20,
                     265
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 26,
@@ -4148,7 +4510,9 @@
                     70,
                     310
                 ]
-            ]
+            ],
+            "token_position": 210,
+            "token_position_word": " urban"
         },
         {
             "layer": 26,
@@ -4166,7 +4530,9 @@
             "test_rmse": 422.96202117191075,
             "test_mse": 178896.87135382788,
             "test_r2": -3.026911316214311,
-            "test_normalized_mae": 1.393199671184154
+            "test_normalized_mae": 1.393199671184154,
+            "token_position": 210,
+            "token_position_word": " urban"
         }
     ],
     "config_path": "scripts/configs/probes/default_probes.json",

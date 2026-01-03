@@ -1,37 +1,39 @@
 {
-  "model": "Qwen/Qwen2.5-7B-Instruct",
-  "probe_type": "time_horizon_category",
-  "layer": 8,
-  "token_position_idx": 11,
-  "training": {
-    "n_samples": 1253,
-    "n_features": 3584,
-    "train_query_ids": [
-      "7af8b316feb64ef4dd8ac94497fedf5b"
-    ],
-    "test_query_ids": [
-      "7af8b316feb64ef4dd8ac94497fedf5b"
-    ]
-  },
-  "metrics": {
-    "cv_accuracy": {
-      "mean": 0.7637577689243027,
-      "std": 0.021159127885569652
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "probe_type": "time_horizon_category",
+    "layer": 8,
+    "token_position_idx": 11,
+    "training": {
+        "n_samples": 1253,
+        "n_features": 3584,
+        "train_query_ids": [
+            "7af8b316feb64ef4dd8ac94497fedf5b"
+        ],
+        "test_query_ids": [
+            "7af8b316feb64ef4dd8ac94497fedf5b"
+        ]
     },
-    "test": {
-      "accuracy": 0.7375703409467064,
-      "f1": 0.8353413654618473
-    }
-  },
-  "files": {
-    "model": "time_horizon_category_layer8_pos11.joblib",
-    "direction": "time_horizon_category_layer8_pos11_direction.npy"
-  },
-  "position": {
-    "sequence_position": 11,
-    "after_choices_presented": true,
-    "after_time_horizon": true,
-    "after_choice_made": true,
-    "in_response": true
-  }
+    "metrics": {
+        "cv_accuracy": {
+            "mean": 0.7637577689243027,
+            "std": 0.021159127885569652
+        },
+        "test": {
+            "accuracy": 0.7375703409467064,
+            "f1": 0.8353413654618473
+        }
+    },
+    "files": {
+        "model": "time_horizon_category_layer8_pos11.joblib",
+        "direction": "time_horizon_category_layer8_pos11_direction.npy"
+    },
+    "position": {
+        "sequence_position": 11,
+        "after_choices_presented": true,
+        "after_time_horizon": true,
+        "after_choice_made": true,
+        "in_response": true
+    },
+    "token_position": 210,
+    "token_position_word": " urban"
 }
